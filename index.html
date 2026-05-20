@@ -313,6 +313,12 @@
         </section>
 
         <section>
+          <h2>Pilot Validation Kit</h2>
+          <p>Use this before claiming real-world impact. The goal is one honest community trial with measurable evidence.</p>
+          <div class="card-grid" id="pilotGrid"></div>
+        </section>
+
+        <section>
           <h2>Business Path</h2>
           <p>XPRIZE needs more than a useful prototype. The engine tracks the proof needed for a real AI-operated service.</p>
           <div class="card-grid" id="businessGrid"></div>
@@ -355,6 +361,13 @@
       { name: 'Service offer', status: 'defined', note: 'Governance setup, policy localization, review workflow, and monthly impact reporting.' },
       { name: 'First customer proof', status: 'pending', note: 'Needs one real community, cohort, team, or maintainer group using the workflow.' },
       { name: 'Revenue or usage metric', status: 'pending', note: 'Needs a real usage record, invoice, grant path, or signed pilot before final submission.' }
+    ];
+
+    const pilot = [
+      { name: 'Pilot target', status: 'ready', note: 'Recruit one community, moderation team, classroom, support group, or open-source maintainer group.' },
+      { name: 'Before baseline', status: 'ready', note: 'Record current review time, unclear decisions, user complaints, and language-support gaps.' },
+      { name: 'Trial packet', status: 'ready', note: 'Use the exported packet as the shared policy, disclosure, review, and explanation template.' },
+      { name: 'After evidence', status: 'pending', note: 'Measure accepted policy drafts, time saved, reviewed decisions, disputes avoided, and multilingual explanations used.' }
     ];
 
     function sentence(value) {
@@ -410,6 +423,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         language,
         gemini_model: model,
         human_ai_loop: loop,
+        pilot_validation_kit: pilot,
         business_path: business,
         evidence_ledger: evidence,
         gemini_prompt: null,
@@ -430,6 +444,13 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         </div>
       `).join('');
       $('evidenceGrid').innerHTML = evidence.map((item) => `
+        <div class="card">
+          <b>${item.name}</b>
+          <span class="badge ${statusClass(item.status)}">${item.status}</span>
+          <p>${item.note}</p>
+        </div>
+      `).join('');
+      $('pilotGrid').innerHTML = pilot.map((item) => `
         <div class="card">
           <b>${item.name}</b>
           <span class="badge ${statusClass(item.status)}">${item.status}</span>

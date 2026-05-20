@@ -18,7 +18,7 @@ try {
   }
   await page.getByRole('button', { name: 'Build Impact Packet' }).click();
   const cards = await page.locator('.card').count();
-  if (cards < 18) {
+  if (cards < 22) {
     throw new Error(`not enough cards: ${cards}`);
   }
   const prompt = await page.locator('#geminiPrompt').innerText();
@@ -31,6 +31,9 @@ try {
   }
   if (!packet.evidence_ledger.some((item) => item.name === 'Gemini API live proof' && item.status === 'attached')) {
     throw new Error('Gemini live proof status missing');
+  }
+  if (!packet.pilot_validation_kit?.some((item) => item.name === 'After evidence' && item.status === 'pending')) {
+    throw new Error('pilot validation kit missing');
   }
   const geminiProofMetric = await page.locator('#geminiProof').innerText();
   if (geminiProofMetric !== '1') {

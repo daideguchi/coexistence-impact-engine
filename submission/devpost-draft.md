@@ -18,12 +18,13 @@ AI participation is becoming normal. The hard part is no longer simply asking wh
 - builds a human/AI operating loop
 - drafts a Gemini prompt for policy and multilingual explanation
 - keeps risky actions behind human approval gates
+- creates a pilot validation kit for real-world impact testing
 - exports an impact packet with evidence and claim boundaries
 - supports live Gemini BYOK testing without committed secrets
 
 ## Built With
 
-HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` smoke proof, Playwright verification, Python boundary checks, GitHub Pages target.
+HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` smoke proof, pilot validation playbook, Playwright verification, Python boundary checks, GitHub Pages target.
 
 ## Links
 

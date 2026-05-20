@@ -32,6 +32,7 @@ https://daideguchi.github.io/coexistence-impact-engine/
 - builds a human/AI operating loop
 - drafts a Gemini prompt for policy, disclosure, review checklist, and user explanation
 - supports browser-local Gemini BYOK testing without saving secrets
+- creates a pilot validation kit for the first real community trial
 - exports an impact packet with evidence ledger and claim boundaries
 - keeps live Gemini proof, user proof, and business evidence blocked until real evidence exists
 
@@ -93,7 +94,7 @@ Expected current state:
 
 ```text
 impact_verify_ok
-cards=18
+cards=22
 coexistence_impact_no_secrets_ok
 coexistence_impact_gemini_boundary_ok
 gemini_live_proof_file_exists=True
@@ -109,5 +110,6 @@ This is a public impact prototype, not a final XPRIZE submission. It claims one 
 - [Submission package](SUBMISSION_PACKAGE.md)
 - [Architecture](ARCHITECTURE.md)
 - [XPRIZE Gemini proof plan](docs/GEMINI_PROOF_PLAN.md)
+- [Pilot validation playbook](docs/PILOT_VALIDATION_PLAYBOOK.md)
 - [Devpost draft](submission/devpost-draft.md)
 - [Build journey](submission/build-journey.md)

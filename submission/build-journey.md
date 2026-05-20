@@ -11,6 +11,7 @@ Coexistence Console proved the governance idea inside Reddit moderation. The XPR
 - Live Vertex AI Gemini proof attached for one policy-draft request.
 - Human/AI operating loop.
 - Impact evidence ledger.
+- Pilot validation kit.
 - Claim-boundary verifiers.
 - Natural English demo video draft.
 

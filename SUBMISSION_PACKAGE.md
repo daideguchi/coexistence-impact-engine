@@ -21,6 +21,7 @@ Coexistence Impact Engine creates a reviewable impact packet:
 - Gemini prompt for policy and multilingual explanation
 - human/AI operating loop
 - approval gates
+- pilot validation kit
 - impact evidence ledger
 - next live proof step
 - claim boundary
@@ -49,6 +50,12 @@ Screenshots:
 ```text
 media/coexistence-impact-engine-full.png
 media/coexistence-impact-engine-pages-full.png
+```
+
+Pilot validation playbook:
+
+```text
+docs/PILOT_VALIDATION_PLAYBOOK.md
 ```
 
 Demo video draft:
