@@ -49,6 +49,8 @@ This public package does not claim live Gemini proof yet. Before any XPRIZE subm
 media/gemini-live-policy-draft.json
 ```
 
+Gemini live proof, real users, and business evidence are not claimed yet.
+
 ## Verify
 
 ```bash
