@@ -2,7 +2,13 @@
 
 ## Current State
 
-The app has a browser-local Gemini BYOK call path, but this repository does not include secrets and does not claim live Gemini proof yet.
+The app has a browser-local Gemini BYOK call path. The repo also includes a local Vertex AI smoke script that writes sanitized proof metadata only.
+
+Current proof file is attached:
+
+```text
+media/gemini-live-policy-draft.json
+```
 
 ## Proof File
 
@@ -24,6 +30,18 @@ Required shape:
   "sample_excerpt": "short sanitized excerpt"
 }
 ```
+
+## Local Vertex Smoke Command
+
+```bash
+GOOGLE_VERTEX_SERVICE_ACCOUNT_JSON=/path/to/service-account.json \
+GOOGLE_VERTEX_PROJECT=pj260519 \
+GOOGLE_VERTEX_LOCATION=us-central1 \
+GOOGLE_VERTEX_MODEL=gemini-2.5-flash \
+node scripts/run_vertex_gemini_smoke.mjs
+```
+
+The script writes `media/gemini-live-policy-draft.json`. It must not print or commit the private key.
 
 ## Safety Rules
 

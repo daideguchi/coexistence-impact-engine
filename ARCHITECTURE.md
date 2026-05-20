@@ -23,6 +23,11 @@ scripts/verify_no_secrets.py
 
 scripts/verify_gemini_boundary.py
   keeps live Gemini claims blocked until media/gemini-live-policy-draft.json exists
+
+scripts/run_vertex_gemini_smoke.mjs
+  uses a local service account JSON path from env
+  calls Vertex AI Gemini generateContent
+  writes sanitized proof metadata only
 ```
 
 ## Gemini Use

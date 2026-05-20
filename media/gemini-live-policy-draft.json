@@ -1,0 +1,17 @@
+{
+  "provider": "google_gemini",
+  "route": "vertex_ai_generate_content",
+  "model": "gemini-2.5-flash",
+  "project": "pj260519",
+  "location": "us-central1",
+  "ran_at_utc": "2026-05-20T14:38:24.016Z",
+  "prompt_purpose": "community governance policy draft",
+  "contains_secret": false,
+  "http_status": 200,
+  "traffic_type": "ON_DEMAND",
+  "prompt_token_count": 61,
+  "candidates_token_count": 8,
+  "total_token_count": 277,
+  "sample_excerpt": "Here is a concise community AI participation policy",
+  "claim_boundary": "This proves one live Gemini policy-draft call only. It does not prove user adoption, revenue, impact metrics, or final XPRIZE readiness."
+}

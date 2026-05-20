@@ -41,7 +41,7 @@ coexistence_impact_no_secrets_ok
 
 python3 scripts/verify_gemini_boundary.py
 coexistence_impact_gemini_boundary_ok
-gemini_live_proof_file_exists=False
+gemini_live_proof_file_exists=True
 ```
 
 Screenshots:
@@ -62,4 +62,4 @@ This draft does not claim final XPRIZE readiness.
 
 ## Claim Boundary
 
-This is not yet a final XPRIZE submission. Live Gemini proof, real user/community trials, and business evidence are still required.
+This is not yet a final XPRIZE submission. One live Gemini policy-draft proof file is attached. Real user/community trials, impact metrics, and business evidence are still required.

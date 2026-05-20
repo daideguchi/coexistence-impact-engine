@@ -26,11 +26,15 @@ try {
     throw new Error('Gemini safety prompt missing');
   }
   const packet = JSON.parse(await page.locator('#packetOutput').innerText());
-  if (packet.claim_boundary !== 'No live Gemini proof, real users, revenue, or final XPRIZE submission readiness is claimed yet.') {
+  if (packet.claim_boundary !== 'One live Gemini policy-draft call is attached. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.') {
     throw new Error('claim boundary mismatch');
   }
-  if (!packet.evidence_ledger.some((item) => item.name === 'Gemini API live proof' && item.status === 'blocked')) {
-    throw new Error('Gemini evidence boundary missing');
+  if (!packet.evidence_ledger.some((item) => item.name === 'Gemini API live proof' && item.status === 'attached')) {
+    throw new Error('Gemini live proof status missing');
+  }
+  const geminiProofMetric = await page.locator('#geminiProof').innerText();
+  if (geminiProofMetric !== '1') {
+    throw new Error(`unexpected Gemini proof metric: ${geminiProofMetric}`);
   }
   const screenshot = path.join(outDir, 'coexistence-impact-engine-full.png');
   await page.screenshot({ path: screenshot, fullPage: true });

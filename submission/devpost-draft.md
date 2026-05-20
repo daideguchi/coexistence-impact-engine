@@ -35,7 +35,7 @@ HTML, CSS, JavaScript, Gemini API BYOK call path, Playwright verification, Pytho
 
 ## What Is Still Needed Before Final Submission
 
-- Run and attach a real Gemini proof file.
+- Keep the attached live Gemini proof file current if the app changes.
 - Validate with at least one real community or organization.
 - Add measurable impact evidence.
 - Add business evidence or credible usage path.
@@ -43,4 +43,4 @@ HTML, CSS, JavaScript, Gemini API BYOK call path, Playwright verification, Pytho
 
 ## Claim Boundary
 
-This is a public impact prototype. It does not claim live Gemini proof, real users, revenue, or final XPRIZE submission readiness yet.
+This is a public impact prototype. It claims one live Gemini policy-draft proof file only. It does not claim real users, revenue, impact metrics, or final XPRIZE submission readiness yet.

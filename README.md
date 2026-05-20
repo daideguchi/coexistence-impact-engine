@@ -52,13 +52,13 @@ The app includes a browser-local Gemini `generateContent` path using a user-supp
 
 No API key is committed, stored, or bundled.
 
-This public package does not claim live Gemini proof yet. Before any XPRIZE submission claim, attach a sanitized proof file:
+This public package now includes one sanitized live Gemini proof file:
 
 ```text
 media/gemini-live-policy-draft.json
 ```
 
-Gemini live proof, real users, and business evidence are not claimed yet.
+The proof shows one Vertex AI Gemini policy-draft call. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
 
 ## Verify
 
@@ -69,6 +69,16 @@ python3 scripts/verify_gemini_boundary.py
 python3 scripts/verify_demo_video.py
 ```
 
+Optional live Gemini proof command:
+
+```bash
+GOOGLE_VERTEX_SERVICE_ACCOUNT_JSON=/path/to/service-account.json \
+GOOGLE_VERTEX_PROJECT=pj260519 \
+GOOGLE_VERTEX_LOCATION=us-central1 \
+GOOGLE_VERTEX_MODEL=gemini-2.5-flash \
+node scripts/run_vertex_gemini_smoke.mjs
+```
+
 Expected current state:
 
 ```text
@@ -76,13 +86,13 @@ impact_verify_ok
 cards=18
 coexistence_impact_no_secrets_ok
 coexistence_impact_gemini_boundary_ok
-gemini_live_proof_file_exists=False
+gemini_live_proof_file_exists=True
 impact_demo_video_ok
 ```
 
 ## Claim Boundary
 
-This is a public impact prototype, not a final XPRIZE submission. It does not claim live Gemini proof, real users, revenue, or final submission readiness yet.
+This is a public impact prototype, not a final XPRIZE submission. It claims one live Gemini policy-draft proof file only. It does not claim real users, revenue, impact metrics, or final submission readiness yet.
 
 ## Submission Docs
 

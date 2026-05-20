@@ -59,11 +59,11 @@ The middle-school clear story explains who it helps, what hurts, and how the pro
 
 The operating loop keeps the boundary clean. Gemini drafts policy and multilingual explanations. Humans approve enforcement, public claims, and final decisions.
 
-The Gemini workbench can run a browser-local BYOK call, but the public repo does not contain secrets and does not claim live proof yet.
+The Gemini workbench can run a browser-local BYOK call, and the public repo now includes one sanitized Vertex AI Gemini proof file. It does not contain secrets.
 
-The evidence ledger and business path show what is real, what is pending, and what must be proven before XPRIZE submission: live Gemini proof, user evidence, impact metrics, and business evidence.
+The evidence ledger and business path show what is real, what is pending, and what must be proven before XPRIZE submission: user evidence, impact metrics, and business evidence.
 
-This is not a final XPRIZE submission yet. It is a honest public foundation for turning AI coexistence into a measurable impact product.
+This is not a final XPRIZE submission yet. It is an honest public foundation for turning AI coexistence into a measurable impact product.
 TEXT
 
 "$EDGE_TTS_PYTHON" -m edge_tts \
@@ -98,8 +98,8 @@ make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
   "Gemini Workbench" \
-  "The app supports live BYOK Gemini calls without committing secrets." \
-  "4 / 6  AI assist, not hidden enforcement" \
+  "A sanitized Vertex AI Gemini proof file is attached without committing secrets." \
+  "4 / 6  Live Gemini proof, bounded claim" \
   "$TMP_DIR/slide-4.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-full.png" \
@@ -110,8 +110,8 @@ make_screenshot_slide "$ROOT/media/coexistence-impact-engine-full.png" \
 
 make_text_slide \
   "Honest Submission Boundary" \
-  "Public prototype is verified. Final XPRIZE readiness is not claimed." \
-  "Next: live Gemini proof, real user trial, impact metrics, and business evidence." \
+  "Gemini proof is attached. Final XPRIZE readiness is not claimed." \
+  "Next: real user trial, impact metrics, and business evidence." \
   "$TMP_DIR/slide-6.png"
 
 ffmpeg -y \

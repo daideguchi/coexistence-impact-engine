@@ -232,14 +232,14 @@
         <h1>Coexistence Impact Engine</h1>
         <p>Gemini-assisted governance for communities where humans and AI work together, with human approval, multilingual explanation, and measurable impact evidence.</p>
       </div>
-      <span class="badge amber">Gemini live proof pending</span>
+      <span class="badge green">Gemini live proof attached</span>
     </header>
 
     <section class="metrics" aria-label="Impact metrics">
       <div class="metric"><strong id="communityCount">5</strong><span>target community types</span></div>
       <div class="metric"><strong id="approvalCount">4</strong><span>human approval gates</span></div>
       <div class="metric"><strong id="languageCount">4</strong><span>supported explanation languages</span></div>
-      <div class="metric"><strong id="geminiProof">0</strong><span>Gemini proof attached</span></div>
+      <div class="metric"><strong id="geminiProof">1</strong><span>Gemini proof attached</span></div>
     </section>
 
     <div class="grid">
@@ -349,6 +349,7 @@
       { name: 'AI handoff', actor: 'Future agent can use', status: 'guarded', note: 'The packet states current truth, stoplines, and proof gaps.' },
       { name: 'Public claim', actor: 'Human owns', status: 'blocked', note: 'No XPRIZE claim until Gemini proof and user evidence exist.' }
     ];
+    const committedGeminiProof = true;
 
     const business = [
       { name: 'Service offer', status: 'defined', note: 'Governance setup, policy localization, review workflow, and monthly impact reporting.' },
@@ -392,7 +393,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
       const language = $('language').value;
       const model = $('model').value.trim() || 'gemini-2.5-flash';
       const evidence = [
-        { name: 'Gemini API live proof', status: 'blocked', note: 'Attach media/gemini-live-policy-draft.json after a real call.' },
+        { name: 'Gemini API live proof', status: committedGeminiProof ? 'attached' : 'blocked', note: committedGeminiProof ? 'media/gemini-live-policy-draft.json proves one live Vertex AI Gemini policy-draft call.' : 'Attach media/gemini-live-policy-draft.json after a real call.' },
         { name: 'Human approval model', status: 'attached', note: 'Four approval gates are visible in the operating loop.' },
         { name: 'Multilingual support', status: 'prototype', note: `${language} explanation target is included in the prompt.` },
         { name: 'Impact measurement', status: 'pending', note: 'Needs real records for time saved, disputes avoided, and decisions reviewed.' },
@@ -413,7 +414,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         evidence_ledger: evidence,
         gemini_prompt: null,
         next_live_proof_step: 'Run one real Gemini generateContent call, sanitize the response metadata, and attach media/gemini-live-policy-draft.json.',
-        claim_boundary: 'No live Gemini proof, real users, revenue, or final XPRIZE submission readiness is claimed yet.'
+        claim_boundary: 'One live Gemini policy-draft call is attached. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.'
       };
       packet.gemini_prompt = buildPrompt(packet);
       currentPacket = packet;
@@ -443,16 +444,16 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         </div>
       `).join('');
       $('geminiPrompt').textContent = packet.gemini_prompt;
-      $('geminiOutput').textContent = 'No Gemini call has been made in this browser session.';
+      $('geminiOutput').textContent = 'Committed proof is attached at media/gemini-live-policy-draft.json. No browser-session Gemini call has been made on this page load.';
       $('packetOutput').textContent = JSON.stringify(packet, null, 2);
-      $('geminiProof').textContent = '0';
+      $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
     }
 
     async function generateGeminiDraft() {
       buildPacket();
       const key = $('apiKey').value.trim();
       if (!key) {
-        $('geminiOutput').textContent = 'Gemini API key is required for a local live test. No request was made, no secret was saved, and no live Gemini proof is claimed.';
+        $('geminiOutput').textContent = 'Gemini API key is required for a new browser-local live test. No request was made and no secret was saved. The committed Vertex proof file remains attached.';
         return;
       }
       const model = encodeURIComponent(currentPacket.gemini_model);
@@ -474,7 +475,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         $('geminiProof').textContent = '1';
       } catch (error) {
         $('geminiOutput').textContent = `Gemini live call failed: ${error.message}`;
-        $('geminiProof').textContent = '0';
+        $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
       }
     }
 
