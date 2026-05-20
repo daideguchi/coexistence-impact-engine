@@ -76,6 +76,7 @@ The proof shows one Vertex AI Gemini policy-draft call. Real users, impact metri
 ```bash
 node scripts/verify_impact.mjs
 python3 scripts/verify_no_secrets.py
+python3 scripts/verify_readme_review_hub.py
 python3 scripts/verify_gemini_boundary.py
 python3 scripts/verify_demo_video.py
 ```
@@ -96,6 +97,7 @@ Expected current state:
 impact_verify_ok
 cards=22
 coexistence_impact_no_secrets_ok
+coexistence_impact_readme_review_hub_ok
 coexistence_impact_gemini_boundary_ok
 gemini_live_proof_file_exists=True
 impact_demo_video_ok

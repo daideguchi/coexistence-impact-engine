@@ -40,6 +40,9 @@ sections=6
 python3 scripts/verify_no_secrets.py
 coexistence_impact_no_secrets_ok
 
+python3 scripts/verify_readme_review_hub.py
+coexistence_impact_readme_review_hub_ok
+
 python3 scripts/verify_gemini_boundary.py
 coexistence_impact_gemini_boundary_ok
 gemini_live_proof_file_exists=True
