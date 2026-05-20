@@ -22,6 +22,7 @@ Coexistence Impact Engine creates a reviewable impact packet:
 - human/AI operating loop
 - approval gates
 - pilot validation kit
+- pilot outreach kit
 - impact evidence ledger
 - next live proof step
 - claim boundary
@@ -59,6 +60,7 @@ Pilot validation playbook:
 
 ```text
 docs/PILOT_VALIDATION_PLAYBOOK.md
+docs/PILOT_OUTREACH_PACKET.md
 ```
 
 Demo video draft:

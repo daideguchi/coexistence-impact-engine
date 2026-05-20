@@ -12,6 +12,7 @@ Coexistence Console proved the governance idea inside Reddit moderation. The XPR
 - Human/AI operating loop.
 - Impact evidence ledger.
 - Pilot validation kit.
+- Pilot outreach kit for the first real operator.
 - Claim-boundary verifiers.
 - README review-hub verifier for public submission completeness.
 - Natural English demo video draft.

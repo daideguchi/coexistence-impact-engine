@@ -19,6 +19,7 @@ AI participation is becoming normal. The hard part is no longer simply asking wh
 - drafts a Gemini prompt for policy and multilingual explanation
 - keeps risky actions behind human approval gates
 - creates a pilot validation kit for real-world impact testing
+- creates a pilot outreach kit for recruiting the first real operator
 - exports an impact packet with evidence and claim boundaries
 - supports live Gemini BYOK testing without committed secrets
 

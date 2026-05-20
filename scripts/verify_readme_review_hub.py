@@ -30,6 +30,7 @@ REQUIRED_MARKERS = [
     "coexistence_impact_no_secrets_ok",
     "gemini_live_proof_file_exists=True",
     "Pilot validation playbook",
+    "Pilot outreach packet",
     "does not claim real users",
 ]
 

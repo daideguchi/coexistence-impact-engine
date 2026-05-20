@@ -33,6 +33,8 @@ Record the current state before using the tool:
 5. Use the packet for a small batch of real decisions or explanations.
 6. Record what changed after the pilot.
 
+Use `docs/PILOT_OUTREACH_PACKET.md` to recruit the first operator and collect only non-private evidence.
+
 ## After Evidence
 
 Useful evidence includes:
