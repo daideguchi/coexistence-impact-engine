@@ -8,6 +8,16 @@ AI coexistence is not just a moderation problem. It is an impact and governance 
 
 Coexistence Impact Engine helps communities and small teams govern AI-assisted participation with clear policy, multilingual explanation, human approval gates, and measurable evidence.
 
+## Judge Quick Read
+
+Who it helps: communities, moderators, and small organizations where humans and AI will work in the same space.
+
+The problem: the hard question is not only whether AI was involved. The hard question is how people set rules, explain decisions, approve risky steps, support multiple languages, and measure whether the workflow helped.
+
+How Coexistence Impact Engine solves it: the app creates a human/AI operating loop, Gemini policy-draft prompt, multilingual explanation path, human approval gates, evidence ledger, and exportable impact packet.
+
+What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, and one sanitized live Vertex AI Gemini policy-draft proof are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
+
 ## Live Demo
 
 GitHub Pages target:
