@@ -51,6 +51,15 @@ media/coexistence-impact-engine-full.png
 media/coexistence-impact-engine-pages-full.png
 ```
 
+Demo video draft:
+
+```text
+media/coexistence-impact-engine-demo.mp4
+https://raw.githubusercontent.com/daideguchi/coexistence-impact-engine/main/media/coexistence-impact-engine-demo.mp4
+```
+
+This draft does not claim final XPRIZE readiness.
+
 ## Claim Boundary
 
 This is not yet a final XPRIZE submission. Live Gemini proof, real user/community trials, and business evidence are still required.

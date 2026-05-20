@@ -37,6 +37,15 @@ GitHub Pages screenshot target:
 media/coexistence-impact-engine-pages-full.png
 ```
 
+Current demo video draft:
+
+```text
+media/coexistence-impact-engine-demo.mp4
+https://raw.githubusercontent.com/daideguchi/coexistence-impact-engine/main/media/coexistence-impact-engine-demo.mp4
+```
+
+This is a narration draft for review. It does not claim final XPRIZE readiness.
+
 ## Gemini Boundary
 
 The app includes a browser-local Gemini `generateContent` path using a user-supplied API key and the default model field `gemini-2.5-flash`.
@@ -57,6 +66,7 @@ Gemini live proof, real users, and business evidence are not claimed yet.
 node scripts/verify_impact.mjs
 python3 scripts/verify_no_secrets.py
 python3 scripts/verify_gemini_boundary.py
+python3 scripts/verify_demo_video.py
 ```
 
 Expected current state:
@@ -67,6 +77,7 @@ cards=18
 coexistence_impact_no_secrets_ok
 coexistence_impact_gemini_boundary_ok
 gemini_live_proof_file_exists=False
+impact_demo_video_ok
 ```
 
 ## Claim Boundary

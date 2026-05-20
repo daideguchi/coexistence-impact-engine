@@ -25,6 +25,14 @@ AI participation is becoming normal. The hard part is no longer simply asking wh
 
 HTML, CSS, JavaScript, Gemini API BYOK call path, Playwright verification, Python boundary checks, GitHub Pages target.
 
+## Links
+
+- Live demo: https://daideguchi.github.io/coexistence-impact-engine/
+- GitHub: https://github.com/daideguchi/coexistence-impact-engine
+- Submission package: https://raw.githubusercontent.com/daideguchi/coexistence-impact-engine/main/SUBMISSION_PACKAGE.md
+- Screenshot: https://raw.githubusercontent.com/daideguchi/coexistence-impact-engine/main/media/coexistence-impact-engine-full.png
+- Demo video draft: https://raw.githubusercontent.com/daideguchi/coexistence-impact-engine/main/media/coexistence-impact-engine-demo.mp4
+
 ## What Is Still Needed Before Final Submission
 
 - Run and attach a real Gemini proof file.
