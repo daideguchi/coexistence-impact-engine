@@ -23,7 +23,7 @@ AI participation is becoming normal. The hard part is no longer simply asking wh
 
 ## Built With
 
-HTML, CSS, JavaScript, Gemini API BYOK call path, Playwright verification, Python boundary checks, GitHub Pages target.
+HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` smoke proof, Playwright verification, Python boundary checks, GitHub Pages target.
 
 ## Links
 

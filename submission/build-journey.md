@@ -8,13 +8,15 @@ Coexistence Console proved the governance idea inside Reddit moderation. The XPR
 
 - Static public MVP.
 - Gemini prompt and BYOK call path.
+- Live Vertex AI Gemini proof attached for one policy-draft request.
 - Human/AI operating loop.
 - Impact evidence ledger.
 - Claim-boundary verifiers.
+- Natural English demo video draft.
 
 ## Next Build
 
-- Live Gemini proof.
+- Keep the Gemini proof current if the prompt or model route changes.
 - Real user/community trial.
 - Impact metric capture.
 - Business evidence.
