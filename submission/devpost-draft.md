@@ -53,4 +53,4 @@ HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` sm
 
 ## Claim Boundary
 
-This is a public impact prototype. It claims one live Gemini policy-draft proof file and one informal early-feedback signal only. The Field Reality Check can classify evidence quality, but it does not create formal validation. The project does not claim a formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.
+This is a public impact prototype. It claims one live Gemini proof file for policy drafting and Field Reality Check, plus one informal early-feedback signal only. The Field Reality Check can classify evidence quality, but it does not create formal validation. The project does not claim a formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.

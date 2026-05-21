@@ -40,8 +40,15 @@ def main() -> int:
         print("coexistence_impact_gemini_boundary_failed")
         print(f"missing_or_invalid={missing}")
         return 1
+    checks = data.get("checks") or []
+    purposes = {check.get("prompt_purpose") for check in checks if isinstance(check, dict)}
+    if data.get("field_reality_check_live_proof") is not True or "field reality check" not in purposes:
+        print("coexistence_impact_gemini_boundary_failed")
+        print("missing_field_reality_check_live_proof=True")
+        return 1
     print("coexistence_impact_gemini_boundary_ok")
     print("gemini_live_proof_file_exists=True")
+    print("field_reality_check_live_proof=True")
     return 0
 
 

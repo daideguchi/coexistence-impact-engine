@@ -55,28 +55,7 @@ function sanitizeExcerpt(text) {
   return String(text || '').replace(/\s+/g, ' ').trim().slice(0, 500);
 }
 
-async function main() {
-  if (!keyPath) {
-    throw new Error('Set GOOGLE_VERTEX_SERVICE_ACCOUNT_JSON to a local service account JSON path.');
-  }
-  const serviceAccount = JSON.parse(await readFile(keyPath, 'utf8'));
-  if (serviceAccount.project_id !== project) {
-    throw new Error(`Service account project mismatch: expected ${project}, got ${serviceAccount.project_id}`);
-  }
-
-  const prompt = `Draft a concise community AI participation policy.
-
-Return exactly five short bullets:
-1. allowed AI-assisted use
-2. disclosure expectation
-3. human review checkpoint
-4. multilingual explanation note
-5. claim boundary
-
-Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
-
-  const token = await getAccessToken(serviceAccount);
-  const url = `https://${location}-aiplatform.googleapis.com/v1/projects/${project}/locations/${location}/publishers/google/models/${model}:generateContent`;
+async function callGemini({ token, url, prompt, purpose, maxOutputTokens = 220 }) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
@@ -87,15 +66,65 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       generationConfig: {
         temperature: 0.2,
-        maxOutputTokens: 220,
+        maxOutputTokens,
       },
     }),
   });
   const data = await res.json().catch(() => ({}));
   const text = data?.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('\n').trim() || '';
   if (!res.ok || !text) {
-    throw new Error(`Vertex Gemini call failed: HTTP ${res.status} ${data?.error?.status || ''} ${data?.error?.message || ''}`.trim());
+    throw new Error(`Vertex Gemini ${purpose} call failed: HTTP ${res.status} ${data?.error?.status || ''} ${data?.error?.message || ''}`.trim());
   }
+  return {
+    prompt_purpose: purpose,
+    http_status: res.status,
+    traffic_type: data?.usageMetadata?.trafficType || null,
+    prompt_token_count: data?.usageMetadata?.promptTokenCount || null,
+    candidates_token_count: data?.usageMetadata?.candidatesTokenCount || null,
+    total_token_count: data?.usageMetadata?.totalTokenCount || null,
+    sample_excerpt: sanitizeExcerpt(text),
+  };
+}
+
+async function main() {
+  if (!keyPath) {
+    throw new Error('Set GOOGLE_VERTEX_SERVICE_ACCOUNT_JSON to a local service account JSON path.');
+  }
+  const serviceAccount = JSON.parse(await readFile(keyPath, 'utf8'));
+  if (serviceAccount.project_id !== project) {
+    throw new Error(`Service account project mismatch: expected ${project}, got ${serviceAccount.project_id}`);
+  }
+
+  const policyPrompt = `Draft a concise community AI participation policy.
+
+Return exactly five short bullets:
+1. allowed AI-assisted use
+2. disclosure expectation
+3. human review checkpoint
+4. multilingual explanation note
+5. claim boundary
+
+Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
+
+  const fieldRealityPrompt = `Act as a field operator reviewing this informal feedback:
+"A real person tried the prototype and said: Yeah, this is good."
+
+Return exactly five short bullets:
+1. evidence level
+2. what the reaction suggests
+3. what it does not prove
+4. blocked public claim
+5. next measurement
+
+Do not claim formal validation, real users, adoption, measured impact, or XPRIZE readiness. Do not claim to detect AI authorship.`;
+
+  const token = await getAccessToken(serviceAccount);
+  const url = `https://${location}-aiplatform.googleapis.com/v1/projects/${project}/locations/${location}/publishers/google/models/${model}:generateContent`;
+  const checks = [
+    await callGemini({ token, url, prompt: policyPrompt, purpose: 'community governance policy draft' }),
+    await callGemini({ token, url, prompt: fieldRealityPrompt, purpose: 'field reality check', maxOutputTokens: 180 }),
+  ];
+  const totalTokenCount = checks.reduce((sum, check) => sum + Number(check.total_token_count || 0), 0);
 
   const proof = {
     provider: 'google_gemini',
@@ -104,15 +133,15 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
     project,
     location,
     ran_at_utc: new Date().toISOString(),
-    prompt_purpose: 'community governance policy draft',
+    prompt_purpose: 'community governance policy draft + field reality check',
     contains_secret: false,
-    http_status: res.status,
-    traffic_type: data?.usageMetadata?.trafficType || null,
-    prompt_token_count: data?.usageMetadata?.promptTokenCount || null,
-    candidates_token_count: data?.usageMetadata?.candidatesTokenCount || null,
-    total_token_count: data?.usageMetadata?.totalTokenCount || null,
-    sample_excerpt: sanitizeExcerpt(text),
-    claim_boundary: 'This proves one live Gemini policy-draft call only. It does not prove user adoption, revenue, impact metrics, or final XPRIZE readiness.',
+    http_status: 200,
+    live_call_count: checks.length,
+    field_reality_check_live_proof: true,
+    total_token_count: totalTokenCount || null,
+    sample_excerpt: checks.map((check) => `${check.prompt_purpose}: ${check.sample_excerpt}`).join(' | '),
+    checks,
+    claim_boundary: 'This proves live Gemini calls for policy drafting and field reality checking only. It does not prove user adoption, formal validation, revenue, impact metrics, or final XPRIZE readiness.',
   };
 
   await mkdir(path.dirname(proofPath), { recursive: true });
@@ -121,6 +150,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
   console.log(`proof=${proofPath}`);
   console.log(`model=${model}`);
   console.log(`total_token_count=${proof.total_token_count}`);
+  console.log('field_reality_check_live_proof=true');
 }
 
 main().catch((error) => {

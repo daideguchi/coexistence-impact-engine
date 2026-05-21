@@ -292,6 +292,7 @@
         <div class="btn-row">
           <button class="btn primary" id="buildPacket">Build Impact Packet</button>
           <button class="btn" id="runRealityCheck">Run Field Check</button>
+          <button class="btn" id="generateFieldCheck">Generate Field Check</button>
           <button class="btn" id="generateGemini">Generate Gemini Draft</button>
           <button class="btn" id="copyPacket">Copy Packet</button>
         </div>
@@ -339,6 +340,7 @@
             </div>
             <div class="card-grid" id="fieldGrid"></div>
           </div>
+          <pre class="packet" id="fieldOutput"></pre>
           <p class="note">This is AI-assisted situational judgment. It may classify evidence quality and next questions, but it must not claim adoption, impact, or final validation by itself.</p>
         </section>
 
@@ -530,6 +532,29 @@ Return:
 Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
     }
 
+    function buildFieldPrompt(packet) {
+      return `You are Gemini acting as a field operator, not a final authority.
+
+Field role: ${packet.field_reality_check.role}
+Field note: ${packet.field_reality_check.input}
+Community: ${packet.community}
+Problem: ${packet.problem}
+
+Return concise JSON with these keys:
+- evidence_level
+- field_reading
+- usable_evidence
+- blocked_claim
+- next_measurement
+- human_approval_needed
+
+Rules:
+- Do not claim formal validation from casual feedback.
+- Do not claim real users, measured impact, adoption, or XPRIZE readiness.
+- Do not detect AI authorship.
+- Treat this as situational judgment for a human operator.`;
+    }
+
     function buildFieldRealityCheck() {
       const role = $('fieldRole').value;
       const input = normalizedEvidence($('fieldNote').value) || 'not collected yet';
@@ -594,10 +619,12 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         business_path: business,
         evidence_ledger: evidence,
         gemini_prompt: null,
+        field_reality_prompt: null,
         next_live_proof_step: 'Run one real Gemini generateContent call, sanitize the response metadata, and attach media/gemini-live-policy-draft.json.',
         claim_boundary: 'One live Gemini policy-draft call and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.'
       };
       packet.gemini_prompt = buildPrompt(packet);
+      packet.field_reality_prompt = buildFieldPrompt(packet);
       currentPacket = packet;
 
       $('storyGrid').innerHTML = story.map(([name, note]) => `
@@ -670,6 +697,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
       `).join('');
       $('geminiPrompt').textContent = packet.gemini_prompt;
       $('geminiOutput').textContent = 'Committed proof is attached at media/gemini-live-policy-draft.json. No browser-session Gemini call has been made on this page load.';
+      $('fieldOutput').textContent = JSON.stringify(packet.field_reality_check, null, 2);
       $('packetOutput').textContent = JSON.stringify(packet, null, 2);
       $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
       $('pilotProof').textContent = String(trialEvidence.evidence_items_captured);
@@ -705,8 +733,45 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
       }
     }
 
+    async function generateFieldCheck() {
+      buildPacket();
+      const key = $('apiKey').value.trim();
+      if (!key) {
+        $('fieldOutput').textContent = [
+          'No Gemini API key was provided, so no browser live request was made.',
+          'Local field check preview:',
+          JSON.stringify(currentPacket.field_reality_check, null, 2),
+          '',
+          'To run Gemini here, provide a browser-local key. The key is not saved.'
+        ].join('\n');
+        return;
+      }
+      const model = encodeURIComponent(currentPacket.gemini_model);
+      $('fieldOutput').textContent = 'Calling Gemini for Field Reality Check with a browser-local key...';
+      try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: currentPacket.field_reality_prompt }] }]
+          })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error?.message || `Gemini request failed with ${response.status}`);
+        }
+        const text = data.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('\n').trim() || '(empty response)';
+        $('fieldOutput').textContent = text;
+        $('geminiProof').textContent = '1';
+      } catch (error) {
+        $('fieldOutput').textContent = `Gemini Field Reality Check failed: ${error.message}`;
+        $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
+      }
+    }
+
     $('buildPacket').addEventListener('click', buildPacket);
     $('runRealityCheck').addEventListener('click', buildPacket);
+    $('generateFieldCheck').addEventListener('click', generateFieldCheck);
     $('generateGemini').addEventListener('click', generateGeminiDraft);
     $('copyPacket').addEventListener('click', async () => {
       buildPacket();

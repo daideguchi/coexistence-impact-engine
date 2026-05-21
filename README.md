@@ -16,7 +16,7 @@ The problem: the hard question is not only whether AI was involved. The hard que
 
 How Coexistence Impact Engine solves it: the app creates a human/AI operating loop, Gemini policy-draft prompt, multilingual explanation path, Field Reality Check, human approval gates, pilot trial workspace, evidence ledger, and exportable impact packet.
 
-What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, pilot evidence calculator, and one sanitized live Vertex AI Gemini policy-draft proof are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
+What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, pilot evidence calculator, and one sanitized live Vertex AI Gemini proof file for policy drafting and Field Reality Check are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
 
 Early feedback: one informal reviewer understood the value quickly and responded positively. This is treated as an initial signal only, not formal validation. The next milestone is to turn that "this feels useful" reaction into measured pilot evidence.
 
@@ -76,7 +76,7 @@ This public package now includes one sanitized live Gemini proof file:
 media/gemini-live-policy-draft.json
 ```
 
-The proof shows one Vertex AI Gemini policy-draft call. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
+The proof shows Vertex AI Gemini calls for policy drafting and Field Reality Check. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
 
 ## Verify
 
@@ -109,12 +109,13 @@ coexistence_impact_no_secrets_ok
 coexistence_impact_readme_review_hub_ok
 coexistence_impact_gemini_boundary_ok
 gemini_live_proof_file_exists=True
+field_reality_check_live_proof=True
 impact_demo_video_ok
 ```
 
 ## Claim Boundary
 
-This is a public impact prototype, not a final XPRIZE submission. It claims one live Gemini policy-draft proof file and one informal early-feedback signal only. It does not claim real users, a formal pilot, broad user validation, revenue, impact metrics, or final submission readiness yet.
+This is a public impact prototype, not a final XPRIZE submission. It claims one live Gemini proof file for policy drafting and Field Reality Check, plus one informal early-feedback signal only. It does not claim real users, a formal pilot, broad user validation, revenue, impact metrics, or final submission readiness yet.
 
 ## Submission Docs
 

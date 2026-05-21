@@ -17,6 +17,7 @@ try {
     throw new Error(`unexpected h1: ${h1}`);
   }
   await page.getByRole('button', { name: 'Build Impact Packet' }).click();
+  await page.getByRole('button', { name: 'Run Field Check' }).click();
   const cards = await page.locator('.card').count();
   if (cards < 38) {
     throw new Error(`not enough cards: ${cards}`);
@@ -35,8 +36,15 @@ try {
   if (packet.field_reality_check?.evidence_level !== 'informal positive signal') {
     throw new Error('field reality check did not classify the default early signal');
   }
+  if (!packet.field_reality_prompt?.includes('acting as a field operator')) {
+    throw new Error('field reality prompt missing');
+  }
   if (!packet.field_reality_check?.blocked_claim.includes('formal validation')) {
     throw new Error('field reality check missing blocked claim boundary');
+  }
+  const fieldOutput = await page.locator('#fieldOutput').innerText();
+  if (!fieldOutput.includes('informal positive signal')) {
+    throw new Error('field output missing default local classification');
   }
   if (!packet.evidence_ledger.some((item) => item.name === 'Gemini API live proof' && item.status === 'attached')) {
     throw new Error('Gemini live proof status missing');
