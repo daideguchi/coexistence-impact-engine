@@ -52,7 +52,7 @@ Useful evidence includes:
 
 ## Handling Informal Feedback
 
-If the first reaction is simply positive, do not overstate it. A response like "this is good" is useful as an early signal that the problem and workflow are understandable, but it is not a formal pilot result. If the operator refuses to share details with AI, respect that boundary and record only a privacy-respecting positive signal.
+If the first reaction is simply positive, do not overstate it. A response like "this is good" is useful as an early signal that the problem and workflow are understandable, but it is not a formal pilot result. If the operator keeps details private, respect that boundary and record only a privacy-respecting positive signal.
 
 Record it as:
 

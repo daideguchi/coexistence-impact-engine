@@ -54,7 +54,7 @@ Use this only before a formal pilot. Keep it modest and honest.
 Who saw it:
 What they reacted to:
 Plain reaction:
-Details shared with AI: yes / no
+Details publicly shareable: yes / no
 Measurement status: measured / aggregate-only / standard-default-only / not measured
 What this suggests:
 What it does not prove:

@@ -4,32 +4,32 @@
   "model": "gemini-2.5-flash",
   "project": "pj260519",
   "location": "us-central1",
-  "ran_at_utc": "2026-05-21T10:10:51.038Z",
+  "ran_at_utc": "2026-05-21T10:23:51.082Z",
   "prompt_purpose": "community governance policy draft + field reality check",
   "contains_secret": false,
   "http_status": 200,
   "live_call_count": 2,
   "field_reality_check_live_proof": true,
-  "total_token_count": 589,
-  "sample_excerpt": "community governance policy draft: Here is a concise community | field reality check: * **evidence level:**",
+  "total_token_count": 586,
+  "sample_excerpt": "community governance policy draft: Here is a concise community AI participation | field reality check: * **evidence level**: Single,",
   "checks": [
     {
       "prompt_purpose": "community governance policy draft",
       "http_status": 200,
       "traffic_type": "ON_DEMAND",
       "prompt_token_count": 61,
-      "candidates_token_count": 5,
+      "candidates_token_count": 7,
       "total_token_count": 277,
-      "sample_excerpt": "Here is a concise community"
+      "sample_excerpt": "Here is a concise community AI participation"
     },
     {
       "prompt_purpose": "field reality check",
       "http_status": 200,
       "traffic_type": "ON_DEMAND",
-      "prompt_token_count": 136,
-      "candidates_token_count": 6,
-      "total_token_count": 312,
-      "sample_excerpt": "* **evidence level:**"
+      "prompt_token_count": 133,
+      "candidates_token_count": 8,
+      "total_token_count": 309,
+      "sample_excerpt": "* **evidence level**: Single,"
     }
   ],
   "claim_boundary": "This proves live Gemini calls for policy drafting and field reality checking only. It does not prove user adoption, formal validation, revenue, impact metrics, or final XPRIZE readiness."

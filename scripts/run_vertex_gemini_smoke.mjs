@@ -107,7 +107,7 @@ Return exactly five short bullets:
 Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
 
   const fieldRealityPrompt = `Act as a field operator reviewing this privacy-limited feedback:
-"A real person tried the prototype, declined to share details with the AI, and gave a positive but non-specific reaction. The only safe measurement description is standard/default."
+"A real person tried the prototype, kept the details private, and gave a positive but non-specific reaction. The only safe measurement description is standard/default."
 
 Return exactly six short bullets:
 1. evidence level
