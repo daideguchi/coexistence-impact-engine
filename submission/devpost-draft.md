@@ -12,6 +12,12 @@ A Gemini-assisted governance engine for communities where humans and AI work tog
 
 AI participation is becoming normal. The hard part is no longer simply asking whether AI was involved. The hard part is how humans govern, explain, review, and measure AI-assisted work responsibly.
 
+I built this from a very personal place: I like open communities, and I believe humans and AI are going to share more of the same workspaces. That future will be useful, but it will also be messy. People will still need rules, context, explanation, and trust.
+
+Early feedback was simple, but important. When I showed the prototype to someone outside the build process, the reaction was not a dramatic pitch-deck moment. It was closer to: "Yeah, this is good." That mattered to me. Coexistence Impact Engine is not trying to impress people with another AI demo. It is trying to make a difficult future feel manageable.
+
+The first signal was that the core idea made sense without a long explanation. The next step is to convert that first "this feels useful" reaction into measured pilot evidence: time saved, decisions reviewed, explanations accepted or edited, and multilingual workflows completed.
+
 ## What It Does
 
 - defines the community and impact problem
@@ -46,4 +52,4 @@ HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` sm
 
 ## Claim Boundary
 
-This is a public impact prototype. It claims one live Gemini policy-draft proof file only. It does not claim real users, revenue, impact metrics, or final XPRIZE submission readiness yet.
+This is a public impact prototype. It claims one live Gemini policy-draft proof file and one informal early-feedback signal only. It does not claim a formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.

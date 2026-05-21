@@ -49,9 +49,20 @@ Useful evidence includes:
 - qualitative feedback from the operator
 - estimated time saved using `max(0, baseline minutes - trial minutes) x reviewed decisions`
 
+## Handling Informal Feedback
+
+If the first reaction is simply positive, do not overstate it. A response like "this is good" is useful as an early signal that the problem and workflow are understandable, but it is not a formal pilot result.
+
+Record it as:
+
+- the person understood the value without a long explanation
+- the reaction was positive but not measured
+- the next step is to capture real before/after workflow evidence
+
 ## Stoplines
 
 - Do not claim broad impact from a single anecdote.
+- Do not present a casual positive reaction as formal validation.
 - Do not include private user data in public proof.
 - Do not claim the tool detects AI authorship.
 - Do not claim final XPRIZE readiness until impact evidence and business evidence exist.

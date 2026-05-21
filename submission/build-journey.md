@@ -4,6 +4,8 @@
 
 Coexistence Console proved the governance idea inside Reddit moderation. The XPRIZE lane needs the broader impact version: a product that can help communities and teams operate responsibly with AI participation.
 
+The early outside reaction was not theatrical; it was a simple positive response that the idea made sense. That is the right level of evidence for this stage. It says the problem is recognizable, not that the product has proven impact yet.
+
 ## Current Build
 
 - Static public MVP.
@@ -17,6 +19,7 @@ Coexistence Console proved the governance idea inside Reddit moderation. The XPR
 - Claim-boundary verifiers.
 - README review-hub verifier for public submission completeness.
 - Natural English demo video draft.
+- Early-feedback story recorded with a strict claim boundary.
 
 ## Next Build
 

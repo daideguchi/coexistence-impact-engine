@@ -18,6 +18,8 @@ How Coexistence Impact Engine solves it: the app creates a human/AI operating lo
 
 What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, pilot evidence calculator, and one sanitized live Vertex AI Gemini policy-draft proof are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
 
+Early feedback: one informal reviewer understood the value quickly and responded positively. This is treated as an initial signal only, not formal validation. The next milestone is to turn that "this feels useful" reaction into measured pilot evidence.
+
 ## Live Demo
 
 GitHub Pages target:
@@ -108,7 +110,7 @@ impact_demo_video_ok
 
 ## Claim Boundary
 
-This is a public impact prototype, not a final XPRIZE submission. It claims one live Gemini policy-draft proof file only. It does not claim real users, revenue, impact metrics, or final submission readiness yet.
+This is a public impact prototype, not a final XPRIZE submission. It claims one live Gemini policy-draft proof file and one informal early-feedback signal only. It does not claim real users, a formal pilot, broad user validation, revenue, impact metrics, or final submission readiness yet.
 
 ## Submission Docs
 

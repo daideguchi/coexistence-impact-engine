@@ -32,6 +32,12 @@ Coexistence Impact Engine creates a reviewable impact packet:
 
 The long-game fit is an AI-assisted operations business for communities and teams that need responsible AI participation policies. Gemini is used where it is safest: drafting and summarizing policy artifacts. Humans keep control over enforcement, public claims, and final decisions.
 
+## Early Feedback Signal
+
+The first outside reaction was quiet but useful: the product made sense quickly and was received as a good idea. This is not treated as formal validation or broad user evidence. It is treated as the first sign that the governance problem is recognizable and that the workflow is natural enough to test with a real operator.
+
+The next milestone is to convert that reaction into measured pilot evidence: baseline time, trial time, reviewed decisions, accepted or edited policy text, languages used, and an approved operator quote if available.
+
 ## Current Proof
 
 ```text
@@ -77,4 +83,4 @@ This draft does not claim final XPRIZE readiness.
 
 ## Claim Boundary
 
-This is not yet a final XPRIZE submission. One live Gemini policy-draft proof file is attached. Real user/community trials, impact metrics, and business evidence are still required.
+This is not yet a final XPRIZE submission. One live Gemini policy-draft proof file and one informal early-feedback signal are attached to the story. A formal pilot, impact metrics, and business evidence are still required.

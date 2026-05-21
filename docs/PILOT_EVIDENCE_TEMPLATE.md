@@ -13,6 +13,7 @@ Date:
 Workflow tested:
 AI participation problem:
 Languages needed:
+Initial reaction:
 ```
 
 ## Before Baseline
@@ -45,6 +46,19 @@ Quote:
 Attribution level: anonymous / role only / named
 ```
 
+## Informal Early Signal
+
+Use this only before a formal pilot. Keep it modest and honest.
+
+```text
+Who saw it:
+What they reacted to:
+Plain reaction:
+What this suggests:
+What it does not prove:
+Next evidence step:
+```
+
 ## What Did Not Work
 
 ```text
@@ -69,6 +83,7 @@ The public proof can include:
 ## Stoplines
 
 - Do not claim broad impact from one pilot.
+- Do not turn a casual positive reaction into formal validation.
 - Do not claim AI authorship detection.
 - Do not claim final XPRIZE readiness from this template alone.
 - Do not publish private data or secret credentials.
