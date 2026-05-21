@@ -14,7 +14,7 @@ Who it helps: communities, moderators, and small organizations where humans and 
 
 The problem: the hard question is not only whether AI was involved. The hard question is how people set rules, explain decisions, approve risky steps, support multiple languages, and measure whether the workflow helped.
 
-How Coexistence Impact Engine solves it: the app creates a human/AI operating loop, Gemini policy-draft prompt, multilingual explanation path, human approval gates, pilot trial workspace, evidence ledger, and exportable impact packet.
+How Coexistence Impact Engine solves it: the app creates a human/AI operating loop, Gemini policy-draft prompt, multilingual explanation path, Field Reality Check, human approval gates, pilot trial workspace, evidence ledger, and exportable impact packet.
 
 What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, pilot evidence calculator, and one sanitized live Vertex AI Gemini policy-draft proof are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
 
@@ -33,6 +33,7 @@ https://daideguchi.github.io/coexistence-impact-engine/
 - explains the target user, problem, and solution in plain language
 - builds a human/AI operating loop
 - drafts a Gemini prompt for policy, disclosure, review checklist, and user explanation
+- adds a Field Reality Check so AI can reason from the operator's seat without making final claims
 - supports browser-local Gemini BYOK testing without saving secrets
 - creates a pilot validation kit for the first real community trial
 - creates a pilot outreach kit for recruiting one real operator without private data
@@ -67,6 +68,8 @@ The app includes a browser-local Gemini `generateContent` path using a user-supp
 
 No API key is committed, stored, or bundled.
 
+The Field Reality Check is the intended place for AI judgment. Gemini may role-play the field operator and classify whether a note is usable evidence, an overclaim risk, or a next measurement question. It must not become a final enforcement decision, an authorship detector, or a substitute for human-approved public proof.
+
 This public package now includes one sanitized live Gemini proof file:
 
 ```text
@@ -99,8 +102,9 @@ Expected current state:
 
 ```text
 impact_verify_ok
-cards=31
+cards=38
 pilot_trial_workspace_ok
+field_reality_check_ok
 coexistence_impact_no_secrets_ok
 coexistence_impact_readme_review_hub_ok
 coexistence_impact_gemini_boundary_ok

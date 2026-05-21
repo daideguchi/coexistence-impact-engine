@@ -11,6 +11,7 @@ The early outside reaction was not theatrical; it was a simple positive response
 - Static public MVP.
 - Gemini prompt and BYOK call path.
 - Live Vertex AI Gemini proof attached for one policy-draft request.
+- Field Reality Check for operator-seat judgment of vague feedback, evidence quality, blocked claims, and next measurements.
 - Human/AI operating loop.
 - Impact evidence ledger.
 - Pilot validation kit.

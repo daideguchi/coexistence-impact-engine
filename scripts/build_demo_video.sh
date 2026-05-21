@@ -61,6 +61,8 @@ The operating loop keeps the boundary clean. Gemini drafts policy and multilingu
 
 The Gemini workbench can run a browser-local BYOK call, and the public repo now includes one sanitized Vertex AI Gemini proof file. It does not contain secrets.
 
+The Field Reality Check is where AI is allowed to judge from the operator's seat. It separates a vague reaction from usable evidence, blocked claims, and the next thing to measure.
+
 The evidence ledger and business path show what is real, what is pending, and what must be proven before XPRIZE submission: user evidence, impact metrics, and business evidence.
 
 The new pilot trial workspace captures baseline minutes, trial minutes, reviewed decisions, policy outcomes, languages used, and an optional approved quote. Its time-saved formula stays at zero until a real operator enters real evidence.
@@ -83,38 +85,44 @@ make_text_slide \
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
   "Impact Intake" \
   "Community, problem, stance, language, model, and BYOK Gemini path." \
-  "1 / 6  Define the impact context" \
+  "1 / 7  Define the impact context" \
   "$TMP_DIR/slide-1.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
   "Plain Story" \
   "Who it helps, what hurts, and how governance makes AI participation safer." \
-  "2 / 6  Middle-school clear" \
+  "2 / 7  Middle-school clear" \
   "$TMP_DIR/slide-2.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
   "Human And AI Loop" \
   "Gemini drafts. Humans approve policy, enforcement, public claims, and final decisions." \
-  "3 / 6  Human control boundary" \
+  "3 / 7  Human control boundary" \
   "$TMP_DIR/slide-3.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
   "Gemini Workbench" \
   "A sanitized Vertex AI Gemini proof file is attached without committing secrets." \
-  "4 / 6  Live Gemini proof, bounded claim" \
+  "4 / 7  Live Gemini proof, bounded claim" \
   "$TMP_DIR/slide-4.png"
+
+make_screenshot_slide "$ROOT/media/coexistence-impact-engine-full.png" \
+  "Field Reality Check" \
+  "AI reasons from the operator's seat: signal, blocked claim, and next measurement." \
+  "5 / 7  Situational judgment, not final validation" \
+  "$TMP_DIR/slide-5.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-full.png" \
   "Pilot Trial Workspace" \
   "Capture baseline time, reviewed decisions, policy outcome, languages, and an approved quote." \
-  "5 / 6  Real impact capture" \
-  "$TMP_DIR/slide-5.png"
+  "6 / 7  Real impact capture" \
+  "$TMP_DIR/slide-6.png"
 
 make_text_slide \
   "Honest Submission Boundary" \
   "Gemini proof is attached. Final XPRIZE readiness is not claimed." \
   "Next: one real operator trial, impact metrics, and business evidence." \
-  "$TMP_DIR/slide-6.png"
+  "$TMP_DIR/slide-7.png"
 
 ffmpeg -y \
   -loop 1 -t 13 -i "$TMP_DIR/slide-0.png" \
@@ -124,8 +132,9 @@ ffmpeg -y \
   -loop 1 -t 13 -i "$TMP_DIR/slide-4.png" \
   -loop 1 -t 13 -i "$TMP_DIR/slide-5.png" \
   -loop 1 -t 13 -i "$TMP_DIR/slide-6.png" \
+  -loop 1 -t 13 -i "$TMP_DIR/slide-7.png" \
   -i "$TMP_DIR/narration.mp3" \
-  -filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v][6:v]concat=n=7:v=1:a=0,format=yuv420p[v];[7:a]loudnorm=I=-16:TP=-1.5:LRA=11,volume=0.92[a]" \
+  -filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v][6:v][7:v]concat=n=8:v=1:a=0,format=yuv420p[v];[8:a]loudnorm=I=-16:TP=-1.5:LRA=11,volume=0.92[a]" \
   -map "[v]" -map "[a]" -r 30 -c:v libx264 -preset veryfast -crf 23 -c:a aac -b:a 192k -shortest -movflags +faststart "$OUT"
 
 cp "$OUT" "$DRAFT_OUT"

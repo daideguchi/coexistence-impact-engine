@@ -17,6 +17,7 @@ REQUIRED_MARKERS = [
     "What It Does",
     "Demo Media",
     "Gemini Boundary",
+    "Field Reality Check",
     "Verify",
     "Claim Boundary",
     "Submission Docs",

@@ -28,11 +28,12 @@ Record the current state before using the tool:
 
 1. Fill the Impact Intake in the public app.
 2. Build the Impact Packet.
-3. Review the Gemini prompt and policy draft route.
-4. Human operator approves or edits the policy.
-5. Fill the Pilot Trial Workspace with baseline minutes, trial minutes, reviewed decisions, policy outcome, languages used, and any approved quote.
-6. Use the packet for a small batch of real decisions or explanations.
-7. Record what changed after the pilot.
+3. Run Field Reality Check on any vague note, feedback, or proposed public claim.
+4. Review the Gemini prompt and policy draft route.
+5. Human operator approves or edits the policy.
+6. Fill the Pilot Trial Workspace with baseline minutes, trial minutes, reviewed decisions, policy outcome, languages used, and any approved quote.
+7. Use the packet for a small batch of real decisions or explanations.
+8. Record what changed after the pilot.
 
 Use `docs/PILOT_OUTREACH_PACKET.md` to recruit the first operator and collect only non-private evidence.
 Use `docs/PILOT_EVIDENCE_TEMPLATE.md` to turn that trial into safe public proof.
@@ -59,10 +60,13 @@ Record it as:
 - the reaction was positive but not measured
 - the next step is to capture real before/after workflow evidence
 
+The Field Reality Check should help with this exact separation. It may act as the field operator and say what the note suggests, what it does not prove, and what should be measured next. It must not replace human approval of the final public claim.
+
 ## Stoplines
 
 - Do not claim broad impact from a single anecdote.
 - Do not present a casual positive reaction as formal validation.
+- Do not present AI field judgment as final validation.
 - Do not include private user data in public proof.
 - Do not claim the tool detects AI authorship.
 - Do not claim final XPRIZE readiness until impact evidence and business evidence exist.

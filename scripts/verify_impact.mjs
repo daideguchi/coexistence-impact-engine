@@ -18,19 +18,31 @@ try {
   }
   await page.getByRole('button', { name: 'Build Impact Packet' }).click();
   const cards = await page.locator('.card').count();
-  if (cards < 31) {
+  if (cards < 38) {
     throw new Error(`not enough cards: ${cards}`);
   }
   const prompt = await page.locator('#geminiPrompt').innerText();
   if (!prompt.includes('Do not claim to detect AI authorship')) {
     throw new Error('Gemini safety prompt missing');
   }
+  if (!prompt.includes('field reality check')) {
+    throw new Error('Field Reality Check prompt missing');
+  }
   const packet = JSON.parse(await page.locator('#packetOutput').innerText());
-  if (packet.claim_boundary !== 'One live Gemini policy-draft call is attached. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.') {
+  if (packet.claim_boundary !== 'One live Gemini policy-draft call and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.') {
     throw new Error('claim boundary mismatch');
+  }
+  if (packet.field_reality_check?.evidence_level !== 'informal positive signal') {
+    throw new Error('field reality check did not classify the default early signal');
+  }
+  if (!packet.field_reality_check?.blocked_claim.includes('formal validation')) {
+    throw new Error('field reality check missing blocked claim boundary');
   }
   if (!packet.evidence_ledger.some((item) => item.name === 'Gemini API live proof' && item.status === 'attached')) {
     throw new Error('Gemini live proof status missing');
+  }
+  if (!packet.evidence_ledger.some((item) => item.name === 'Field reality check' && item.status === 'prototype')) {
+    throw new Error('Field reality check evidence ledger item missing');
   }
   if (!packet.pilot_validation_kit?.some((item) => item.name === 'After evidence' && item.status === 'pending')) {
     throw new Error('pilot validation kit missing');
@@ -63,6 +75,7 @@ try {
   await page.locator('#acceptedPolicy').fill('accepted after edits');
   await page.locator('#languagesUsed').fill('English, Japanese');
   await page.locator('#operatorQuote').fill('The checklist made the decision easier to explain.');
+  await page.locator('#fieldNote').fill('Pilot operator reviewed 5 decisions. Baseline 18 minutes, trial 10 minutes.');
   await page.getByRole('button', { name: 'Build Impact Packet' }).click();
   const trialPacket = JSON.parse(await page.locator('#packetOutput').innerText());
   const trial = trialPacket.pilot_trial_workspace;
@@ -72,9 +85,13 @@ try {
   if (trial.evidence_items_captured !== 6 || trial.status !== 'pilot evidence entered') {
     throw new Error('pilot evidence capture did not register');
   }
+  if (trialPacket.field_reality_check.evidence_level !== 'pilot evidence candidate') {
+    throw new Error('field reality check did not recognize pilot evidence candidate');
+  }
   console.log('impact_verify_ok');
   console.log(`cards=${cards}`);
   console.log('pilot_trial_workspace_ok');
+  console.log('field_reality_check_ok');
   console.log(`screenshot=${screenshot}`);
   console.log(`bytes=${bytes}`);
 } finally {

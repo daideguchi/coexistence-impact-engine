@@ -23,6 +23,7 @@ The first signal was that the core idea made sense without a long explanation. T
 - defines the community and impact problem
 - builds a human/AI operating loop
 - drafts a Gemini prompt for policy and multilingual explanation
+- adds a Field Reality Check where AI role-plays the operator and separates usable evidence from overclaims
 - keeps risky actions behind human approval gates
 - creates a pilot validation kit for real-world impact testing
 - creates a pilot outreach kit for recruiting the first real operator
@@ -32,7 +33,7 @@ The first signal was that the core idea made sense without a long explanation. T
 
 ## Built With
 
-HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` smoke proof, pilot validation playbook, Playwright verification, Python boundary checks, GitHub Pages target.
+HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` smoke proof, Field Reality Check, pilot validation playbook, Playwright verification, Python boundary checks, GitHub Pages target.
 
 ## Links
 
@@ -52,4 +53,4 @@ HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` sm
 
 ## Claim Boundary
 
-This is a public impact prototype. It claims one live Gemini policy-draft proof file and one informal early-feedback signal only. It does not claim a formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.
+This is a public impact prototype. It claims one live Gemini policy-draft proof file and one informal early-feedback signal only. The Field Reality Check can classify evidence quality, but it does not create formal validation. The project does not claim a formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.

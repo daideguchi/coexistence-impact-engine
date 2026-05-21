@@ -59,6 +59,20 @@ What it does not prove:
 Next evidence step:
 ```
 
+## Field Reality Check
+
+Use AI here as a field-role assistant. Ask it to act as the operator who would actually use the workflow, then separate signal from proof.
+
+```text
+Field role:
+Field note reviewed:
+AI field reading:
+Usable evidence:
+Blocked claim:
+Next measurement:
+Human approval needed before publishing:
+```
+
 ## What Did Not Work
 
 ```text
@@ -84,6 +98,7 @@ The public proof can include:
 
 - Do not claim broad impact from one pilot.
 - Do not turn a casual positive reaction into formal validation.
+- Do not let the AI field reading become the final public claim.
 - Do not claim AI authorship detection.
 - Do not claim final XPRIZE readiness from this template alone.
 - Do not publish private data or secret credentials.

@@ -19,6 +19,7 @@ Coexistence Impact Engine creates a reviewable impact packet:
 - target community
 - governance stance
 - Gemini prompt for policy and multilingual explanation
+- Field Reality Check for operator-seat evidence judgment
 - human/AI operating loop
 - approval gates
 - pilot validation kit
@@ -32,6 +33,8 @@ Coexistence Impact Engine creates a reviewable impact packet:
 
 The long-game fit is an AI-assisted operations business for communities and teams that need responsible AI participation policies. Gemini is used where it is safest: drafting and summarizing policy artifacts. Humans keep control over enforcement, public claims, and final decisions.
 
+The product also uses AI where field judgment is useful: acting as the operator persona to separate "this feels useful" from measurable proof. That gives moderators and operators a practical assistant without turning the AI into a final authority.
+
 ## Early Feedback Signal
 
 The first outside reaction was quiet but useful: the product made sense quickly and was received as a good idea. This is not treated as formal validation or broad user evidence. It is treated as the first sign that the governance problem is recognizable and that the workflow is natural enough to test with a real operator.
@@ -43,8 +46,9 @@ The next milestone is to convert that reaction into measured pilot evidence: bas
 ```text
 node scripts/verify_impact.mjs
 impact_verify_ok
-cards=31
+cards=38
 pilot_trial_workspace_ok
+field_reality_check_ok
 
 python3 scripts/verify_no_secrets.py
 coexistence_impact_no_secrets_ok

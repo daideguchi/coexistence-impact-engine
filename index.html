@@ -288,9 +288,10 @@
           Gemini API key for local live test
           <input id="apiKey" type="password" autocomplete="off" placeholder="Not saved, not committed">
         </label>
-        <p class="note">The public demo does not include secrets. A live Gemini proof file must be attached before any XPRIZE submission claim.</p>
+        <p class="note">The public demo does not include secrets. One sanitized live Gemini proof file is attached; final XPRIZE readiness still requires real impact evidence.</p>
         <div class="btn-row">
           <button class="btn primary" id="buildPacket">Build Impact Packet</button>
+          <button class="btn" id="runRealityCheck">Run Field Check</button>
           <button class="btn" id="generateGemini">Generate Gemini Draft</button>
           <button class="btn" id="copyPacket">Copy Packet</button>
         </div>
@@ -315,6 +316,30 @@
             <pre class="packet" id="geminiPrompt"></pre>
             <pre class="packet" id="geminiOutput"></pre>
           </div>
+        </section>
+
+        <section>
+          <h2>Field Reality Check</h2>
+          <p>Ask the AI to think from the operator's seat: what does this reaction or draft prove, what does it not prove, and what should be measured next?</p>
+          <div class="two-col">
+            <div class="mini-form">
+              <label>
+                Field role
+                <select id="fieldRole">
+                  <option selected>volunteer community moderator</option>
+                  <option>education cohort lead</option>
+                  <option>open-source maintainer</option>
+                  <option>support team operator</option>
+                </select>
+              </label>
+              <label>
+                Field note or feedback
+                <textarea id="fieldNote">A real person tried the prototype and said: "Yeah, this is good."</textarea>
+              </label>
+            </div>
+            <div class="card-grid" id="fieldGrid"></div>
+          </div>
+          <p class="note">This is AI-assisted situational judgment. It may classify evidence quality and next questions, but it must not claim adoption, impact, or final validation by itself.</p>
         </section>
 
         <section>
@@ -388,7 +413,7 @@
 
         <section>
           <h2>Claim Boundary</h2>
-          <p id="claimBoundary">This public MVP is an impact prototype. It does not claim live Gemini proof, real users, revenue, or XPRIZE submission readiness yet.</p>
+          <p id="claimBoundary">This public MVP claims one live Gemini proof file and one informal early-feedback signal. Field Reality Check is assistant judgment only; it does not prove real users, measured impact, revenue, or XPRIZE submission readiness.</p>
         </section>
       </div>
     </div>
@@ -491,6 +516,8 @@
 Community: ${packet.community}
 Problem: ${packet.problem}
 Stance: ${packet.stance}
+Field role: ${packet.field_reality_check.role}
+Field note: ${packet.field_reality_check.input}
 
 Return:
 1. AI participation policy
@@ -498,8 +525,39 @@ Return:
 3. moderator review checklist
 4. user-facing explanation
 5. one human approval warning
+6. field reality check: act as the field role and separate usable evidence, blocked claims, and the next thing to measure
 
 Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
+    }
+
+    function buildFieldRealityCheck() {
+      const role = $('fieldRole').value;
+      const input = normalizedEvidence($('fieldNote').value) || 'not collected yet';
+      const lower = input.toLowerCase();
+      const isInformalPositive = /good|nice|useful|いい|良い|sounds good|makes sense/.test(lower);
+      const hasNumbers = /\d/.test(input);
+      const hasFormalPilot = /pilot|trial|baseline|minutes|decisions|reviewed|operator/.test(lower) && hasNumbers;
+      const evidenceLevel = hasFormalPilot ? 'pilot evidence candidate' : isInformalPositive ? 'informal positive signal' : 'unclassified field note';
+      const safeClaim = hasFormalPilot
+        ? 'This may support a pilot evidence claim after private details are removed and the operator approves public wording.'
+        : 'One informal reviewer understood the value quickly and responded positively. This is an early signal only.';
+      const blockedClaim = hasFormalPilot
+        ? 'Do not claim broad impact from one pilot or publish private details.'
+        : 'Do not claim formal validation, real users, measured impact, adoption, or XPRIZE readiness from this reaction.';
+      const nextMeasure = hasFormalPilot
+        ? 'Verify baseline minutes, trial minutes, reviewed decisions, accepted edits, languages used, and quote approval.'
+        : 'Run one measured operator trial with baseline time, trial time, reviewed decisions, accepted or edited policy text, and languages used.';
+
+      return {
+        role,
+        input,
+        evidence_level: evidenceLevel,
+        field_reading: `As a ${role}, this tells me whether the workflow is understandable before it tells me whether it saved work.`,
+        safe_claim: safeClaim,
+        blocked_claim: blockedClaim,
+        next_measurement: nextMeasure,
+        decision_owner: 'human operator owns final claims and public proof'
+      };
     }
 
     function buildPacket() {
@@ -509,10 +567,12 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
       const language = $('language').value;
       const model = $('model').value.trim() || 'gemini-2.5-flash';
       const trialEvidence = buildTrialEvidence();
+      const fieldRealityCheck = buildFieldRealityCheck();
       const evidence = [
         { name: 'Gemini API live proof', status: committedGeminiProof ? 'attached' : 'blocked', note: committedGeminiProof ? 'media/gemini-live-policy-draft.json proves one live Vertex AI Gemini policy-draft call.' : 'Attach media/gemini-live-policy-draft.json after a real call.' },
         { name: 'Human approval model', status: 'attached', note: 'Four approval gates are visible in the operating loop.' },
         { name: 'Multilingual support', status: 'prototype', note: `${language} explanation target is included in the prompt.` },
+        { name: 'Field reality check', status: 'prototype', note: `${fieldRealityCheck.evidence_level}: ${fieldRealityCheck.safe_claim}` },
         { name: 'Impact measurement', status: trialEvidence.status.includes('entered') ? 'trial entered' : 'pending', note: trialEvidence.status.includes('entered') ? `${trialEvidence.estimated_minutes_saved} estimated minutes saved; formula is included in the export.` : 'Needs real records for time saved, disputes avoided, and decisions reviewed.' },
         { name: 'Public users', status: 'pending', note: 'Needs at least one real community or organization trial.' },
         { name: 'Business evidence', status: 'pending', note: 'Needs a credible usage or revenue path before XPRIZE final submission.' }
@@ -526,6 +586,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         stance,
         language,
         gemini_model: model,
+        field_reality_check: fieldRealityCheck,
         human_ai_loop: loop,
         pilot_validation_kit: pilot,
         pilot_trial_workspace: trialEvidence,
@@ -534,7 +595,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         evidence_ledger: evidence,
         gemini_prompt: null,
         next_live_proof_step: 'Run one real Gemini generateContent call, sanitize the response metadata, and attach media/gemini-live-policy-draft.json.',
-        claim_boundary: 'One live Gemini policy-draft call is attached. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.'
+        claim_boundary: 'One live Gemini policy-draft call and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.'
       };
       packet.gemini_prompt = buildPrompt(packet);
       currentPacket = packet;
@@ -550,6 +611,21 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         </div>
       `).join('');
       $('evidenceGrid').innerHTML = evidence.map((item) => `
+        <div class="card">
+          <b>${item.name}</b>
+          <span class="badge ${statusClass(item.status)}">${item.status}</span>
+          <p>${item.note}</p>
+        </div>
+      `).join('');
+      const fieldCards = [
+        { name: 'Evidence level', status: 'review', note: fieldRealityCheck.evidence_level },
+        { name: 'Field reading', status: 'assist', note: fieldRealityCheck.field_reading },
+        { name: 'Safe claim', status: 'guarded', note: fieldRealityCheck.safe_claim },
+        { name: 'Blocked claim', status: 'blocked', note: fieldRealityCheck.blocked_claim },
+        { name: 'Next measurement', status: 'ready', note: fieldRealityCheck.next_measurement },
+        { name: 'Decision owner', status: 'approval gate', note: fieldRealityCheck.decision_owner }
+      ];
+      $('fieldGrid').innerHTML = fieldCards.map((item) => `
         <div class="card">
           <b>${item.name}</b>
           <span class="badge ${statusClass(item.status)}">${item.status}</span>
@@ -630,6 +706,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
     }
 
     $('buildPacket').addEventListener('click', buildPacket);
+    $('runRealityCheck').addEventListener('click', buildPacket);
     $('generateGemini').addEventListener('click', generateGeminiDraft);
     $('copyPacket').addEventListener('click', async () => {
       buildPacket();
