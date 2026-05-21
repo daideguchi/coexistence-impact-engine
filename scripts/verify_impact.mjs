@@ -19,7 +19,7 @@ try {
   await page.getByRole('button', { name: 'Build Impact Packet' }).click();
   await page.getByRole('button', { name: 'Run Field Check' }).click();
   const cards = await page.locator('.card').count();
-  if (cards < 38) {
+  if (cards < 40) {
     throw new Error(`not enough cards: ${cards}`);
   }
   const prompt = await page.locator('#geminiPrompt').innerText();
@@ -33,7 +33,7 @@ try {
   if (packet.claim_boundary !== 'One live Gemini policy-draft call and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.') {
     throw new Error('claim boundary mismatch');
   }
-  if (packet.field_reality_check?.evidence_level !== 'informal positive signal') {
+  if (packet.field_reality_check?.evidence_level !== 'privacy-respecting positive signal') {
     throw new Error('field reality check did not classify the default early signal');
   }
   if (!packet.field_reality_prompt?.includes('acting as a field operator')) {
@@ -42,8 +42,11 @@ try {
   if (!packet.field_reality_check?.blocked_claim.includes('formal validation')) {
     throw new Error('field reality check missing blocked claim boundary');
   }
+  if (!packet.field_reality_check?.blocked_claim.includes('standard/default values')) {
+    throw new Error('field reality check missing standard/default value boundary');
+  }
   const fieldOutput = await page.locator('#fieldOutput').innerText();
-  if (!fieldOutput.includes('informal positive signal')) {
+  if (!fieldOutput.includes('privacy-respecting positive signal')) {
     throw new Error('field output missing default local classification');
   }
   if (!packet.evidence_ledger.some((item) => item.name === 'Gemini API live proof' && item.status === 'attached')) {
@@ -83,6 +86,8 @@ try {
   await page.locator('#acceptedPolicy').fill('accepted after edits');
   await page.locator('#languagesUsed').fill('English, Japanese');
   await page.locator('#operatorQuote').fill('The checklist made the decision easier to explain.');
+  await page.locator('#fieldPrivacy').selectOption({ label: 'public-safe details allowed' });
+  await page.locator('#measurementStatus').selectOption({ label: 'measured numbers available' });
   await page.locator('#fieldNote').fill('Pilot operator reviewed 5 decisions. Baseline 18 minutes, trial 10 minutes.');
   await page.getByRole('button', { name: 'Build Impact Packet' }).click();
   const trialPacket = JSON.parse(await page.locator('#packetOutput').innerText());

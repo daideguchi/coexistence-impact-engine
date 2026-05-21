@@ -16,7 +16,7 @@ I built this from a very personal place: I like open communities, and I believe 
 
 Early feedback was simple, but important. When I showed the prototype to someone outside the build process, the reaction was not a dramatic pitch-deck moment. It was closer to: "Yeah, this is good." That mattered to me. Coexistence Impact Engine is not trying to impress people with another AI demo. It is trying to make a difficult future feel manageable.
 
-The first signal was that the core idea made sense without a long explanation. The next step is to convert that first "this feels useful" reaction into measured pilot evidence: time saved, decisions reviewed, explanations accepted or edited, and multilingual workflows completed.
+The first signal was that the core idea made sense without a long explanation. The reviewer did not share detailed evidence with the AI, so I treat the reaction as privacy-respecting and positive, but not measured validation. The next step is to convert that first "this feels useful" reaction into aggregate evidence the operator is comfortable sharing: time saved, decisions reviewed, explanations accepted or edited, and multilingual workflows completed.
 
 ## What It Does
 
@@ -53,4 +53,4 @@ HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` sm
 
 ## Claim Boundary
 
-This is a public impact prototype. It claims one live Gemini proof file for policy drafting and Field Reality Check, plus one informal early-feedback signal only. The Field Reality Check can classify evidence quality, but it does not create formal validation. The project does not claim a formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.
+This is a public impact prototype. It claims one live Gemini proof file for policy drafting and Field Reality Check, plus one privacy-respecting positive early-feedback signal only. The Field Reality Check can classify evidence quality, privacy limits, and overclaim risks, but it does not create formal validation. The project does not claim a formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.

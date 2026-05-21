@@ -106,17 +106,18 @@ Return exactly five short bullets:
 
 Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
 
-  const fieldRealityPrompt = `Act as a field operator reviewing this informal feedback:
-"A real person tried the prototype and said: Yeah, this is good."
+  const fieldRealityPrompt = `Act as a field operator reviewing this privacy-limited feedback:
+"A real person tried the prototype, declined to share details with the AI, and gave a positive but non-specific reaction. The only safe measurement description is standard/default."
 
-Return exactly five short bullets:
+Return exactly six short bullets:
 1. evidence level
 2. what the reaction suggests
 3. what it does not prove
 4. blocked public claim
 5. next measurement
+6. privacy handling
 
-Do not claim formal validation, real users, adoption, measured impact, or XPRIZE readiness. Do not claim to detect AI authorship.`;
+Do not claim formal validation, real users, adoption, measured impact, or XPRIZE readiness. Do not treat standard/default values as measured impact. Respect withheld details. Do not claim to detect AI authorship.`;
 
   const token = await getAccessToken(serviceAccount);
   const url = `https://${location}-aiplatform.googleapis.com/v1/projects/${project}/locations/${location}/publishers/google/models/${model}:generateContent`;

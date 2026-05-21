@@ -52,12 +52,14 @@ Useful evidence includes:
 
 ## Handling Informal Feedback
 
-If the first reaction is simply positive, do not overstate it. A response like "this is good" is useful as an early signal that the problem and workflow are understandable, but it is not a formal pilot result.
+If the first reaction is simply positive, do not overstate it. A response like "this is good" is useful as an early signal that the problem and workflow are understandable, but it is not a formal pilot result. If the operator refuses to share details with AI, respect that boundary and record only a privacy-respecting positive signal.
 
 Record it as:
 
 - the person understood the value without a long explanation
 - the reaction was positive but not measured
+- details were withheld, if the operator did not want to share them
+- standard/default values are placeholders, not measured impact
 - the next step is to capture real before/after workflow evidence
 
 The Field Reality Check should help with this exact separation. It may act as the field operator and say what the note suggests, what it does not prove, and what should be measured next. It must not replace human approval of the final public claim.
@@ -66,6 +68,7 @@ The Field Reality Check should help with this exact separation. It may act as th
 
 - Do not claim broad impact from a single anecdote.
 - Do not present a casual positive reaction as formal validation.
+- Do not turn withheld details or standard/default values into measured evidence.
 - Do not present AI field judgment as final validation.
 - Do not include private user data in public proof.
 - Do not claim the tool detects AI authorship.

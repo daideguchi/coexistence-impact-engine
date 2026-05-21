@@ -334,8 +334,24 @@
                 </select>
               </label>
               <label>
+                Evidence access
+                <select id="fieldPrivacy">
+                  <option selected>private details withheld</option>
+                  <option>aggregate-only evidence allowed</option>
+                  <option>public-safe details allowed</option>
+                </select>
+              </label>
+              <label>
+                Measurement status
+                <select id="measurementStatus">
+                  <option selected>standard/default only</option>
+                  <option>measured numbers available</option>
+                  <option>not measured</option>
+                </select>
+              </label>
+              <label>
                 Field note or feedback
-                <textarea id="fieldNote">A real person tried the prototype and said: "Yeah, this is good."</textarea>
+                <textarea id="fieldNote">A real person tried the prototype, declined to share details with the AI, and gave a positive but non-specific reaction. The only safe measurement description is standard/default.</textarea>
               </label>
             </div>
             <div class="card-grid" id="fieldGrid"></div>
@@ -536,6 +552,8 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
       return `You are Gemini acting as a field operator, not a final authority.
 
 Field role: ${packet.field_reality_check.role}
+Evidence access: ${packet.field_reality_check.privacy_status}
+Measurement status: ${packet.field_reality_check.measurement_status}
 Field note: ${packet.field_reality_check.input}
 Community: ${packet.community}
 Problem: ${packet.problem}
@@ -546,10 +564,13 @@ Return concise JSON with these keys:
 - usable_evidence
 - blocked_claim
 - next_measurement
+- privacy_handling
 - human_approval_needed
 
 Rules:
 - Do not claim formal validation from casual feedback.
+- Do not treat standard/default values as measured impact.
+- Respect withheld details and propose aggregate-only next evidence.
 - Do not claim real users, measured impact, adoption, or XPRIZE readiness.
 - Do not detect AI authorship.
 - Treat this as situational judgment for a human operator.`;
@@ -557,30 +578,47 @@ Rules:
 
     function buildFieldRealityCheck() {
       const role = $('fieldRole').value;
+      const privacyStatus = $('fieldPrivacy').value;
+      const measurementStatus = $('measurementStatus').value;
       const input = normalizedEvidence($('fieldNote').value) || 'not collected yet';
       const lower = input.toLowerCase();
-      const isInformalPositive = /good|nice|useful|いい|良い|sounds good|makes sense/.test(lower);
+      const isInformalPositive = /positive|good|nice|useful|いい|良い|sounds good|makes sense/.test(lower);
       const hasNumbers = /\d/.test(input);
-      const hasFormalPilot = /pilot|trial|baseline|minutes|decisions|reviewed|operator/.test(lower) && hasNumbers;
-      const evidenceLevel = hasFormalPilot ? 'pilot evidence candidate' : isInformalPositive ? 'informal positive signal' : 'unclassified field note';
+      const detailWithheld = privacyStatus.includes('withheld') || /withheld|private|declined|refused|not share|details|情報提供|拒否|非公開/.test(lower);
+      const standardOnly = measurementStatus.includes('standard') || /standard|default|標準/.test(lower);
+      const hasFormalPilot = /pilot|trial|baseline|minutes|decisions|reviewed|operator/.test(lower) && hasNumbers && !detailWithheld && measurementStatus.includes('measured');
+      const evidenceLevel = hasFormalPilot
+        ? 'pilot evidence candidate'
+        : isInformalPositive && (detailWithheld || standardOnly)
+          ? 'privacy-respecting positive signal'
+          : isInformalPositive ? 'informal positive signal' : 'unclassified field note';
       const safeClaim = hasFormalPilot
         ? 'This may support a pilot evidence claim after private details are removed and the operator approves public wording.'
+        : evidenceLevel === 'privacy-respecting positive signal'
+          ? 'A real operator reaction was positive, but details were withheld and values are standard/default only. Treat this as a privacy-respecting early signal.'
         : 'One informal reviewer understood the value quickly and responded positively. This is an early signal only.';
       const blockedClaim = hasFormalPilot
         ? 'Do not claim broad impact from one pilot or publish private details.'
+        : evidenceLevel === 'privacy-respecting positive signal'
+          ? 'Do not claim formal validation, real users, measured impact, adoption, or time saved. Do not convert standard/default values into quantitative proof.'
         : 'Do not claim formal validation, real users, measured impact, adoption, or XPRIZE readiness from this reaction.';
       const nextMeasure = hasFormalPilot
         ? 'Verify baseline minutes, trial minutes, reviewed decisions, accepted edits, languages used, and quote approval.'
+        : evidenceLevel === 'privacy-respecting positive signal'
+          ? 'Ask for aggregate-only evidence the operator is comfortable sharing: one count, one yes/no accepted-edit flag, one non-identifying quote, or a before/after minute range.'
         : 'Run one measured operator trial with baseline time, trial time, reviewed decisions, accepted or edited policy text, and languages used.';
 
       return {
         role,
+        privacy_status: privacyStatus,
+        measurement_status: measurementStatus,
         input,
         evidence_level: evidenceLevel,
         field_reading: `As a ${role}, this tells me whether the workflow is understandable before it tells me whether it saved work.`,
         safe_claim: safeClaim,
         blocked_claim: blockedClaim,
         next_measurement: nextMeasure,
+        privacy_handling: detailWithheld ? 'Respect the refusal to share details. Keep only non-identifying aggregate evidence.' : 'Public-safe detail may be used only after human approval.',
         decision_owner: 'human operator owns final claims and public proof'
       };
     }
@@ -646,10 +684,13 @@ Rules:
       `).join('');
       const fieldCards = [
         { name: 'Evidence level', status: 'review', note: fieldRealityCheck.evidence_level },
+        { name: 'Privacy status', status: 'guarded', note: fieldRealityCheck.privacy_status },
+        { name: 'Measurement status', status: 'review', note: fieldRealityCheck.measurement_status },
         { name: 'Field reading', status: 'assist', note: fieldRealityCheck.field_reading },
         { name: 'Safe claim', status: 'guarded', note: fieldRealityCheck.safe_claim },
         { name: 'Blocked claim', status: 'blocked', note: fieldRealityCheck.blocked_claim },
         { name: 'Next measurement', status: 'ready', note: fieldRealityCheck.next_measurement },
+        { name: 'Privacy handling', status: 'guarded', note: fieldRealityCheck.privacy_handling },
         { name: 'Decision owner', status: 'approval gate', note: fieldRealityCheck.decision_owner }
       ];
       $('fieldGrid').innerHTML = fieldCards.map((item) => `

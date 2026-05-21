@@ -18,7 +18,7 @@ How Coexistence Impact Engine solves it: the app creates a human/AI operating lo
 
 What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, pilot evidence calculator, and one sanitized live Vertex AI Gemini proof file for policy drafting and Field Reality Check are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
 
-Early feedback: one informal reviewer understood the value quickly and responded positively. This is treated as an initial signal only, not formal validation. The next milestone is to turn that "this feels useful" reaction into measured pilot evidence.
+Early feedback: one informal reviewer understood the value quickly and responded positively, but declined to share details with the AI. This is treated as a privacy-respecting positive signal only, not formal validation. Standard/default values are not counted as measured impact. The next milestone is to turn that "this feels useful" reaction into aggregate evidence the operator is comfortable sharing.
 
 ## Live Demo
 
@@ -33,7 +33,7 @@ https://daideguchi.github.io/coexistence-impact-engine/
 - explains the target user, problem, and solution in plain language
 - builds a human/AI operating loop
 - drafts a Gemini prompt for policy, disclosure, review checklist, and user explanation
-- adds a Field Reality Check so AI can reason from the operator's seat without making final claims
+- adds a Field Reality Check so AI can reason from the operator's seat, respect withheld details, and avoid turning standard/default values into impact claims
 - supports browser-local Gemini BYOK testing without saving secrets
 - creates a pilot validation kit for the first real community trial
 - creates a pilot outreach kit for recruiting one real operator without private data
@@ -68,7 +68,7 @@ The app includes a browser-local Gemini `generateContent` path using a user-supp
 
 No API key is committed, stored, or bundled.
 
-The Field Reality Check is the intended place for AI judgment. Gemini may role-play the field operator and classify whether a note is usable evidence, an overclaim risk, or a next measurement question. It must not become a final enforcement decision, an authorship detector, or a substitute for human-approved public proof.
+The Field Reality Check is the intended place for AI judgment. Gemini may role-play the field operator and classify whether a note is usable evidence, an overclaim risk, a privacy-limited signal, or a next measurement question. It must not become a final enforcement decision, an authorship detector, or a substitute for human-approved public proof.
 
 This public package now includes one sanitized live Gemini proof file:
 
@@ -102,7 +102,7 @@ Expected current state:
 
 ```text
 impact_verify_ok
-cards=38
+cards=41
 pilot_trial_workspace_ok
 field_reality_check_ok
 coexistence_impact_no_secrets_ok

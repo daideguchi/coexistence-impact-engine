@@ -37,16 +37,16 @@ The product also uses AI where field judgment is useful: acting as the operator 
 
 ## Early Feedback Signal
 
-The first outside reaction was quiet but useful: the product made sense quickly and was received as a good idea. This is not treated as formal validation or broad user evidence. It is treated as the first sign that the governance problem is recognizable and that the workflow is natural enough to test with a real operator.
+The first outside reaction was quiet but useful: the product made sense quickly and was received as a good idea. The reviewer did not share detailed evidence with the AI, so this is not treated as formal validation or broad user evidence. It is treated as a privacy-respecting positive signal that the governance problem is recognizable and that the workflow is natural enough to test with a real operator.
 
-The next milestone is to convert that reaction into measured pilot evidence: baseline time, trial time, reviewed decisions, accepted or edited policy text, languages used, and an approved operator quote if available.
+The next milestone is to convert that reaction into evidence the operator is comfortable sharing: baseline time, trial time, reviewed decisions, accepted or edited policy text, languages used, and an approved operator quote if available. Standard/default values are recorded only as placeholders, not measured impact.
 
 ## Current Proof
 
 ```text
 node scripts/verify_impact.mjs
 impact_verify_ok
-cards=38
+cards=41
 pilot_trial_workspace_ok
 field_reality_check_ok
 

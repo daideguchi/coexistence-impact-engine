@@ -54,6 +54,8 @@ Use this only before a formal pilot. Keep it modest and honest.
 Who saw it:
 What they reacted to:
 Plain reaction:
+Details shared with AI: yes / no
+Measurement status: measured / aggregate-only / standard-default-only / not measured
 What this suggests:
 What it does not prove:
 Next evidence step:
@@ -68,6 +70,8 @@ Field role:
 Field note reviewed:
 AI field reading:
 Usable evidence:
+Privacy limit:
+Standard/default value warning:
 Blocked claim:
 Next measurement:
 Human approval needed before publishing:
@@ -98,6 +102,8 @@ The public proof can include:
 
 - Do not claim broad impact from one pilot.
 - Do not turn a casual positive reaction into formal validation.
+- Do not treat standard/default values as measured impact.
+- Do not pressure an operator to share private details.
 - Do not let the AI field reading become the final public claim.
 - Do not claim AI authorship detection.
 - Do not claim final XPRIZE readiness from this template alone.
