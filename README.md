@@ -14,9 +14,9 @@ Who it helps: communities, moderators, and small organizations where humans and 
 
 The problem: the hard question is not only whether AI was involved. The hard question is how people set rules, explain decisions, approve risky steps, support multiple languages, and measure whether the workflow helped.
 
-How Coexistence Impact Engine solves it: the app creates a human/AI operating loop, Gemini policy-draft prompt, multilingual explanation path, human approval gates, evidence ledger, and exportable impact packet.
+How Coexistence Impact Engine solves it: the app creates a human/AI operating loop, Gemini policy-draft prompt, multilingual explanation path, human approval gates, pilot trial workspace, evidence ledger, and exportable impact packet.
 
-What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, and one sanitized live Vertex AI Gemini policy-draft proof are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
+What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, pilot evidence calculator, and one sanitized live Vertex AI Gemini policy-draft proof are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
 
 ## Live Demo
 
@@ -34,6 +34,7 @@ https://daideguchi.github.io/coexistence-impact-engine/
 - supports browser-local Gemini BYOK testing without saving secrets
 - creates a pilot validation kit for the first real community trial
 - creates a pilot outreach kit for recruiting one real operator without private data
+- creates a pilot trial workspace for baseline minutes, reviewed decisions, accepted policy text, languages used, optional operator quote, and estimated time saved
 - exports an impact packet with evidence ledger and claim boundaries
 - keeps live Gemini proof, user proof, and business evidence blocked until real evidence exists
 
@@ -96,7 +97,8 @@ Expected current state:
 
 ```text
 impact_verify_ok
-cards=25
+cards=31
+pilot_trial_workspace_ok
 coexistence_impact_no_secrets_ok
 coexistence_impact_readme_review_hub_ok
 coexistence_impact_gemini_boundary_ok
@@ -115,5 +117,6 @@ This is a public impact prototype, not a final XPRIZE submission. It claims one 
 - [XPRIZE Gemini proof plan](docs/GEMINI_PROOF_PLAN.md)
 - [Pilot validation playbook](docs/PILOT_VALIDATION_PLAYBOOK.md)
 - [Pilot outreach packet](docs/PILOT_OUTREACH_PACKET.md)
+- [Pilot evidence template](docs/PILOT_EVIDENCE_TEMPLATE.md)
 - [Devpost draft](submission/devpost-draft.md)
 - [Build journey](submission/build-journey.md)

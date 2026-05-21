@@ -13,6 +13,7 @@ Coexistence Console proved the governance idea inside Reddit moderation. The XPR
 - Impact evidence ledger.
 - Pilot validation kit.
 - Pilot outreach kit for the first real operator.
+- Pilot Trial Workspace with baseline/trial minutes, reviewed decisions, policy outcome, languages, optional quote, and deterministic time-saved formula.
 - Claim-boundary verifiers.
 - README review-hub verifier for public submission completeness.
 - Natural English demo video draft.
@@ -21,5 +22,5 @@ Coexistence Console proved the governance idea inside Reddit moderation. The XPR
 
 - Keep the Gemini proof current if the prompt or model route changes.
 - Real user/community trial.
-- Impact metric capture.
+- Impact metric capture from one real operator trial.
 - Business evidence.

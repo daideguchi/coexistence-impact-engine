@@ -63,6 +63,8 @@ The Gemini workbench can run a browser-local BYOK call, and the public repo now 
 
 The evidence ledger and business path show what is real, what is pending, and what must be proven before XPRIZE submission: user evidence, impact metrics, and business evidence.
 
+The new pilot trial workspace captures baseline minutes, trial minutes, reviewed decisions, policy outcomes, languages used, and an optional approved quote. Its time-saved formula stays at zero until a real operator enters real evidence.
+
 This is not a final XPRIZE submission yet. It is an honest public foundation for turning AI coexistence into a measurable impact product.
 TEXT
 
@@ -103,15 +105,15 @@ make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
   "$TMP_DIR/slide-4.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-full.png" \
-  "Evidence And Business Path" \
-  "The package separates prototype proof from live Gemini, user, impact, and business evidence." \
-  "5 / 6  XPRIZE proof gaps" \
+  "Pilot Trial Workspace" \
+  "Capture baseline time, reviewed decisions, policy outcome, languages, and an approved quote." \
+  "5 / 6  Real impact capture" \
   "$TMP_DIR/slide-5.png"
 
 make_text_slide \
   "Honest Submission Boundary" \
   "Gemini proof is attached. Final XPRIZE readiness is not claimed." \
-  "Next: real user trial, impact metrics, and business evidence." \
+  "Next: one real operator trial, impact metrics, and business evidence." \
   "$TMP_DIR/slide-6.png"
 
 ffmpeg -y \

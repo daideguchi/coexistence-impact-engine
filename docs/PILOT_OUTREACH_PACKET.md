@@ -58,6 +58,8 @@ Collect only non-private evidence:
 7. One short operator quote, if they agree.
 ```
 
+Use `docs/PILOT_EVIDENCE_TEMPLATE.md` after the trial so the evidence is recorded consistently and private details are removed before publication.
+
 ## Public Proof Shape
 
 Safe public proof can be:

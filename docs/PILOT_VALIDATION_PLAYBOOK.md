@@ -30,10 +30,12 @@ Record the current state before using the tool:
 2. Build the Impact Packet.
 3. Review the Gemini prompt and policy draft route.
 4. Human operator approves or edits the policy.
-5. Use the packet for a small batch of real decisions or explanations.
-6. Record what changed after the pilot.
+5. Fill the Pilot Trial Workspace with baseline minutes, trial minutes, reviewed decisions, policy outcome, languages used, and any approved quote.
+6. Use the packet for a small batch of real decisions or explanations.
+7. Record what changed after the pilot.
 
 Use `docs/PILOT_OUTREACH_PACKET.md` to recruit the first operator and collect only non-private evidence.
+Use `docs/PILOT_EVIDENCE_TEMPLATE.md` to turn that trial into safe public proof.
 
 ## After Evidence
 
@@ -45,6 +47,7 @@ Useful evidence includes:
 - disputes avoided or resolved
 - multilingual explanations sent
 - qualitative feedback from the operator
+- estimated time saved using `max(0, baseline minutes - trial minutes) x reviewed decisions`
 
 ## Stoplines
 

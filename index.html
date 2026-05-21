@@ -83,7 +83,7 @@
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 12px;
     }
 
@@ -217,6 +217,15 @@
       margin: 0;
     }
 
+    .mini-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-form textarea {
+      min-height: 86px;
+    }
+
     @media (max-width: 900px) {
       header, .grid, .two-col { grid-template-columns: 1fr; }
       .form { position: static; }
@@ -240,6 +249,7 @@
       <div class="metric"><strong id="approvalCount">4</strong><span>human approval gates</span></div>
       <div class="metric"><strong id="languageCount">4</strong><span>supported explanation languages</span></div>
       <div class="metric"><strong id="geminiProof">1</strong><span>Gemini proof attached</span></div>
+      <div class="metric"><strong id="pilotProof">0</strong><span>pilot evidence items</span></div>
     </section>
 
     <div class="grid">
@@ -319,6 +329,47 @@
         </section>
 
         <section>
+          <h2>Pilot Trial Workspace</h2>
+          <p>Capture only non-private before/after evidence. The calculator stays at zero until a real operator trial is entered.</p>
+          <div class="two-col">
+            <div class="mini-form">
+              <label>
+                Pilot operator
+                <input id="pilotOperator" placeholder="Example: forum moderator, maintainer, educator">
+              </label>
+              <label>
+                Baseline minutes per decision
+                <input id="baselineMinutes" type="number" min="0" step="1" placeholder="Before this workflow">
+              </label>
+              <label>
+                Trial minutes per decision
+                <input id="trialMinutes" type="number" min="0" step="1" placeholder="After using the packet">
+              </label>
+              <label>
+                Decisions or explanations reviewed
+                <input id="decisionsReviewed" type="number" min="0" step="1" value="0">
+              </label>
+              <label>
+                Policy text accepted or rejected
+                <textarea id="acceptedPolicy" placeholder="No private user data. Note what was accepted, edited, or rejected."></textarea>
+              </label>
+              <label>
+                Languages used
+                <input id="languagesUsed" placeholder="Example: English, Japanese">
+              </label>
+              <label>
+                Optional operator quote
+                <textarea id="operatorQuote" placeholder="Use only if the operator agrees to a public quote."></textarea>
+              </label>
+            </div>
+            <div>
+              <div class="card-grid" id="trialGrid"></div>
+              <p class="note">Estimated time saved = max(0, baseline minutes - trial minutes) x reviewed decisions. This is only evidence after a real operator enters real numbers.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
           <h2>Pilot Outreach Kit</h2>
           <p>Use this to recruit the first real operator without inventing impact evidence.</p>
           <div class="card-grid" id="outreachGrid"></div>
@@ -394,6 +445,46 @@
       return 'green';
     }
 
+    function normalizedEvidence(value) {
+      const text = String(value || '').trim();
+      if (!text || /^pending$/i.test(text) || /^not collected/i.test(text)) return '';
+      return text;
+    }
+
+    function buildTrialEvidence() {
+      const operator = normalizedEvidence($('pilotOperator').value);
+      const baselineMinutes = Number($('baselineMinutes').value || 0);
+      const trialMinutes = Number($('trialMinutes').value || 0);
+      const decisionsReviewed = Number($('decisionsReviewed').value || 0);
+      const acceptedPolicy = normalizedEvidence($('acceptedPolicy').value);
+      const languagesUsed = normalizedEvidence($('languagesUsed').value);
+      const operatorQuote = normalizedEvidence($('operatorQuote').value);
+      const estimatedMinutesSaved = Math.max(0, baselineMinutes - trialMinutes) * Math.max(0, decisionsReviewed);
+      const evidenceItems = [
+        operator,
+        decisionsReviewed > 0 ? String(decisionsReviewed) : '',
+        acceptedPolicy,
+        languagesUsed,
+        operatorQuote,
+        estimatedMinutesSaved > 0 ? String(estimatedMinutesSaved) : ''
+      ].filter(Boolean).length;
+      const hasTrial = evidenceItems > 0 && decisionsReviewed > 0;
+
+      return {
+        operator: operator || 'not collected yet',
+        baseline_minutes_per_decision: baselineMinutes || null,
+        trial_minutes_per_decision: trialMinutes || null,
+        decisions_or_explanations_reviewed: decisionsReviewed,
+        accepted_or_rejected_policy_text: acceptedPolicy || 'pending',
+        languages_used: languagesUsed || 'pending',
+        operator_quote: operatorQuote || 'pending',
+        estimated_minutes_saved: estimatedMinutesSaved,
+        estimated_time_saved_formula: 'max(0, baseline minutes - trial minutes) x reviewed decisions',
+        evidence_items_captured: evidenceItems,
+        status: hasTrial ? 'pilot evidence entered' : 'pilot evidence pending'
+      };
+    }
+
     function buildPrompt(packet) {
       return `You are Gemini helping a human community operator. Draft concise governance copy in ${packet.language}.
 
@@ -417,11 +508,12 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
       const stance = $('stance').value;
       const language = $('language').value;
       const model = $('model').value.trim() || 'gemini-2.5-flash';
+      const trialEvidence = buildTrialEvidence();
       const evidence = [
         { name: 'Gemini API live proof', status: committedGeminiProof ? 'attached' : 'blocked', note: committedGeminiProof ? 'media/gemini-live-policy-draft.json proves one live Vertex AI Gemini policy-draft call.' : 'Attach media/gemini-live-policy-draft.json after a real call.' },
         { name: 'Human approval model', status: 'attached', note: 'Four approval gates are visible in the operating loop.' },
         { name: 'Multilingual support', status: 'prototype', note: `${language} explanation target is included in the prompt.` },
-        { name: 'Impact measurement', status: 'pending', note: 'Needs real records for time saved, disputes avoided, and decisions reviewed.' },
+        { name: 'Impact measurement', status: trialEvidence.status.includes('entered') ? 'trial entered' : 'pending', note: trialEvidence.status.includes('entered') ? `${trialEvidence.estimated_minutes_saved} estimated minutes saved; formula is included in the export.` : 'Needs real records for time saved, disputes avoided, and decisions reviewed.' },
         { name: 'Public users', status: 'pending', note: 'Needs at least one real community or organization trial.' },
         { name: 'Business evidence', status: 'pending', note: 'Needs a credible usage or revenue path before XPRIZE final submission.' }
       ];
@@ -436,6 +528,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
         gemini_model: model,
         human_ai_loop: loop,
         pilot_validation_kit: pilot,
+        pilot_trial_workspace: trialEvidence,
         pilot_outreach_kit: outreach,
         business_path: business,
         evidence_ledger: evidence,
@@ -470,6 +563,21 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
           <p>${item.note}</p>
         </div>
       `).join('');
+      const trialCards = [
+        { name: 'Operator', status: trialEvidence.operator === 'not collected yet' ? 'pending' : 'entered', note: trialEvidence.operator },
+        { name: 'Reviewed decisions', status: trialEvidence.decisions_or_explanations_reviewed > 0 ? 'entered' : 'pending', note: `${trialEvidence.decisions_or_explanations_reviewed} decisions or explanations` },
+        { name: 'Estimated time saved', status: trialEvidence.estimated_minutes_saved > 0 ? 'entered' : 'pending', note: `${trialEvidence.estimated_minutes_saved} minutes; ${trialEvidence.estimated_time_saved_formula}` },
+        { name: 'Policy outcome', status: trialEvidence.accepted_or_rejected_policy_text === 'pending' ? 'pending' : 'entered', note: trialEvidence.accepted_or_rejected_policy_text },
+        { name: 'Languages used', status: trialEvidence.languages_used === 'pending' ? 'pending' : 'entered', note: trialEvidence.languages_used },
+        { name: 'Operator quote', status: trialEvidence.operator_quote === 'pending' ? 'pending' : 'entered', note: trialEvidence.operator_quote }
+      ];
+      $('trialGrid').innerHTML = trialCards.map((item) => `
+        <div class="card">
+          <b>${item.name}</b>
+          <span class="badge ${statusClass(item.status)}">${item.status}</span>
+          <p>${item.note}</p>
+        </div>
+      `).join('');
       $('outreachGrid').innerHTML = outreach.map((item) => `
         <div class="card">
           <b>${item.name}</b>
@@ -488,6 +596,7 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
       $('geminiOutput').textContent = 'Committed proof is attached at media/gemini-live-policy-draft.json. No browser-session Gemini call has been made on this page load.';
       $('packetOutput').textContent = JSON.stringify(packet, null, 2);
       $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
+      $('pilotProof').textContent = String(trialEvidence.evidence_items_captured);
     }
 
     async function generateGeminiDraft() {

@@ -23,6 +23,7 @@ Coexistence Impact Engine creates a reviewable impact packet:
 - approval gates
 - pilot validation kit
 - pilot outreach kit
+- pilot trial workspace and time-saved formula
 - impact evidence ledger
 - next live proof step
 - claim boundary
@@ -36,7 +37,8 @@ The long-game fit is an AI-assisted operations business for communities and team
 ```text
 node scripts/verify_impact.mjs
 impact_verify_ok
-sections=6
+cards=31
+pilot_trial_workspace_ok
 
 python3 scripts/verify_no_secrets.py
 coexistence_impact_no_secrets_ok
@@ -61,6 +63,7 @@ Pilot validation playbook:
 ```text
 docs/PILOT_VALIDATION_PLAYBOOK.md
 docs/PILOT_OUTREACH_PACKET.md
+docs/PILOT_EVIDENCE_TEMPLATE.md
 ```
 
 Demo video draft:

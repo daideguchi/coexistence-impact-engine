@@ -18,7 +18,7 @@ try {
   }
   await page.getByRole('button', { name: 'Build Impact Packet' }).click();
   const cards = await page.locator('.card').count();
-  if (cards < 25) {
+  if (cards < 31) {
     throw new Error(`not enough cards: ${cards}`);
   }
   const prompt = await page.locator('#geminiPrompt').innerText();
@@ -38,9 +38,16 @@ try {
   if (!packet.pilot_outreach_kit?.some((item) => item.name === 'Operator invite' && item.status === 'ready')) {
     throw new Error('pilot outreach kit missing');
   }
+  if (!packet.pilot_trial_workspace || packet.pilot_trial_workspace.status !== 'pilot evidence pending') {
+    throw new Error('pilot trial workspace missing default pending state');
+  }
   const geminiProofMetric = await page.locator('#geminiProof').innerText();
   if (geminiProofMetric !== '1') {
     throw new Error(`unexpected Gemini proof metric: ${geminiProofMetric}`);
+  }
+  const defaultPilotProof = await page.locator('#pilotProof').innerText();
+  if (defaultPilotProof !== '0') {
+    throw new Error(`unexpected default pilot proof metric: ${defaultPilotProof}`);
   }
   const screenshot = path.join(outDir, 'coexistence-impact-engine-full.png');
   await page.screenshot({ path: screenshot, fullPage: true });
@@ -48,8 +55,26 @@ try {
   if (bytes < 80_000) {
     throw new Error(`screenshot too small: ${bytes}`);
   }
+
+  await page.locator('#pilotOperator').fill('one volunteer moderator');
+  await page.locator('#baselineMinutes').fill('18');
+  await page.locator('#trialMinutes').fill('10');
+  await page.locator('#decisionsReviewed').fill('5');
+  await page.locator('#acceptedPolicy').fill('accepted after edits');
+  await page.locator('#languagesUsed').fill('English, Japanese');
+  await page.locator('#operatorQuote').fill('The checklist made the decision easier to explain.');
+  await page.getByRole('button', { name: 'Build Impact Packet' }).click();
+  const trialPacket = JSON.parse(await page.locator('#packetOutput').innerText());
+  const trial = trialPacket.pilot_trial_workspace;
+  if (trial.estimated_minutes_saved !== 40) {
+    throw new Error(`unexpected estimated minutes saved: ${trial.estimated_minutes_saved}`);
+  }
+  if (trial.evidence_items_captured !== 6 || trial.status !== 'pilot evidence entered') {
+    throw new Error('pilot evidence capture did not register');
+  }
   console.log('impact_verify_ok');
   console.log(`cards=${cards}`);
+  console.log('pilot_trial_workspace_ok');
   console.log(`screenshot=${screenshot}`);
   console.log(`bytes=${bytes}`);
 } finally {

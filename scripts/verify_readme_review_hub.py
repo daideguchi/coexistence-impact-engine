@@ -31,6 +31,9 @@ REQUIRED_MARKERS = [
     "gemini_live_proof_file_exists=True",
     "Pilot validation playbook",
     "Pilot outreach packet",
+    "Pilot evidence template",
+    "pilot_trial_workspace_ok",
+    "docs/PILOT_EVIDENCE_TEMPLATE.md",
     "does not claim real users",
 ]
 

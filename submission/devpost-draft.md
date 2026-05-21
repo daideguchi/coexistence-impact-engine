@@ -20,6 +20,7 @@ AI participation is becoming normal. The hard part is no longer simply asking wh
 - keeps risky actions behind human approval gates
 - creates a pilot validation kit for real-world impact testing
 - creates a pilot outreach kit for recruiting the first real operator
+- captures pilot-trial evidence with a baseline/trial time calculator
 - exports an impact packet with evidence and claim boundaries
 - supports live Gemini BYOK testing without committed secrets
 
@@ -39,7 +40,7 @@ HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` sm
 
 - Keep the attached live Gemini proof file current if the app changes.
 - Validate with at least one real community or organization.
-- Add measurable impact evidence.
+- Add measurable impact evidence using the Pilot Trial Workspace and `docs/PILOT_EVIDENCE_TEMPLATE.md`.
 - Add business evidence or credible usage path.
 - DD must approve legal terms and final submission.
 
