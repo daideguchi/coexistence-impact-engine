@@ -26,6 +26,13 @@ What is proven now: the public app, screenshots, demo video draft, no-secret ver
 
 Early feedback: one informal reviewer understood the value quickly and responded positively, while keeping the details private. This is treated as a privacy-respecting positive signal only, not formal validation. Standard/default values are not counted as measured impact. The next milestone is to turn that "this feels useful" reaction into aggregate evidence the operator is comfortable sharing.
 
+## 30-Second Review Path
+
+1. Read the one-sentence pitch to understand the governance and impact loop.
+2. Open the live app and build an impact packet.
+3. Check the Gemini proof, Field Reality Check, evidence ladder, and pilot workspace.
+4. Confirm the boundary: real impact remains unclaimed until a real operator enters before/after pilot evidence.
+
 ## Live Demo
 
 GitHub Pages target:
@@ -155,7 +162,7 @@ Expected current state:
 
 ```text
 impact_verify_ok
-cards=41
+cards=51
 pilot_trial_workspace_ok
 field_reality_check_ok
 coexistence_impact_no_secrets_ok

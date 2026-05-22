@@ -64,7 +64,7 @@ The next milestone is to convert that reaction into evidence the operator is com
 ```text
 node scripts/verify_impact.mjs
 impact_verify_ok
-cards=41
+cards=51
 pilot_trial_workspace_ok
 field_reality_check_ok
 
