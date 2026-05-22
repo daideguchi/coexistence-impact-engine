@@ -74,6 +74,37 @@
       white-space: nowrap;
       width: fit-content;
     }
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .lang-toggle {
+      display: inline-flex;
+      gap: 4px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdfd;
+    }
+    .lang-toggle button {
+      border: 0;
+      border-radius: 6px;
+      min-height: 28px;
+      padding: 4px 8px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+    .lang-toggle button.active {
+      background: var(--teal);
+      color: #fff;
+    }
 
     .blue { background: var(--blue-soft); color: var(--blue); }
     .teal { background: var(--teal-soft); color: var(--teal); }
@@ -271,6 +302,7 @@
       .form { position: static; }
       .metrics, .card-grid { grid-template-columns: 1fr; }
       .btn { flex: 1; }
+      .header-actions { justify-content: flex-start; }
     }
   </style>
 </head>
@@ -281,7 +313,13 @@
         <h1>Coexistence Impact Engine</h1>
         <p>Gemini-assisted governance for communities where humans and AI work together, with human approval, multilingual explanation, and measurable impact evidence.</p>
       </div>
-      <span class="badge green">Gemini live proof attached</span>
+      <div class="header-actions">
+        <span class="badge green">Gemini live proof attached</span>
+        <div class="lang-toggle" aria-label="Language">
+          <button type="button" class="active" data-lang-button="en">EN</button>
+          <button type="button" data-lang-button="ja">日本語</button>
+        </div>
+      </div>
     </header>
 
     <section class="metrics" aria-label="Impact metrics">
@@ -325,18 +363,18 @@
         <label>
           Governance stance
           <select id="stance">
-            <option>AI-friendly with disclosure</option>
-            <option selected>Balanced human-reviewed governance</option>
-            <option>Strict disclosure and review</option>
+            <option value="AI-friendly with disclosure">AI-friendly with disclosure</option>
+            <option value="Balanced human-reviewed governance" selected>Balanced human-reviewed governance</option>
+            <option value="Strict disclosure and review">Strict disclosure and review</option>
           </select>
         </label>
         <label>
           Explanation language
           <select id="language">
-            <option selected>English</option>
-            <option>Japanese</option>
-            <option>Spanish</option>
-            <option>French</option>
+            <option value="English" selected>English</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
           </select>
         </label>
         <label>
@@ -392,26 +430,26 @@
               <label>
                 Field role
                 <select id="fieldRole">
-                  <option selected>volunteer community moderator</option>
-                  <option>education cohort lead</option>
-                  <option>open-source maintainer</option>
-                  <option>support team operator</option>
+                  <option value="volunteer community moderator" selected>volunteer community moderator</option>
+                  <option value="education cohort lead">education cohort lead</option>
+                  <option value="open-source maintainer">open-source maintainer</option>
+                  <option value="support team operator">support team operator</option>
                 </select>
               </label>
               <label>
                 Evidence access
                 <select id="fieldPrivacy">
-                  <option selected>private details withheld</option>
-                  <option>aggregate-only evidence allowed</option>
-                  <option>public-safe details allowed</option>
+                  <option value="private details withheld" selected>private details withheld</option>
+                  <option value="aggregate-only evidence allowed">aggregate-only evidence allowed</option>
+                  <option value="public-safe details allowed">public-safe details allowed</option>
                 </select>
               </label>
               <label>
                 Measurement status
                 <select id="measurementStatus">
-                  <option selected>standard/default only</option>
-                  <option>measured numbers available</option>
-                  <option>not measured</option>
+                  <option value="standard/default only" selected>standard/default only</option>
+                  <option value="measured numbers available">measured numbers available</option>
+                  <option value="not measured">not measured</option>
                 </select>
               </label>
               <label>
@@ -505,6 +543,271 @@
   <script>
     const $ = (id) => document.getElementById(id);
     let currentPacket = null;
+    let currentLang = 'en';
+
+    const translations = {
+      ja: {
+        'Coexistence Impact Engine': '共存インパクトエンジン',
+        'Gemini-assisted governance for communities where humans and AI work together, with human approval, multilingual explanation, and measurable impact evidence.': '人間とAIが一緒に働くコミュニティのための、Gemini支援ガバナンスです。人間の承認、多言語説明、測定できるインパクト証拠を扱います。',
+        'Gemini live proof attached': 'Gemini実行証拠あり',
+        'target community types': '対象コミュニティ種別',
+        'human approval gates': '人間承認ゲート',
+        'supported explanation languages': '対応説明言語',
+        'Gemini proof attached': 'Gemini証拠あり',
+        'pilot evidence items': 'パイロット証拠',
+        'judge hook': '審査員向けの刺しどころ',
+        'One-Sentence Pitch': '一言でいうと',
+        'For communities where humans and AI work together, Coexistence Impact Engine turns policy, multilingual explanation, and pilot measurement into an evidence packet so impact claims wait for proof.': '人間とAIが一緒に働くコミュニティのために、ポリシー、多言語説明、パイロット測定を証拠パケットに変え、インパクト主張が証拠を待つ状態にします。',
+        'Honest current state': '正直な現在地',
+        'Gemini proof is attached. Real pilot evidence is the next gate.': 'Gemini証拠はあります。次の関門は実パイロット証拠です。',
+        'This prototype already shows the workflow, the human approval model, and one sanitized Gemini proof. It deliberately keeps pilot impact at zero until a real operator enters before/after evidence.': 'このプロトタイプは、ワークフロー、人間承認モデル、公開用に整えたGemini証拠を示します。実オペレーターが前後比較の証拠を入れるまで、パイロット効果は意図的にゼロのままです。',
+        'Impact Intake': 'インパクト入力',
+        'Community or team': 'コミュニティまたはチーム',
+        'Impact problem': '解決したい問題',
+        'Governance stance': 'ガバナンス方針',
+        'Explanation language': '説明言語',
+        'Gemini model': 'Geminiモデル',
+        'Gemini API key for local live test': 'ローカル動作確認用Gemini APIキー',
+        'Build Impact Packet': 'インパクトパケットを作る',
+        'Run Field Check': '現場チェックを実行',
+        'Generate Field Check': '現場チェックを生成',
+        'Generate Gemini Draft': 'Gemini下書きを生成',
+        'Copy Packet': 'パケットをコピー',
+        'Middle-School Clear Story': '中学生にもわかる説明',
+        'Evidence Readiness Ladder': '証拠準備の段階',
+        'Human / AI Operating Loop': '人間 / AI 運用ループ',
+        'Gemini Workbench': 'Gemini作業台',
+        'Field Reality Check': '現場リアリティチェック',
+        'Impact Evidence Ledger': 'インパクト証拠台帳',
+        'Pilot Validation Kit': 'パイロット検証キット',
+        'Pilot Trial Workspace': 'パイロット試行ワークスペース',
+        'Pilot Outreach Kit': 'パイロット依頼キット',
+        'Business Path': '事業化の道筋',
+        'Impact Packet Export': 'インパクトパケット出力',
+        'Claim Boundary': '主張の境界',
+        'Show now:': '今見せられるもの:',
+        'Collect next:': '次に集めるもの:',
+        'Do not claim yet:': 'まだ主張しないこと:',
+        'policy drafting, Field Reality Check, multilingual explanation target, and claim boundary.': 'ポリシー下書き、現場リアリティチェック、多言語説明の対象、主張の境界。',
+        'baseline minutes, trial minutes, decisions reviewed, accepted edits, languages used, and approved quote.': '導入前分数、試行分数、レビュー判断数、承認された修正、使用言語、承認済み引用。',
+        'broad adoption, measured impact, revenue, or final XPRIZE readiness.': '広い採用、測定済みインパクト、売上、XPRIZE最終準備完了。',
+        'The public demo does not include secrets. One sanitized live Gemini proof file is attached; final XPRIZE readiness still requires real impact evidence.': '公開デモに秘密情報は含めていません。公開用に整えたGemini実行証拠ファイルを1件添付済みです。XPRIZE最終準備完了には、まだ実インパクト証拠が必要です。',
+        'Judges can see exactly what is proven, what is an early signal, and what still needs a real pilot.': '審査員は、何が証明済みで、何が初期シグナルで、何に実パイロットが必要かを正確に見られます。',
+        'Gemini drafts language and summaries. Humans approve policy, enforcement, public claims, and final submission.': 'Geminiは文面と要約を下書きします。ポリシー、運用判断、公開主張、最終提出は人間が承認します。',
+        'Use Gemini for policy drafting and multilingual explanation, not hidden enforcement or AI-authorship detection.': 'Geminiはポリシー下書きと多言語説明に使います。見えない処分やAI作者検出には使いません。',
+        "Ask the AI to think from the operator's seat: what does this reaction or draft prove, what does it not prove, and what should be measured next?": 'AIに現場運用者の席から考えさせます。この反応や下書きが何を証明し、何を証明せず、次に何を測るべきかを分けます。',
+        'This is AI-assisted situational judgment. It may classify evidence quality and next questions, but it must not claim adoption, impact, or final validation by itself.': 'これはAI支援の状況判断です。証拠品質や次の質問は分類できますが、それだけで採用、インパクト、最終検証済みとは主張してはいけません。',
+        'Use this before claiming real-world impact. The goal is one honest community trial with measurable evidence.': '現実世界のインパクトを主張する前に使います。目標は、測定できる証拠を持つ正直なコミュニティ試行を1件作ることです。',
+        'Capture only non-private before/after evidence. The calculator stays at zero until a real operator trial is entered.': '非公開情報を含まない前後比較だけを記録します。実オペレーター試行が入力されるまで、計算結果はゼロのままです。',
+        'Estimated time saved = max(0, baseline minutes - trial minutes) x reviewed decisions. This is only evidence after a real operator enters real numbers.': '推定節約時間 = max(0, 導入前分数 - 試行分数) x レビュー済み判断数。実オペレーターが実数を入力した後だけ証拠になります。',
+        'Use this to recruit the first real operator without inventing impact evidence.': 'インパクト証拠を作り話にせず、最初の実オペレーターを募集するために使います。',
+        'XPRIZE needs more than a useful prototype. The engine tracks the proof needed for a real AI-operated service.': 'XPRIZEには便利なプロトタイプ以上が必要です。このエンジンは、実際のAI運用サービスに必要な証拠を追跡します。',
+        'This public MVP claims one live Gemini proof file and one informal early-feedback signal. Field Reality Check is assistant judgment only; it does not prove real users, measured impact, revenue, or XPRIZE submission readiness.': 'この公開MVPが主張するのは、Gemini実行証拠ファイル1件と、非公式な初期フィードバックシグナル1件です。現場リアリティチェックはアシスタント判断にすぎず、実ユーザー、測定済みインパクト、売上、XPRIZE提出準備完了を証明するものではありません。',
+        'Community or team': 'コミュニティまたはチーム',
+        'Impact problem': '解決したい問題',
+        'Governance stance': 'ガバナンス方針',
+        'Explanation language': '説明言語',
+        'Gemini model': 'Geminiモデル',
+        'Gemini API key for local live test': 'ローカルライブテスト用Gemini APIキー',
+        'Field role': '現場ロール',
+        'Evidence access': '証拠アクセス',
+        'Measurement status': '測定状態',
+        'Field note or feedback': '現場メモまたは反応',
+        'Pilot operator': 'パイロット運用者',
+        'Baseline minutes per decision': '1判断あたりの導入前分数',
+        'Trial minutes per decision': '1判断あたりの試行分数',
+        'Decisions or explanations reviewed': 'レビューした判断または説明数',
+        'Policy text accepted or rejected': '承認または却下されたポリシー文',
+        'Optional operator quote': '任意の運用者コメント',
+        'Not saved, not committed': '保存もコミットもしません',
+        'Example: forum moderator, maintainer, educator': '例: フォーラムモデレーター、メンテナー、教育者',
+        'Before this workflow': 'このワークフロー導入前',
+        'After using the packet': 'パケット使用後',
+        'No private user data. Note what was accepted, edited, or rejected.': '非公開ユーザーデータは入れません。承認、修正、却下された内容だけを書きます。',
+        'Example: English, Japanese': '例: 英語、日本語',
+        'Use only if the operator agrees to a public quote.': '運用者が公開引用に同意した場合だけ使います。',
+        'AI-friendly with disclosure': 'AI利用歓迎・開示あり',
+        'Balanced human-reviewed governance': 'バランス型・人間レビューあり',
+        'Strict disclosure and review': '厳格な開示とレビュー',
+        'English': '英語',
+        'Japanese': '日本語',
+        'Spanish': 'スペイン語',
+        'French': 'フランス語',
+        'volunteer community moderator': 'ボランティアのコミュニティモデレーター',
+        'education cohort lead': '教育コホートのリード',
+        'open-source maintainer': 'オープンソースメンテナー',
+        'support team operator': 'サポートチーム運用者',
+        'private details withheld': '詳細は非公開',
+        'aggregate-only evidence allowed': '集計のみ共有可能',
+        'public-safe details allowed': '公開可能な詳細あり',
+        'standard/default only': '標準/デフォルトのみ',
+        'measured numbers available': '測定数値あり',
+        'not measured': '未測定',
+        'Who': '誰のため',
+        'Problem': '困りごと',
+        'How': 'どう解決するか',
+        'Community operators, moderators, educators, and maintainers who want AI participation without chaos.': 'AI参加を混乱させずに受け入れたいコミュニティ運用者、モデレーター、教育者、メンテナーのためです。',
+        'AI-assisted work can help, but people need clear rules, disclosure, review, and explanations.': 'AI支援は役に立ちますが、人間には明確なルール、開示、レビュー、説明が必要です。',
+        'Gemini drafts policy and multilingual explanations; deterministic workflow gates keep humans in control.': 'Geminiがポリシーと多言語説明の下書きを作り、決定的なワークフローゲートが人間の管理を保ちます。',
+        'Policy draft': 'ポリシー下書き',
+        'Disclosure explanation': '開示説明',
+        'Risky decision': 'リスクのある判断',
+        'Impact measurement': 'インパクト測定',
+        'AI handoff': 'AIへの引き継ぎ',
+        'Public claim': '公開主張',
+        'Gemini assists': 'Geminiが支援',
+        'Human owns': '人間が責任を持つ',
+        'System records': 'システムが記録',
+        'Future agent can use': '将来のAIも使える',
+        'draft only': '下書きのみ',
+        'human review': '人間レビュー',
+        'approval gate': '承認ゲート',
+        'evidence first': '証拠が先',
+        'guarded': '保護中',
+        'blocked': 'ブロック',
+        'Policy text starts as a draft and must be reviewed.': 'ポリシー文は下書きから始まり、必ずレビューが必要です。',
+        'Language can be localized before a moderator sends it.': 'モデレーターが送る前に、説明文を各言語へ調整できます。',
+        'Removal, sanctions, and public claims stay human-controlled.': '削除、制裁、公開主張は人間が管理します。',
+        'Time saved, disputes, and reviewed decisions need real records.': '節約時間、争い、レビュー済み判断には実記録が必要です。',
+        'The packet states current truth, stoplines, and proof gaps.': 'パケットには現在の真実、停止線、証拠不足が書かれます。',
+        'No XPRIZE claim until Gemini proof and user evidence exist.': 'Gemini証拠とユーザー証拠が揃うまで、XPRIZE向けの強い主張はしません。',
+        '1. Prototype proof': '1. プロトタイプ証拠',
+        '2. Field signal': '2. 現場シグナル',
+        '3. Pilot evidence': '3. パイロット証拠',
+        '4. Impact case': '4. インパクト事例',
+        'attached': '添付済み',
+        'early signal': '初期シグナル',
+        'next gate': '次の関門',
+        'blocked until measured': '測定までブロック',
+        'Public UI, screenshot, demo video, verifiers, and one sanitized Vertex AI Gemini proof are attached.': '公開UI、スクリーンショット、デモ動画、検証スクリプト、公開用に整えたVertex AI Gemini証拠を添付済みです。',
+        'One informal reaction was positive, but the details stayed private and are not counted as measured validation.': '非公式な反応は前向きでしたが、詳細は非公開で、測定済み検証とは数えません。',
+        'A real operator must enter baseline time, trial time, reviewed decisions, policy outcome, languages used, and any approved quote.': '実オペレーターが、基準時間、試行時間、レビュー判断数、ポリシー結果、使用言語、承認済み引用を入力する必要があります。',
+        'Broad impact, revenue, and final XPRIZE readiness stay blocked until repeatable proof exists.': '再現できる証拠が出るまで、広いインパクト、売上、XPRIZE最終準備完了は主張しません。',
+        'Service offer': '提供サービス',
+        'First customer proof': '最初の顧客証拠',
+        'Revenue or usage metric': '売上または利用指標',
+        'defined': '定義済み',
+        'pending': '未完了',
+        'Governance setup, policy localization, review workflow, and monthly impact reporting.': 'ガバナンス設計、ポリシー多言語化、レビューワークフロー、月次インパクトレポートを提供します。',
+        'Needs one real community, cohort, team, or maintainer group using the workflow.': 'このワークフローを使う実コミュニティ、コホート、チーム、メンテナーグループが1つ必要です。',
+        'Needs a real usage record, invoice, grant path, or signed pilot before final submission.': '最終提出前に、実利用記録、請求書、助成金ルート、署名済みパイロットのいずれかが必要です。',
+        'Pilot target': 'パイロット対象',
+        'Before baseline': '導入前ベースライン',
+        'Trial packet': '試行パケット',
+        'After evidence': '導入後証拠',
+        'ready': '準備済み',
+        'Recruit one community, moderation team, classroom, support group, or open-source maintainer group.': 'コミュニティ、モデレーションチーム、教室、サポートグループ、オープンソースメンテナーグループのどれか1つを募集します。',
+        'Record current review time, unclear decisions, user complaints, and language-support gaps.': '現在のレビュー時間、曖昧な判断、ユーザー不満、言語サポート不足を記録します。',
+        'Use the exported packet as the shared policy, disclosure, review, and explanation template.': '出力パケットを、共有ポリシー、開示、レビュー、説明テンプレートとして使います。',
+        'Measure accepted policy drafts, time saved, reviewed decisions, disputes avoided, and multilingual explanations used.': '承認されたポリシー下書き、節約時間、レビュー済み判断、回避できた争い、使われた多言語説明を測定します。',
+        'Operator invite': '運用者への依頼',
+        'Baseline questions': 'ベースライン質問',
+        'Evidence return': '証拠の回収',
+        'Ask one moderator, maintainer, educator, or team lead to try the packet on a real AI participation decision.': 'モデレーター、メンテナー、教育者、チームリードの誰か1人に、実際のAI参加判断でパケットを試してもらいます。',
+        'Ask how long policy writing takes now, where decisions feel inconsistent, and which languages need explanation.': '今のポリシー作成時間、判断がぶれる場所、説明が必要な言語を聞きます。',
+        'Collect only non-private counts, accepted edits, time saved, and a short operator quote after the trial.': '試行後は、非公開情報を含まない件数、承認された修正、節約時間、短い運用者コメントだけを集めます。',
+        'Gemini API live proof': 'Gemini API実行証拠',
+        'Human approval model': '人間承認モデル',
+        'Multilingual support': '多言語対応',
+        'Field reality check': '現場リアリティチェック',
+        'Impact measurement': 'インパクト測定',
+        'Public users': '公開ユーザー',
+        'Business evidence': '事業証拠',
+        'prototype': 'プロトタイプ',
+        'trial entered': '試行入力済み',
+        'media/gemini-live-policy-draft.json proves one live Vertex AI Gemini policy-draft call.': 'media/gemini-live-policy-draft.json が、Vertex AI Geminiによるポリシー下書き実行を1回証明します。',
+        'Attach media/gemini-live-policy-draft.json after a real call.': '実行後に media/gemini-live-policy-draft.json を添付します。',
+        'Four approval gates are visible in the operating loop.': '運用ループ内に4つの承認ゲートが見えます。',
+        'Needs real records for time saved, disputes avoided, and decisions reviewed.': '節約時間、回避できた争い、レビュー済み判断には実記録が必要です。',
+        'Needs at least one real community or organization trial.': '少なくとも1つの実コミュニティまたは組織での試行が必要です。',
+        'Needs a credible usage or revenue path before XPRIZE final submission.': 'XPRIZE最終提出前に、信頼できる利用または売上ルートが必要です。',
+        'Evidence level': '証拠レベル',
+        'Privacy status': 'プライバシー状態',
+        'Measurement status': '測定状態',
+        'Field reading': '現場の読み取り',
+        'Safe claim': '安全に言える主張',
+        'Blocked claim': '止めるべき主張',
+        'Next measurement': '次に測ること',
+        'Privacy handling': 'プライバシー処理',
+        'Decision owner': '最終判断者',
+        'review': 'レビュー',
+        'assist': '支援',
+        'Operator': '運用者',
+        'Reviewed decisions': 'レビュー済み判断',
+        'Estimated time saved': '推定節約時間',
+        'Policy outcome': 'ポリシー結果',
+        'Languages used': '使用言語',
+        'Operator quote': '運用者コメント',
+        'entered': '入力済み',
+        'not collected yet': '未収集',
+        'pilot evidence entered': 'パイロット証拠入力済み',
+        'pilot evidence pending': 'パイロット証拠待ち',
+        'privacy-respecting positive signal': 'プライバシーを尊重した前向きシグナル',
+        'informal positive signal': '非公式な前向きシグナル',
+        'unclassified field note': '未分類の現場メモ',
+        'pilot evidence candidate': 'パイロット証拠候補'
+      }
+    };
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
+      document.querySelectorAll('[data-lang-button]').forEach((button) => {
+        button.classList.toggle('active', button.dataset.langButton === lang);
+      });
+      const map = translations[lang] || {};
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      for (const node of nodes) {
+        const parent = node.parentElement;
+        if (!parent || ['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT'].includes(parent.tagName)) continue;
+      if (!node.datasetOriginalText) node.datasetOriginalText = node.nodeValue;
+      const original = node.datasetOriginalText.trim();
+      if (!original) continue;
+      node.nodeValue = node.datasetOriginalText.replace(original, map[original] || original);
+      }
+    }
+
+    function tr(value) {
+      return currentLang === 'ja' ? (translations.ja[value] || value) : value;
+    }
+
+    function deepLocalize(value) {
+      if (Array.isArray(value)) return value.map(deepLocalize);
+      if (value && typeof value === 'object') {
+        return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, deepLocalize(item)]));
+      }
+      return typeof value === 'string' ? tr(value) : value;
+    }
+
+    const sampleInputs = {
+      en: {
+        community: 'volunteer moderators running a multilingual AI-aware community',
+        problem: 'AI-assisted posts are useful, but moderators need transparent rules, disclosure norms, review checklists, and explanations that humans can approve.',
+        fieldNote: 'A real person tried the prototype, kept the details private, and gave a positive but non-specific reaction. The only safe measurement description is standard/default.'
+      },
+      ja: {
+        community: '多言語でAI利用を扱うコミュニティを運営するボランティアモデレーター',
+        problem: 'AI支援投稿は役に立ちますが、モデレーターには透明なルール、開示の考え方、レビューチェックリスト、人間が承認できる説明文が必要です。',
+        fieldNote: '実際の人がプロトタイプを試し、詳細は非公開のまま、前向きだが具体性のない反応をくれました。安全に言える測定説明は標準/デフォルトのみです。'
+      }
+    };
+
+    function syncSampleInputs(lang) {
+      const next = sampleInputs[lang];
+      const other = sampleInputs[lang === 'ja' ? 'en' : 'ja'];
+      for (const id of ['community', 'problem', 'fieldNote']) {
+        if ($(id).value === other[id] || $(id).value === next[id]) $(id).value = next[id];
+      }
+      if (lang === 'ja' && $('language').value === 'English') $('language').value = 'Japanese';
+      if (lang === 'en' && $('language').value === 'Japanese') $('language').value = 'English';
+      document.querySelectorAll('[placeholder]').forEach((node) => {
+        const original = node.datasetOriginalPlaceholder || node.getAttribute('placeholder');
+        node.datasetOriginalPlaceholder = original;
+        node.setAttribute('placeholder', lang === 'ja' ? (translations.ja[original] || original) : original);
+      });
+    }
 
     const story = [
       ['Who', 'Community operators, moderators, educators, and maintainers who want AI participation without chaos.'],
@@ -562,7 +865,7 @@
 
     function normalizedEvidence(value) {
       const text = String(value || '').trim();
-      if (!text || /^pending$/i.test(text) || /^not collected/i.test(text)) return '';
+      if (!text || /^pending$/i.test(text) || /^not collected/i.test(text) || /^未収集/.test(text) || /^未入力/.test(text)) return '';
       return text;
     }
 
@@ -586,21 +889,42 @@
       const hasTrial = evidenceItems > 0 && decisionsReviewed > 0;
 
       return {
-        operator: operator || 'not collected yet',
+        operator: operator || (currentLang === 'ja' ? '未収集' : 'not collected yet'),
         baseline_minutes_per_decision: baselineMinutes || null,
         trial_minutes_per_decision: trialMinutes || null,
         decisions_or_explanations_reviewed: decisionsReviewed,
-        accepted_or_rejected_policy_text: acceptedPolicy || 'pending',
-        languages_used: languagesUsed || 'pending',
-        operator_quote: operatorQuote || 'pending',
+        accepted_or_rejected_policy_text: acceptedPolicy || (currentLang === 'ja' ? '未入力' : 'pending'),
+        languages_used: languagesUsed || (currentLang === 'ja' ? '未入力' : 'pending'),
+        operator_quote: operatorQuote || (currentLang === 'ja' ? '未入力' : 'pending'),
         estimated_minutes_saved: estimatedMinutesSaved,
-        estimated_time_saved_formula: 'max(0, baseline minutes - trial minutes) x reviewed decisions',
+        estimated_time_saved_formula: currentLang === 'ja'
+          ? 'max(0, 導入前分数 - 試行分数) x レビュー済み判断数'
+          : 'max(0, baseline minutes - trial minutes) x reviewed decisions',
         evidence_items_captured: evidenceItems,
         status: hasTrial ? 'pilot evidence entered' : 'pilot evidence pending'
       };
     }
 
     function buildPrompt(packet) {
+      if (currentLang === 'ja') {
+        return `あなたは、人間のコミュニティ運用者を助けるGeminiです。${tr(packet.language)}で短く実用的なガバナンス文を下書きしてください。
+
+コミュニティ: ${packet.community}
+問題: ${packet.problem}
+方針: ${tr(packet.stance)}
+現場ロール: ${tr(packet.field_reality_check.role)}
+現場メモ: ${packet.field_reality_check.input}
+
+返すもの:
+1. AI参加ポリシー
+2. 開示依頼文
+3. モデレーターレビュー用チェックリスト
+4. ユーザー向け説明文
+5. 人間承認が必要だという警告
+6. 現場リアリティチェック: 現場ロールになりきって、使える証拠、止めるべき主張、次に測ることを分ける
+
+AI作者検出を主張しないでください。最終的な処分判断をしないでください。`;
+      }
       return `You are Gemini helping a human community operator. Draft concise governance copy in ${packet.language}.
 
 Community: ${packet.community}
@@ -621,6 +945,33 @@ Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
     }
 
     function buildFieldPrompt(packet) {
+      if (currentLang === 'ja') {
+        return `あなたはGeminiです。最終権限者ではなく、現場運用者として判断してください。
+
+現場ロール: ${tr(packet.field_reality_check.role)}
+証拠アクセス: ${tr(packet.field_reality_check.privacy_status)}
+測定状態: ${tr(packet.field_reality_check.measurement_status)}
+現場メモ: ${packet.field_reality_check.input}
+コミュニティ: ${packet.community}
+問題: ${packet.problem}
+
+次のキーを持つ短いJSONを返してください:
+- evidence_level
+- field_reading
+- usable_evidence
+- blocked_claim
+- next_measurement
+- privacy_handling
+- human_approval_needed
+
+ルール:
+- 雑談レベルの反応を正式な検証だと主張しない。
+- 標準/デフォルト値を測定済みインパクトとして扱わない。
+- 非公開の詳細を尊重し、集計だけの次証拠を提案する。
+- 実ユーザー、測定済みインパクト、採用、XPRIZE準備完了を主張しない。
+- AI作者検出をしない。
+- 人間運用者のための状況判断として扱う。`;
+      }
       return `You are Gemini acting as a field operator, not a final authority.
 
 Field role: ${packet.field_reality_check.role}
@@ -654,7 +1005,7 @@ Rules:
       const measurementStatus = $('measurementStatus').value;
       const input = normalizedEvidence($('fieldNote').value) || 'not collected yet';
       const lower = input.toLowerCase();
-      const isInformalPositive = /positive|good|nice|useful|いい|良い|sounds good|makes sense/.test(lower);
+      const isInformalPositive = /positive|good|nice|useful|いい|良い|前向き|好意的|sounds good|makes sense/.test(lower);
       const hasNumbers = /\d/.test(input);
       const detailWithheld = privacyStatus.includes('withheld') || /withheld|private|declined|refused|not share|details|情報提供|拒否|非公開/.test(lower);
       const standardOnly = measurementStatus.includes('standard') || /standard|default|標準/.test(lower);
@@ -664,34 +1015,56 @@ Rules:
         : isInformalPositive && (detailWithheld || standardOnly)
           ? 'privacy-respecting positive signal'
           : isInformalPositive ? 'informal positive signal' : 'unclassified field note';
-      const safeClaim = hasFormalPilot
-        ? 'This may support a pilot evidence claim after private details are removed and the operator approves public wording.'
-        : evidenceLevel === 'privacy-respecting positive signal'
-          ? 'A real operator reaction was positive, but details were withheld and values are standard/default only. Treat this as a privacy-respecting early signal.'
-        : 'One informal reviewer understood the value quickly and responded positively. This is an early signal only.';
-      const blockedClaim = hasFormalPilot
-        ? 'Do not claim broad impact from one pilot or publish private details.'
-        : evidenceLevel === 'privacy-respecting positive signal'
-          ? 'Do not claim formal validation, real users, measured impact, adoption, or time saved. Do not convert standard/default values into quantitative proof.'
-        : 'Do not claim formal validation, real users, measured impact, adoption, or XPRIZE readiness from this reaction.';
-      const nextMeasure = hasFormalPilot
-        ? 'Verify baseline minutes, trial minutes, reviewed decisions, accepted edits, languages used, and quote approval.'
-        : evidenceLevel === 'privacy-respecting positive signal'
-          ? 'Ask for aggregate-only evidence the operator is comfortable sharing: one count, one yes/no accepted-edit flag, one non-identifying quote, or a before/after minute range.'
-        : 'Run one measured operator trial with baseline time, trial time, reviewed decisions, accepted or edited policy text, and languages used.';
+      const safeClaim = currentLang === 'ja'
+        ? (hasFormalPilot
+            ? '非公開詳細を除き、運用者が公開文言を承認した後なら、パイロット証拠の主張に使える可能性があります。'
+            : evidenceLevel === 'privacy-respecting positive signal'
+              ? '実運用者の反応は前向きでした。ただし詳細は非公開で、値は標準/デフォルトのみです。プライバシーを尊重した初期シグナルとして扱います。'
+              : '非公式レビュー担当者は価値をすぐ理解し、前向きに反応しました。これは初期シグナルに限ります。')
+        : (hasFormalPilot
+            ? 'This may support a pilot evidence claim after private details are removed and the operator approves public wording.'
+            : evidenceLevel === 'privacy-respecting positive signal'
+              ? 'A real operator reaction was positive, but details were withheld and values are standard/default only. Treat this as a privacy-respecting early signal.'
+              : 'One informal reviewer understood the value quickly and responded positively. This is an early signal only.');
+      const blockedClaim = currentLang === 'ja'
+        ? (hasFormalPilot
+            ? '1件のパイロットから広いインパクトを主張したり、非公開詳細を公開したりしないでください。'
+            : evidenceLevel === 'privacy-respecting positive signal'
+              ? '正式検証、実ユーザー、測定済みインパクト、採用、節約時間を主張しないでください。標準/デフォルト値を定量的証拠に変換しないでください。'
+              : 'この反応だけで、正式検証、実ユーザー、測定済みインパクト、採用、XPRIZE準備完了を主張しないでください。')
+        : (hasFormalPilot
+            ? 'Do not claim broad impact from one pilot or publish private details.'
+            : evidenceLevel === 'privacy-respecting positive signal'
+              ? 'Do not claim formal validation, real users, measured impact, adoption, or time saved. Do not convert standard/default values into quantitative proof.'
+              : 'Do not claim formal validation, real users, measured impact, adoption, or XPRIZE readiness from this reaction.');
+      const nextMeasure = currentLang === 'ja'
+        ? (hasFormalPilot
+            ? '基準時間、試行時間、レビュー済み判断数、承認済み修正、使用言語、引用承認を確認します。'
+            : evidenceLevel === 'privacy-respecting positive signal'
+              ? '運用者が共有しやすい集計のみの証拠を依頼します。件数1つ、承認修正の有無、匿名引用、または前後の分数レンジです。'
+              : '基準時間、試行時間、レビュー済み判断数、承認または修正されたポリシー文、使用言語を含む測定付き運用者試行を1回行います。')
+        : (hasFormalPilot
+            ? 'Verify baseline minutes, trial minutes, reviewed decisions, accepted edits, languages used, and quote approval.'
+            : evidenceLevel === 'privacy-respecting positive signal'
+              ? 'Ask for aggregate-only evidence the operator is comfortable sharing: one count, one yes/no accepted-edit flag, one non-identifying quote, or a before/after minute range.'
+              : 'Run one measured operator trial with baseline time, trial time, reviewed decisions, accepted or edited policy text, and languages used.');
 
       return {
-        role,
-        privacy_status: privacyStatus,
-        measurement_status: measurementStatus,
+        role: currentLang === 'ja' ? tr(role) : role,
+        privacy_status: currentLang === 'ja' ? tr(privacyStatus) : privacyStatus,
+        measurement_status: currentLang === 'ja' ? tr(measurementStatus) : measurementStatus,
         input,
-        evidence_level: evidenceLevel,
-        field_reading: `As a ${role}, this tells me whether the workflow is understandable before it tells me whether it saved work.`,
+        evidence_level: currentLang === 'ja' ? tr(evidenceLevel) : evidenceLevel,
+        field_reading: currentLang === 'ja'
+          ? `${tr(role)}として見ると、これは「作業時間を減らしたか」より先に、「ワークフローの価値が伝わるか」を示しています。`
+          : `As a ${role}, this tells me whether the workflow is understandable before it tells me whether it saved work.`,
         safe_claim: safeClaim,
         blocked_claim: blockedClaim,
         next_measurement: nextMeasure,
-        privacy_handling: detailWithheld ? 'Respect the refusal to share details. Keep only non-identifying aggregate evidence.' : 'Public-safe detail may be used only after human approval.',
-        decision_owner: 'human operator owns final claims and public proof'
+        privacy_handling: currentLang === 'ja'
+          ? (detailWithheld ? '詳細共有の拒否を尊重します。個人や組織を特定しない集計証拠だけを残します。' : '公開可能な詳細も、人間承認後にだけ使えます。')
+          : (detailWithheld ? 'Respect the refusal to share details. Keep only non-identifying aggregate evidence.' : 'Public-safe detail may be used only after human approval.'),
+        decision_owner: currentLang === 'ja' ? '最終主張と公開証拠は人間の運用者が責任を持ちます' : 'human operator owns final claims and public proof'
       };
     }
 
@@ -706,9 +1079,9 @@ Rules:
       const evidence = [
         { name: 'Gemini API live proof', status: committedGeminiProof ? 'attached' : 'blocked', note: committedGeminiProof ? 'media/gemini-live-policy-draft.json proves one live Vertex AI Gemini policy-draft call.' : 'Attach media/gemini-live-policy-draft.json after a real call.' },
         { name: 'Human approval model', status: 'attached', note: 'Four approval gates are visible in the operating loop.' },
-        { name: 'Multilingual support', status: 'prototype', note: `${language} explanation target is included in the prompt.` },
+        { name: 'Multilingual support', status: 'prototype', note: currentLang === 'ja' ? `${tr(language)}の説明対象がプロンプトに含まれています。` : `${language} explanation target is included in the prompt.` },
         { name: 'Field reality check', status: 'prototype', note: `${fieldRealityCheck.evidence_level}: ${fieldRealityCheck.safe_claim}` },
-        { name: 'Impact measurement', status: trialEvidence.status.includes('entered') ? 'trial entered' : 'pending', note: trialEvidence.status.includes('entered') ? `${trialEvidence.estimated_minutes_saved} estimated minutes saved; formula is included in the export.` : 'Needs real records for time saved, disputes avoided, and decisions reviewed.' },
+        { name: 'Impact measurement', status: trialEvidence.status.includes('entered') ? 'trial entered' : 'pending', note: trialEvidence.status.includes('entered') ? (currentLang === 'ja' ? `推定 ${trialEvidence.estimated_minutes_saved} 分を節約。算出式は出力に含めています。` : `${trialEvidence.estimated_minutes_saved} estimated minutes saved; formula is included in the export.`) : 'Needs real records for time saved, disputes avoided, and decisions reviewed.' },
         { name: 'Public users', status: 'pending', note: 'Needs at least one real community or organization trial.' },
         { name: 'Business evidence', status: 'pending', note: 'Needs a credible usage or revenue path before XPRIZE final submission.' }
       ];
@@ -732,34 +1105,36 @@ Rules:
         gemini_prompt: null,
         field_reality_prompt: null,
         next_live_proof_step: 'Run one real Gemini generateContent call, sanitize the response metadata, and attach media/gemini-live-policy-draft.json.',
-        claim_boundary: 'One live Gemini policy-draft call and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.'
+        claim_boundary: currentLang === 'ja'
+          ? 'Geminiによるポリシー下書き実行証拠1件と、非公式な初期フィードバックシグナル1件を添付しています。現場リアリティチェックはアシスタント判断にすぎません。実ユーザー、売上、インパクト指標、XPRIZE最終提出準備完了はまだ主張しません。'
+          : 'One live Gemini policy-draft call and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.'
       };
       packet.gemini_prompt = buildPrompt(packet);
       packet.field_reality_prompt = buildFieldPrompt(packet);
       currentPacket = packet;
 
       $('storyGrid').innerHTML = story.map(([name, note]) => `
-        <div class="card"><b>${name}</b><span class="badge teal">clear</span><p>${note}</p></div>
+        <div class="card"><b>${tr(name)}</b><span class="badge teal">${currentLang === 'ja' ? '明確' : 'clear'}</span><p>${tr(note)}</p></div>
       `).join('');
       $('readinessGrid').innerHTML = readiness.map((item) => `
         <div class="card">
-          <b>${item.name}</b>
-          <span class="badge ${statusClass(item.status)}">${item.status}</span>
-          <p>${item.note}</p>
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p>${tr(item.note)}</p>
         </div>
       `).join('');
       $('loopGrid').innerHTML = loop.map((item) => `
         <div class="card">
-          <b>${item.name}</b>
-          <span class="badge ${statusClass(item.status)}">${item.status}</span>
-          <p><strong>${item.actor}:</strong> ${item.note}</p>
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p><strong>${tr(item.actor)}:</strong> ${tr(item.note)}</p>
         </div>
       `).join('');
       $('evidenceGrid').innerHTML = evidence.map((item) => `
         <div class="card">
-          <b>${item.name}</b>
-          <span class="badge ${statusClass(item.status)}">${item.status}</span>
-          <p>${item.note}</p>
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p>${tr(item.note)}</p>
         </div>
       `).join('');
       const fieldCards = [
@@ -775,64 +1150,69 @@ Rules:
       ];
       $('fieldGrid').innerHTML = fieldCards.map((item) => `
         <div class="card">
-          <b>${item.name}</b>
-          <span class="badge ${statusClass(item.status)}">${item.status}</span>
-          <p>${item.note}</p>
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p>${tr(item.note)}</p>
         </div>
       `).join('');
       $('pilotGrid').innerHTML = pilot.map((item) => `
         <div class="card">
-          <b>${item.name}</b>
-          <span class="badge ${statusClass(item.status)}">${item.status}</span>
-          <p>${item.note}</p>
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p>${tr(item.note)}</p>
         </div>
       `).join('');
       const trialCards = [
-        { name: 'Operator', status: trialEvidence.operator === 'not collected yet' ? 'pending' : 'entered', note: trialEvidence.operator },
-        { name: 'Reviewed decisions', status: trialEvidence.decisions_or_explanations_reviewed > 0 ? 'entered' : 'pending', note: `${trialEvidence.decisions_or_explanations_reviewed} decisions or explanations` },
-        { name: 'Estimated time saved', status: trialEvidence.estimated_minutes_saved > 0 ? 'entered' : 'pending', note: `${trialEvidence.estimated_minutes_saved} minutes; ${trialEvidence.estimated_time_saved_formula}` },
-        { name: 'Policy outcome', status: trialEvidence.accepted_or_rejected_policy_text === 'pending' ? 'pending' : 'entered', note: trialEvidence.accepted_or_rejected_policy_text },
-        { name: 'Languages used', status: trialEvidence.languages_used === 'pending' ? 'pending' : 'entered', note: trialEvidence.languages_used },
-        { name: 'Operator quote', status: trialEvidence.operator_quote === 'pending' ? 'pending' : 'entered', note: trialEvidence.operator_quote }
+        { name: 'Operator', status: trialEvidence.operator === 'not collected yet' || trialEvidence.operator === '未収集' ? 'pending' : 'entered', note: trialEvidence.operator },
+        { name: 'Reviewed decisions', status: trialEvidence.decisions_or_explanations_reviewed > 0 ? 'entered' : 'pending', note: currentLang === 'ja' ? `${trialEvidence.decisions_or_explanations_reviewed} 件の判断または説明` : `${trialEvidence.decisions_or_explanations_reviewed} decisions or explanations` },
+        { name: 'Estimated time saved', status: trialEvidence.estimated_minutes_saved > 0 ? 'entered' : 'pending', note: currentLang === 'ja' ? `${trialEvidence.estimated_minutes_saved} 分; ${trialEvidence.estimated_time_saved_formula}` : `${trialEvidence.estimated_minutes_saved} minutes; ${trialEvidence.estimated_time_saved_formula}` },
+        { name: 'Policy outcome', status: trialEvidence.accepted_or_rejected_policy_text === 'pending' || trialEvidence.accepted_or_rejected_policy_text === '未入力' ? 'pending' : 'entered', note: trialEvidence.accepted_or_rejected_policy_text },
+        { name: 'Languages used', status: trialEvidence.languages_used === 'pending' || trialEvidence.languages_used === '未入力' ? 'pending' : 'entered', note: trialEvidence.languages_used },
+        { name: 'Operator quote', status: trialEvidence.operator_quote === 'pending' || trialEvidence.operator_quote === '未入力' ? 'pending' : 'entered', note: trialEvidence.operator_quote }
       ];
       $('trialGrid').innerHTML = trialCards.map((item) => `
         <div class="card">
-          <b>${item.name}</b>
-          <span class="badge ${statusClass(item.status)}">${item.status}</span>
-          <p>${item.note}</p>
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p>${tr(item.note)}</p>
         </div>
       `).join('');
       $('outreachGrid').innerHTML = outreach.map((item) => `
         <div class="card">
-          <b>${item.name}</b>
-          <span class="badge ${statusClass(item.status)}">${item.status}</span>
-          <p>${item.note}</p>
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p>${tr(item.note)}</p>
         </div>
       `).join('');
       $('businessGrid').innerHTML = business.map((item) => `
         <div class="card">
-          <b>${item.name}</b>
-          <span class="badge ${statusClass(item.status)}">${item.status}</span>
-          <p>${item.note}</p>
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p>${tr(item.note)}</p>
         </div>
       `).join('');
       $('geminiPrompt').textContent = packet.gemini_prompt;
-      $('geminiOutput').textContent = 'Committed proof is attached at media/gemini-live-policy-draft.json. No browser-session Gemini call has been made on this page load.';
-      $('fieldOutput').textContent = JSON.stringify(packet.field_reality_check, null, 2);
-      $('packetOutput').textContent = JSON.stringify(packet, null, 2);
+      $('geminiOutput').textContent = currentLang === 'ja'
+        ? '提出済み証拠は media/gemini-live-policy-draft.json に添付済みです。このページ読み込みでは、ブラウザセッションからGemini呼び出しはしていません。'
+        : 'Committed proof is attached at media/gemini-live-policy-draft.json. No browser-session Gemini call has been made on this page load.';
+      $('fieldOutput').textContent = JSON.stringify(deepLocalize(packet.field_reality_check), null, 2);
+      $('packetOutput').textContent = JSON.stringify(deepLocalize(packet), null, 2);
       $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
       $('pilotProof').textContent = String(trialEvidence.evidence_items_captured);
+      applyLanguage(currentLang);
     }
 
     async function generateGeminiDraft() {
       buildPacket();
       const key = $('apiKey').value.trim();
       if (!key) {
-        $('geminiOutput').textContent = 'Gemini API key is required for a new browser-local live test. No request was made and no secret was saved. The committed Vertex proof file remains attached.';
+        $('geminiOutput').textContent = currentLang === 'ja'
+          ? 'ブラウザ内で新しいライブテストを行うにはGemini APIキーが必要です。リクエストは行わず、秘密情報も保存していません。提出済みのVertex証拠ファイルは引き続き添付されています。'
+          : 'Gemini API key is required for a new browser-local live test. No request was made and no secret was saved. The committed Vertex proof file remains attached.';
         return;
       }
       const model = encodeURIComponent(currentPacket.gemini_model);
-      $('geminiOutput').textContent = 'Calling Gemini with a browser-local key...';
+      $('geminiOutput').textContent = currentLang === 'ja' ? 'ブラウザ内キーでGeminiを呼び出しています...' : 'Calling Gemini with a browser-local key...';
       try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`, {
           method: 'POST',
@@ -849,7 +1229,7 @@ Rules:
         $('geminiOutput').textContent = text;
         $('geminiProof').textContent = '1';
       } catch (error) {
-        $('geminiOutput').textContent = `Gemini live call failed: ${error.message}`;
+        $('geminiOutput').textContent = currentLang === 'ja' ? `Geminiライブ呼び出しに失敗しました: ${error.message}` : `Gemini live call failed: ${error.message}`;
         $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
       }
     }
@@ -858,7 +1238,13 @@ Rules:
       buildPacket();
       const key = $('apiKey').value.trim();
       if (!key) {
-        $('fieldOutput').textContent = [
+        $('fieldOutput').textContent = currentLang === 'ja' ? [
+          'Gemini APIキーが入力されていないため、ブラウザからのライブリクエストは行っていません。',
+          'ローカル現場チェックのプレビュー:',
+          JSON.stringify(currentPacket.field_reality_check, null, 2),
+          '',
+          'ここでGeminiを実行するには、ブラウザ内キーを入力してください。キーは保存されません。'
+        ].join('\n') : [
           'No Gemini API key was provided, so no browser live request was made.',
           'Local field check preview:',
           JSON.stringify(currentPacket.field_reality_check, null, 2),
@@ -868,7 +1254,7 @@ Rules:
         return;
       }
       const model = encodeURIComponent(currentPacket.gemini_model);
-      $('fieldOutput').textContent = 'Calling Gemini for Field Reality Check with a browser-local key...';
+      $('fieldOutput').textContent = currentLang === 'ja' ? 'ブラウザ内キーでGeminiの現場リアリティチェックを呼び出しています...' : 'Calling Gemini for Field Reality Check with a browser-local key...';
       try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`, {
           method: 'POST',
@@ -885,11 +1271,18 @@ Rules:
         $('fieldOutput').textContent = text;
         $('geminiProof').textContent = '1';
       } catch (error) {
-        $('fieldOutput').textContent = `Gemini Field Reality Check failed: ${error.message}`;
+        $('fieldOutput').textContent = currentLang === 'ja' ? `Gemini現場リアリティチェックに失敗しました: ${error.message}` : `Gemini Field Reality Check failed: ${error.message}`;
         $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
       }
     }
 
+    document.querySelectorAll('[data-lang-button]').forEach((button) => {
+      button.addEventListener('click', () => {
+        syncSampleInputs(button.dataset.langButton);
+        applyLanguage(button.dataset.langButton);
+        buildPacket();
+      });
+    });
     $('buildPacket').addEventListener('click', buildPacket);
     $('runRealityCheck').addEventListener('click', buildPacket);
     $('generateFieldCheck').addEventListener('click', generateFieldCheck);
@@ -897,11 +1290,12 @@ Rules:
     $('copyPacket').addEventListener('click', async () => {
       buildPacket();
       await navigator.clipboard.writeText($('packetOutput').textContent);
-      $('copyPacket').textContent = 'Copied';
-      setTimeout(() => { $('copyPacket').textContent = 'Copy Packet'; }, 1000);
+      $('copyPacket').textContent = currentLang === 'ja' ? 'コピーしました' : 'Copied';
+      setTimeout(() => { $('copyPacket').textContent = currentLang === 'ja' ? 'パケットをコピー' : 'Copy Packet'; }, 1000);
     });
 
     buildPacket();
+    applyLanguage('en');
   </script>
 </body>
 </html>

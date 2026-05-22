@@ -39,6 +39,7 @@ https://daideguchi.github.io/coexistence-impact-engine/
 Use these links when reviewing the project or preparing the submission:
 
 - Live app: https://daideguchi.github.io/coexistence-impact-engine/
+- Japanese README: [README.ja.md](README.ja.md)
 - GitHub: https://github.com/daideguchi/coexistence-impact-engine
 - Screenshot: `media/coexistence-impact-engine-full.png`
 - Demo video draft: `media/coexistence-impact-engine-demo.mp4`

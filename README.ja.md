@@ -1,0 +1,49 @@
+# 共存インパクトエンジン
+
+[English README](README.md)
+
+## 一言でいうと
+
+人間とAIが一緒に働くコミュニティのために、ポリシー、多言語説明、パイロット測定を証拠パケットに変え、インパクト主張が証拠を待つ状態にするツールです。
+
+## 誰のためのものか
+
+AI補助の投稿や作業が混ざるコミュニティ、モデレーター、小さな組織、教育チーム、サポートチームのためのガバナンスワークフローです。
+
+## 何が困りごとか
+
+AIが関わる世界では、「AIか人間か」だけでは足りません。ルール、開示、説明、多言語対応、人間の承認、そして本当に役に立ったのかを測る証拠が必要になります。
+
+## どう解決するか
+
+- Geminiでポリシーや説明文の下書きを作ります。
+- 人間の承認ゲートを明示します。
+- Field Reality Checkで、現場目線の証拠と過剰主張を分けます。
+- パイロット試行ワークスペースで前後比較を記録します。
+- インパクト証拠台帳と主張の境界を出力します。
+
+## 日本語対応
+
+画面右上の `日本語` ボタンで、日本語UIに切り替えられます。AI共存は英語圏だけの話ではありません。日本人の作者として、多言語で使えること自体をプロダクト思想の一部にしています。
+
+## 公開リンク
+
+- Live app: https://daideguchi.github.io/coexistence-impact-engine/
+- GitHub repo: https://github.com/daideguchi/coexistence-impact-engine
+- Demo video: `media/coexistence-impact-engine-demo.mp4`
+
+## 主張の境界
+
+これはまだ最終的なXPRIZE提出証拠ではありません。Geminiの動作証拠と初期フィードバックはありますが、正式なパイロット、測定済みインパクト、収益、広いユーザー検証はまだ主張しません。
+
+## 検証
+
+```bash
+node scripts/verify_impact.mjs
+python3 scripts/verify_no_secrets.py
+python3 scripts/verify_readme_review_hub.py
+python3 scripts/verify_gemini_boundary.py
+python3 scripts/verify_demo_video.py
+```
+
+検証では、インパクトパケット、Field Reality Check、日本語UI切替、Gemini境界、no-secrets、デモ動画をまとめて確認します。

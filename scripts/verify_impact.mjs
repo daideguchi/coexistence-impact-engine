@@ -87,12 +87,28 @@ try {
   if (defaultPilotProof !== '0') {
     throw new Error(`unexpected default pilot proof metric: ${defaultPilotProof}`);
   }
+  await page.getByRole('button', { name: '日本語' }).click();
+  const japaneseBody = await page.locator('body').innerText();
+  if (!japaneseBody.includes('共存インパクトエンジン') || !japaneseBody.includes('インパクト主張が証拠を待つ')) {
+    throw new Error('Japanese UI toggle failed');
+  }
+  for (const marker of ['中学生にもわかる説明', 'プライバシーを尊重した前向きシグナル', '正式検証', 'パイロット証拠待ち', '最終主張と公開証拠は人間の運用者が責任を持ちます']) {
+    if (!japaneseBody.includes(marker)) {
+      throw new Error(`Japanese dynamic UI missing marker: ${marker}`);
+    }
+  }
+  for (const leaked of ['privacy-respecting positive signal', 'formal validation', 'pilot evidence pending', 'human operator owns final claims']) {
+    if (japaneseBody.includes(leaked)) {
+      throw new Error(`Japanese UI leaked English dynamic text: ${leaked}`);
+    }
+  }
   const screenshot = path.join(outDir, 'coexistence-impact-engine-full.png');
   await page.screenshot({ path: screenshot, fullPage: true });
   const bytes = fs.statSync(screenshot).size;
   if (bytes < 80_000) {
     throw new Error(`screenshot too small: ${bytes}`);
   }
+  await page.getByRole('button', { name: 'EN' }).click();
 
   await page.locator('#pilotOperator').fill('one volunteer moderator');
   await page.locator('#baselineMinutes').fill('18');
