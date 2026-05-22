@@ -28,8 +28,18 @@ The first signal was that the core idea made sense without a long explanation. T
 - creates a pilot validation kit for real-world impact testing
 - creates a pilot outreach kit for recruiting the first real operator
 - captures pilot-trial evidence with a baseline/trial time calculator
+- shows an evidence readiness ladder so judges can tell proof from future claims
 - exports an impact packet with evidence and claim boundaries
 - supports live Gemini BYOK testing without committed secrets
+
+## Evidence Readiness Ladder
+
+The app does not hide its maturity level. The first screen says Gemini proof is attached and real pilot evidence is the next gate.
+
+- Prototype proof: public app, screenshot, demo video draft, verifiers, and one sanitized Gemini proof file are attached.
+- Field signal: one outside reaction was positive, but private and not counted as measured validation.
+- Pilot evidence: next gate. Collect baseline time, trial time, reviewed decisions, policy outcome, languages used, and approved quote.
+- Impact case: blocked until measured. No broad impact, revenue, or final XPRIZE readiness claim yet.
 
 ## Built With
 

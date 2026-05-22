@@ -28,6 +28,19 @@ GitHub Pages target:
 https://daideguchi.github.io/coexistence-impact-engine/
 ```
 
+## One-Screen Review Hub
+
+Use these links when reviewing the project or preparing the submission:
+
+- Live app: https://daideguchi.github.io/coexistence-impact-engine/
+- GitHub: https://github.com/daideguchi/coexistence-impact-engine
+- Screenshot: `media/coexistence-impact-engine-full.png`
+- Demo video draft: `media/coexistence-impact-engine-demo.mp4`
+- Submission package: [SUBMISSION_PACKAGE.md](SUBMISSION_PACKAGE.md)
+- Devpost draft: [submission/devpost-draft.md](submission/devpost-draft.md)
+
+The first screen is intentionally honest: Gemini proof is attached, but pilot evidence remains zero until a real operator trial is entered.
+
 ## What It Does
 
 - explains the target user, problem, and solution in plain language
@@ -40,6 +53,39 @@ https://daideguchi.github.io/coexistence-impact-engine/
 - creates a pilot trial workspace for baseline minutes, reviewed decisions, accepted policy text, languages used, optional operator quote, and estimated time saved
 - exports an impact packet with evidence ledger and claim boundaries
 - keeps live Gemini proof, user proof, and business evidence blocked until real evidence exists
+
+## Evidence Readiness
+
+Current proof:
+
+- public app and screenshot
+- deterministic impact packet builder
+- one sanitized Vertex AI Gemini proof file
+- Field Reality Check for separating signal from proof
+- no-secret and claim-boundary verification
+- one privacy-respecting positive early-feedback signal
+
+Not claimed yet:
+
+- formal pilot
+- real users or adoption
+- measured impact
+- revenue
+- final XPRIZE readiness
+
+Next evidence gate:
+
+```text
+Run one real operator pilot and collect:
+baseline minutes, trial minutes, reviewed decisions, accepted or edited policy text,
+languages used, and an approved quote if available.
+```
+
+Estimated time saved formula:
+
+```text
+max(0, baseline minutes - trial minutes) x reviewed decisions
+```
 
 ## Demo Media
 

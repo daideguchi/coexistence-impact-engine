@@ -9,6 +9,7 @@ index.html
   Gemini prompt builder
   browser-local Gemini BYOK call
   human/AI operating loop
+  evidence readiness ladder
   evidence ledger
   pilot trial workspace
   time-saved calculator
@@ -73,3 +74,14 @@ max(0, baseline minutes - trial minutes) x reviewed decisions
 ```
 
 The default state stays at zero. Any positive impact metric must come from a real operator trial and should be documented with `docs/PILOT_EVIDENCE_TEMPLATE.md`.
+
+## Evidence Readiness Boundary
+
+The app separates maturity into four visible states:
+
+1. Prototype proof is attached.
+2. Informal field signal is recorded without upgrading it into validation.
+3. Pilot evidence is the next gate.
+4. Broad impact and business claims are blocked until measured.
+
+This is intentional. It keeps the public story useful for judges while preventing the prototype from pretending it has already completed real-world validation.

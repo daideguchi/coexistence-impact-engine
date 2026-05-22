@@ -87,6 +87,36 @@
       gap: 12px;
     }
 
+    .hero-strip {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+      gap: 16px;
+      align-items: center;
+    }
+
+    .hero-strip h2 {
+      margin-top: 8px;
+      font-size: 23px;
+      line-height: 1.18;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .step-list li {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdfd;
+      padding: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .metric {
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -227,7 +257,7 @@
     }
 
     @media (max-width: 900px) {
-      header, .grid, .two-col { grid-template-columns: 1fr; }
+      header, .grid, .two-col, .hero-strip { grid-template-columns: 1fr; }
       .form { position: static; }
       .metrics, .card-grid { grid-template-columns: 1fr; }
       .btn { flex: 1; }
@@ -250,6 +280,19 @@
       <div class="metric"><strong id="languageCount">4</strong><span>supported explanation languages</span></div>
       <div class="metric"><strong id="geminiProof">1</strong><span>Gemini proof attached</span></div>
       <div class="metric"><strong id="pilotProof">0</strong><span>pilot evidence items</span></div>
+    </section>
+
+    <section class="hero-strip" aria-label="Current proof state">
+      <div>
+        <span class="badge amber">Honest current state</span>
+        <h2>Gemini proof is attached. Real pilot evidence is the next gate.</h2>
+        <p>This prototype already shows the workflow, the human approval model, and one sanitized Gemini proof. It deliberately keeps pilot impact at zero until a real operator enters before/after evidence.</p>
+      </div>
+      <ul class="step-list">
+        <li><strong>Show now:</strong> policy drafting, Field Reality Check, multilingual explanation target, and claim boundary.</li>
+        <li><strong>Collect next:</strong> baseline minutes, trial minutes, decisions reviewed, accepted edits, languages used, and approved quote.</li>
+        <li><strong>Do not claim yet:</strong> broad adoption, measured impact, revenue, or final XPRIZE readiness.</li>
+      </ul>
     </section>
 
     <div class="grid">
@@ -302,6 +345,12 @@
         <section>
           <h2>Middle-School Clear Story</h2>
           <div class="card-grid" id="storyGrid"></div>
+        </section>
+
+        <section>
+          <h2>Evidence Readiness Ladder</h2>
+          <p>Judges can see exactly what is proven, what is an early signal, and what still needs a real pilot.</p>
+          <div class="card-grid" id="readinessGrid"></div>
         </section>
 
         <section>
@@ -457,6 +506,13 @@
     ];
     const committedGeminiProof = true;
 
+    const readiness = [
+      { name: '1. Prototype proof', status: 'attached', note: 'Public UI, screenshot, demo video, verifiers, and one sanitized Vertex AI Gemini proof are attached.' },
+      { name: '2. Field signal', status: 'early signal', note: 'One informal reaction was positive, but the details stayed private and are not counted as measured validation.' },
+      { name: '3. Pilot evidence', status: 'next gate', note: 'A real operator must enter baseline time, trial time, reviewed decisions, policy outcome, languages used, and any approved quote.' },
+      { name: '4. Impact case', status: 'blocked until measured', note: 'Broad impact, revenue, and final XPRIZE readiness stay blocked until repeatable proof exists.' }
+    ];
+
     const business = [
       { name: 'Service offer', status: 'defined', note: 'Governance setup, policy localization, review workflow, and monthly impact reporting.' },
       { name: 'First customer proof', status: 'pending', note: 'Needs one real community, cohort, team, or maintainer group using the workflow.' },
@@ -483,7 +539,7 @@
 
     function statusClass(status) {
       if (status.includes('blocked') || status.includes('guarded')) return 'red';
-      if (status.includes('approval') || status.includes('review')) return 'amber';
+      if (status.includes('approval') || status.includes('review') || status.includes('next') || status.includes('pending')) return 'amber';
       if (status.includes('draft') || status.includes('assist')) return 'blue';
       return 'green';
     }
@@ -651,6 +707,7 @@ Rules:
         gemini_model: model,
         field_reality_check: fieldRealityCheck,
         human_ai_loop: loop,
+        evidence_readiness_ladder: readiness,
         pilot_validation_kit: pilot,
         pilot_trial_workspace: trialEvidence,
         pilot_outreach_kit: outreach,
@@ -667,6 +724,13 @@ Rules:
 
       $('storyGrid').innerHTML = story.map(([name, note]) => `
         <div class="card"><b>${name}</b><span class="badge teal">clear</span><p>${note}</p></div>
+      `).join('');
+      $('readinessGrid').innerHTML = readiness.map((item) => `
+        <div class="card">
+          <b>${item.name}</b>
+          <span class="badge ${statusClass(item.status)}">${item.status}</span>
+          <p>${item.note}</p>
+        </div>
       `).join('');
       $('loopGrid').innerHTML = loop.map((item) => `
         <div class="card">

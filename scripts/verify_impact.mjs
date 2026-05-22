@@ -19,8 +19,16 @@ try {
   await page.getByRole('button', { name: 'Build Impact Packet' }).click();
   await page.getByRole('button', { name: 'Run Field Check' }).click();
   const cards = await page.locator('.card').count();
-  if (cards < 40) {
+  if (cards < 44) {
     throw new Error(`not enough cards: ${cards}`);
+  }
+  const proofState = await page.locator('[aria-label="Current proof state"]').innerText();
+  if (!proofState.includes('Gemini proof is attached') || !proofState.includes('Real pilot evidence is the next gate')) {
+    throw new Error('current proof state hero missing');
+  }
+  const readinessText = await page.locator('#readinessGrid').innerText();
+  if (!readinessText.includes('Prototype proof') || !readinessText.includes('Pilot evidence') || !readinessText.includes('blocked until measured')) {
+    throw new Error('evidence readiness ladder missing');
   }
   const prompt = await page.locator('#geminiPrompt').innerText();
   if (!prompt.includes('Do not claim to detect AI authorship')) {
@@ -54,6 +62,9 @@ try {
   }
   if (!packet.evidence_ledger.some((item) => item.name === 'Field reality check' && item.status === 'prototype')) {
     throw new Error('Field reality check evidence ledger item missing');
+  }
+  if (!packet.evidence_readiness_ladder?.some((item) => item.name === '3. Pilot evidence' && item.status === 'next gate')) {
+    throw new Error('evidence readiness ladder missing from packet');
   }
   if (!packet.pilot_validation_kit?.some((item) => item.name === 'After evidence' && item.status === 'pending')) {
     throw new Error('pilot validation kit missing');

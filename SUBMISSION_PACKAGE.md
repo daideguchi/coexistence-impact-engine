@@ -25,6 +25,7 @@ Coexistence Impact Engine creates a reviewable impact packet:
 - pilot validation kit
 - pilot outreach kit
 - pilot trial workspace and time-saved formula
+- evidence readiness ladder
 - impact evidence ledger
 - next live proof step
 - claim boundary
@@ -40,6 +41,13 @@ The product also uses AI where field judgment is useful: acting as the operator 
 The first outside reaction was quiet but useful: the product made sense quickly and was received as a good idea. The details stayed private, so this is not treated as formal validation or broad user evidence. It is treated as a privacy-respecting positive signal that the governance problem is recognizable and that the workflow is natural enough to test with a real operator.
 
 The next milestone is to convert that reaction into evidence the operator is comfortable sharing: baseline time, trial time, reviewed decisions, accepted or edited policy text, languages used, and an approved operator quote if available. Standard/default values are recorded only as placeholders, not measured impact.
+
+## Evidence Readiness Ladder
+
+1. Prototype proof: public UI, screenshot, demo video draft, verifiers, and one sanitized Vertex AI Gemini proof are attached.
+2. Field signal: one informal reaction was positive, but details stayed private and are not counted as measured validation.
+3. Pilot evidence: next gate. A real operator must enter baseline time, trial time, reviewed decisions, policy outcome, languages used, and any approved quote.
+4. Impact case: blocked until measured. Broad impact, revenue, and final XPRIZE readiness require repeatable proof.
 
 ## Current Proof
 
