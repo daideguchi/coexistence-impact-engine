@@ -10,6 +10,12 @@ Coexistence Impact Engine helps communities and small teams govern AI-assisted p
 
 ## Judge Quick Read
 
+One-sentence pitch:
+
+```text
+For communities where humans and AI work together, Coexistence Impact Engine turns policy, multilingual explanation, and pilot measurement into an evidence packet so impact claims wait for proof.
+```
+
 Who it helps: communities, moderators, and small organizations where humans and AI will work in the same space.
 
 The problem: the hard question is not only whether AI was involved. The hard question is how people set rules, explain decisions, approve risky steps, support multiple languages, and measure whether the workflow helped.

@@ -22,6 +22,10 @@ try {
   if (cards < 44) {
     throw new Error(`not enough cards: ${cards}`);
   }
+  const body = await page.locator('body').innerText();
+  if (!body.includes('One-Sentence Pitch') || !body.includes('impact claims wait for proof')) {
+    throw new Error('one-sentence judge hook missing');
+  }
   const proofState = await page.locator('[aria-label="Current proof state"]').innerText();
   if (!proofState.includes('Gemini proof is attached') || !proofState.includes('Real pilot evidence is the next gate')) {
     throw new Error('current proof state hero missing');

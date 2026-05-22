@@ -93,6 +93,16 @@
       gap: 16px;
       align-items: center;
     }
+    .judge-hook {
+      display: grid;
+      gap: 12px;
+    }
+    .pitch-line {
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 850;
+      max-width: 1120px;
+    }
 
     .hero-strip h2 {
       margin-top: 8px;
@@ -280,6 +290,12 @@
       <div class="metric"><strong id="languageCount">4</strong><span>supported explanation languages</span></div>
       <div class="metric"><strong id="geminiProof">1</strong><span>Gemini proof attached</span></div>
       <div class="metric"><strong id="pilotProof">0</strong><span>pilot evidence items</span></div>
+    </section>
+
+    <section class="judge-hook" aria-label="one sentence pitch">
+      <span class="badge green">judge hook</span>
+      <h2>One-Sentence Pitch</h2>
+      <p class="pitch-line">For communities where humans and AI work together, Coexistence Impact Engine turns policy, multilingual explanation, and pilot measurement into an evidence packet so impact claims wait for proof.</p>
     </section>
 
     <section class="hero-strip" aria-label="Current proof state">

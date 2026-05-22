@@ -8,6 +8,16 @@ Coexistence Impact Engine
 
 A Gemini-assisted governance engine for communities where humans and AI work together, keeping humans in control while making policy, disclosure, multilingual explanation, and impact evidence easier to manage.
 
+## One-Sentence Pitch
+
+For communities where humans and AI work together, Coexistence Impact Engine turns policy, multilingual explanation, and pilot measurement into an evidence packet so impact claims wait for proof.
+
+## Who / Problem / How
+
+- Who: communities, moderators, and small teams that need humans and AI to work in the same space.
+- Problem: AI participation creates policy, disclosure, language, approval, and impact-measurement questions that are easy to overclaim.
+- How: the app builds a Gemini-assisted governance packet with human approval gates, Field Reality Check, pilot workspace, evidence ledger, and explicit claim boundaries.
+
 ## Problem
 
 AI-assisted participation is becoming normal. Communities and small teams need more than bans or blind trust. They need rules, explanations, review checklists, approval gates, and evidence of impact.
