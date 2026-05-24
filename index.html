@@ -177,6 +177,32 @@
       font-size: 13px;
     }
 
+    .metric.pilot-pending {
+      border-color: #f0c987;
+      background: #fff8e8;
+    }
+
+    .metric.pilot-pending strong {
+      color: var(--amber);
+    }
+
+    .metric.pilot-pending em {
+      font-style: normal;
+      font-weight: 700;
+      color: var(--amber);
+    }
+
+    .metric-caption {
+      margin: 0;
+      padding: 12px 14px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: 390px minmax(0, 1fr);
@@ -314,6 +340,7 @@
         <p>Gemini-assisted governance for communities where humans and AI work together, with human approval, multilingual explanation, and measurable impact evidence.</p>
       </div>
       <div class="header-actions">
+        <span class="badge amber">Pre-XPRIZE prototype</span>
         <span class="badge green">Gemini live proof attached</span>
         <div class="lang-toggle" aria-label="Language">
           <button type="button" class="active" data-lang-button="en">EN</button>
@@ -322,12 +349,14 @@
       </div>
     </header>
 
+    <p class="metric-caption">Gemini proof is attached. Pilot evidence is intentionally zero until a real operator enters before/after numbers. Real impact, revenue, and final XPRIZE readiness are not claimed yet.</p>
+
     <section class="metrics" aria-label="Impact metrics">
       <div class="metric"><strong id="communityCount">5</strong><span>target community types</span></div>
       <div class="metric"><strong id="approvalCount">4</strong><span>human approval gates</span></div>
       <div class="metric"><strong id="languageCount">4</strong><span>supported explanation languages</span></div>
       <div class="metric"><strong id="geminiProof">1</strong><span>Gemini proof attached</span></div>
-      <div class="metric"><strong id="pilotProof">0</strong><span>pilot evidence items</span></div>
+      <div class="metric pilot-pending"><strong id="pilotProof">0</strong><span>pilot evidence items <em>· awaiting first real operator</em></span></div>
     </section>
 
     <section class="judge-hook" aria-label="one sentence pitch">
@@ -569,7 +598,10 @@
       ja: {
         'Coexistence Impact Engine': '共存インパクトエンジン',
         'Gemini-assisted governance for communities where humans and AI work together, with human approval, multilingual explanation, and measurable impact evidence.': '人間とAIが一緒に働くコミュニティのための、Gemini支援ガバナンスです。人間の承認、多言語説明、測定できるインパクト証拠を扱います。',
+        'Pre-XPRIZE prototype': 'XPRIZE提出前のプロトタイプ',
         'Gemini live proof attached': 'Gemini実行証拠あり',
+        'Gemini proof is attached. Pilot evidence is intentionally zero until a real operator enters before/after numbers. Real impact, revenue, and final XPRIZE readiness are not claimed yet.': 'Gemini証拠は添付済みです。実オペレーターが前後比較の数字を入力するまで、パイロット証拠は意図的にゼロのままです。実インパクト、売上、XPRIZE最終準備完了はまだ主張しません。',
+        '· awaiting first real operator': '・実オペレーター待ち',
         'target community types': '対象コミュニティ種別',
         'human approval gates': '人間承認ゲート',
         'supported explanation languages': '対応説明言語',
