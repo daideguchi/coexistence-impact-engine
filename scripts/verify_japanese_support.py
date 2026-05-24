@@ -15,6 +15,8 @@ required = [
     (readme_ja, "画面の見方"),
     (index, "はじめての方へ"),
     (index, "30秒レビュー手順"),
+    (index, "作り手ワークフロー証拠モード"),
+    (index, "人間主導のAIエージェント・ハッカソン提出ワークフロー"),
     (readme_ja, "主張の境界"),
     (index, 'data-lang-button="ja"'),
     (index, "共存インパクトエンジン"),

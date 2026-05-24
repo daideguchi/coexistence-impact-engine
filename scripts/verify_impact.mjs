@@ -27,11 +27,15 @@ try {
     throw new Error('one-sentence judge hook missing');
   }
   const proofState = await page.locator('[aria-label="Current proof state"]').innerText();
-  if (!proofState.includes('Gemini proof is attached') || !proofState.includes('Real pilot evidence is the next gate')) {
+  if (!proofState.includes('Gemini proof is attached') || !proofState.includes('Real pilot evidence is the next gate') || !proofState.includes('human-led AI agent workflow')) {
     throw new Error('current proof state hero missing');
   }
+  const workflowEvidenceHero = await page.locator('[aria-label="Builder workflow evidence"]').innerText();
+  if (!workflowEvidenceHero.includes('Built from the same human-AI workflow') || !workflowEvidenceHero.includes('Git commits')) {
+    throw new Error('Builder workflow evidence hero missing');
+  }
   const readinessText = await page.locator('#readinessGrid').innerText();
-  if (!readinessText.includes('Prototype proof') || !readinessText.includes('Pilot evidence') || !readinessText.includes('blocked until measured')) {
+  if (!readinessText.includes('Prototype proof') || !readinessText.includes('Builder workflow') || !readinessText.includes('Pilot evidence') || !readinessText.includes('blocked until measured')) {
     throw new Error('evidence readiness ladder missing');
   }
   const prompt = await page.locator('#geminiPrompt').innerText();
@@ -42,8 +46,14 @@ try {
     throw new Error('Field Reality Check prompt missing');
   }
   const packet = JSON.parse(await page.locator('#packetOutput').innerText());
-  if (packet.claim_boundary !== 'One live Gemini policy-draft call and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.') {
+  if (packet.claim_boundary !== 'One live Gemini policy-draft call, one first-party human-led AI agent workflow case, and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. External users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.') {
     throw new Error('claim boundary mismatch');
+  }
+  if (packet.builder_workflow_evidence?.status !== 'first-party workflow evidence attached') {
+    throw new Error('builder workflow evidence status missing');
+  }
+  if (!packet.builder_workflow_evidence?.claim_boundary.includes('not an external pilot')) {
+    throw new Error('builder workflow boundary missing');
   }
   if (packet.field_reality_check?.evidence_level !== 'privacy-respecting positive signal') {
     throw new Error('field reality check did not classify the default early signal');
@@ -64,6 +74,9 @@ try {
   if (!packet.evidence_ledger.some((item) => item.name === 'Gemini API live proof' && item.status === 'attached')) {
     throw new Error('Gemini live proof status missing');
   }
+  if (!packet.evidence_ledger.some((item) => item.name === 'Builder workflow evidence' && item.status === 'first-party workflow evidence attached')) {
+    throw new Error('Builder workflow evidence evidence ledger item missing');
+  }
   if (!packet.evidence_ledger.some((item) => item.name === 'Field reality check' && item.status === 'prototype')) {
     throw new Error('Field reality check evidence ledger item missing');
   }
@@ -83,6 +96,10 @@ try {
   if (geminiProofMetric !== '1') {
     throw new Error(`unexpected Gemini proof metric: ${geminiProofMetric}`);
   }
+  const builderWorkflowProofMetric = await page.locator('#builderWorkflowProof').innerText();
+  if (builderWorkflowProofMetric !== '1') {
+    throw new Error(`unexpected builder workflow proof metric: ${builderWorkflowProofMetric}`);
+  }
   const defaultPilotProof = await page.locator('#pilotProof').innerText();
   if (defaultPilotProof !== '0') {
     throw new Error(`unexpected default pilot proof metric: ${defaultPilotProof}`);
@@ -92,12 +109,12 @@ try {
   if (!japaneseBody.includes('共存インパクトエンジン') || !japaneseBody.includes('インパクト主張が証拠を待つ')) {
     throw new Error('Japanese UI toggle failed');
   }
-  for (const marker of ['中学生にもわかる説明', 'プライバシーを尊重した前向きシグナル', '正式検証', 'パイロット証拠待ち', '最終主張と公開証拠は人間の運用者が責任を持ちます']) {
+  for (const marker of ['中学生にもわかる説明', '作り手ワークフロー証拠モード', '人間主導のAIエージェント・ハッカソン提出ワークフロー', '第一者ワークフロー証拠あり', 'プライバシーを尊重した前向きシグナル', '正式検証', 'パイロット証拠待ち', '最終主張と公開証拠は人間の運用者が責任を持ちます']) {
     if (!japaneseBody.includes(marker)) {
       throw new Error(`Japanese dynamic UI missing marker: ${marker}`);
     }
   }
-  for (const leaked of ['privacy-respecting positive signal', 'formal validation', 'pilot evidence pending', 'human operator owns final claims']) {
+  for (const leaked of ['privacy-respecting positive signal', 'formal validation', 'pilot evidence pending', 'human operator owns final claims', 'first-party workflow evidence attached']) {
     if (japaneseBody.includes(leaked)) {
       throw new Error(`Japanese UI leaked English dynamic text: ${leaked}`);
     }
@@ -136,6 +153,7 @@ try {
   console.log(`cards=${cards}`);
   console.log('pilot_trial_workspace_ok');
   console.log('field_reality_check_ok');
+  console.log('builder_workflow_evidence_ok');
   console.log(`screenshot=${screenshot}`);
   console.log(`bytes=${bytes}`);
 } finally {

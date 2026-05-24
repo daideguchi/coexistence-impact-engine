@@ -342,6 +342,7 @@
       <div class="header-actions">
         <span class="badge amber">Pre-XPRIZE prototype</span>
         <span class="badge green">Gemini live proof attached</span>
+        <span class="badge blue">Builder workflow evidence attached</span>
         <div class="lang-toggle" aria-label="Language">
           <button type="button" class="active" data-lang-button="en">EN</button>
           <button type="button" data-lang-button="ja">日本語</button>
@@ -349,13 +350,14 @@
       </div>
     </header>
 
-    <p class="metric-caption">Gemini proof is attached. Pilot evidence is intentionally zero until a real operator enters before/after numbers. Real impact, revenue, and final XPRIZE readiness are not claimed yet.</p>
+    <p class="metric-caption">Gemini proof and first-party builder workflow evidence are attached. External pilot evidence is intentionally zero until a real operator enters before/after numbers. Real impact, revenue, and final XPRIZE readiness are not claimed yet.</p>
 
     <section class="metrics" aria-label="Impact metrics">
       <div class="metric"><strong id="communityCount">5</strong><span>target community types</span></div>
       <div class="metric"><strong id="approvalCount">4</strong><span>human approval gates</span></div>
       <div class="metric"><strong id="languageCount">4</strong><span>supported explanation languages</span></div>
       <div class="metric"><strong id="geminiProof">1</strong><span>Gemini proof attached</span></div>
+      <div class="metric"><strong id="builderWorkflowProof">1</strong><span>builder workflow case</span></div>
       <div class="metric pilot-pending"><strong id="pilotProof">0</strong><span>pilot evidence items <em>· awaiting first real operator</em></span></div>
     </section>
 
@@ -381,7 +383,8 @@
       <div class="card-grid">
         <div class="card"><b>1. Read the promise</b><p>Start with the policy, multilingual explanation, and pilot measurement promise.</p></div>
         <div class="card"><b>2. Check the proof state</b><p>Look at the Gemini proof, Field Reality Check, and evidence ladder before judging impact.</p></div>
-        <div class="card"><b>3. Respect the gate</b><p>Real impact stays unclaimed until a real operator enters before/after pilot evidence.</p></div>
+        <div class="card"><b>3. Open workflow evidence mode</b><p>See how the builder's own human-led AI agent workflow becomes first-party evidence without becoming an external pilot claim.</p></div>
+        <div class="card"><b>4. Respect the gate</b><p>Real impact stays unclaimed until a real operator enters before/after pilot evidence.</p></div>
       </div>
     </section>
 
@@ -389,12 +392,25 @@
       <div>
         <span class="badge amber">Honest current state</span>
         <h2>Gemini proof is attached. Real pilot evidence is the next gate.</h2>
-        <p>This prototype already shows the workflow, the human approval model, and one sanitized Gemini proof. It deliberately keeps pilot impact at zero until a real operator enters before/after evidence.</p>
+        <p>This prototype already shows the workflow, the human approval model, one sanitized Gemini proof, and one first-party human-led AI agent workflow case. It deliberately keeps external pilot impact at zero until a real operator enters before/after evidence.</p>
       </div>
       <ul class="step-list">
-        <li><strong>Show now:</strong> policy drafting, Field Reality Check, multilingual explanation target, and claim boundary.</li>
+        <li><strong>Show now:</strong> policy drafting, Field Reality Check, multilingual explanation target, human-led AI agent workflow, and claim boundary.</li>
         <li><strong>Collect next:</strong> baseline minutes, trial minutes, decisions reviewed, accepted edits, languages used, and approved quote.</li>
         <li><strong>Do not claim yet:</strong> broad adoption, measured impact, revenue, or final XPRIZE readiness.</li>
+      </ul>
+    </section>
+
+    <section class="hero-strip" aria-label="Builder workflow evidence">
+      <div>
+        <span class="badge blue">Builder workflow evidence</span>
+        <h2>Built from the same human-AI workflow it is meant to govern.</h2>
+        <p>The human project lead and AI agents used this pattern while preparing the hackathon batch: The human project lead set direction and approvals; AI agents implemented, verified, pushed, and recorded; claim boundaries kept public proof honest.</p>
+      </div>
+      <ul class="step-list">
+        <li><strong>Human role:</strong> The human project lead owns direction, login, final approval, and public judgment.</li>
+        <li><strong>AI role:</strong> Agents draft, implement, test, deploy, verify, and update records.</li>
+        <li><strong>Evidence role:</strong> Git commits, public URLs, README proof, and current-truth records become the handoff packet.</li>
       </ul>
     </section>
 
@@ -518,6 +534,47 @@
         </section>
 
         <section>
+          <h2>Builder Workflow Evidence Mode</h2>
+          <p>Use this mode when the operator is the builder's own human-led AI agent workflow. It records what humans owned, what AI agents did, where approval stopped the workflow, and which public artifacts prove the work happened.</p>
+          <div class="two-col">
+            <div class="mini-form">
+              <label>
+                Workflow case
+                <input id="workflowCase" value="Human-Led AI Agent Hackathon Submission Workflow">
+              </label>
+              <label>
+                Human owner role
+                <textarea id="humanOwner">The human project lead set product direction, handled account confirmation, approved final boundaries, and judged whether the work was ready.</textarea>
+              </label>
+              <label>
+                AI worker role
+                <textarea id="aiWorkers">AI agents implemented UI polish, ran verifiers, pushed Git commits, checked public URLs, and updated current-truth records.</textarea>
+              </label>
+              <label>
+                Human approval moments
+                <textarea id="approvalMoments">Login, reCAPTCHA, account switching, final submit decisions, and claim-boundary approval stayed human-controlled.</textarea>
+              </label>
+              <label>
+                Public proof created
+                <textarea id="publicProof">Five public apps were polished, pushed, verified, and recorded; portfolio Vercel and GitHub Pages surfaces returned HTTP 200.</textarea>
+              </label>
+              <label>
+                Workflow improvement
+                <textarea id="workflowImprovement">The workflow became clearer: status labels, Japanese-first explanations, public proof checks, voice-assisted human stops, and durable records reduced handoff confusion.</textarea>
+              </label>
+              <label>
+                Workflow evidence boundary
+                <textarea id="builderWorkflowBoundary">This is first-party builder workflow evidence. It proves the workflow fits this AI organization workflow, but it is not an external pilot, broad adoption, revenue, or measured social impact.</textarea>
+              </label>
+            </div>
+            <div>
+              <div class="card-grid" id="builderWorkflowGrid"></div>
+              <p class="note">Builder workflow is useful evidence, but it stays separate from external pilot evidence. The public claim must say first-party workflow evidence, not formal validation.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
           <h2>Pilot Validation Kit</h2>
           <p>Use this before claiming real-world impact. The goal is one honest community trial with measurable evidence.</p>
           <div class="card-grid" id="pilotGrid"></div>
@@ -583,7 +640,7 @@
 
         <section>
           <h2>Claim Boundary</h2>
-          <p id="claimBoundary">This public MVP claims one live Gemini proof file and one informal early-feedback signal. Field Reality Check is assistant judgment only; it does not prove real users, measured impact, revenue, or XPRIZE submission readiness.</p>
+          <p id="claimBoundary">This public MVP claims one live Gemini proof file, one first-party human-led AI agent workflow case, and one informal early-feedback signal. Field Reality Check is assistant judgment only; it does not prove external users, measured impact, revenue, or XPRIZE submission readiness.</p>
         </section>
       </div>
     </div>
@@ -600,12 +657,15 @@
         'Gemini-assisted governance for communities where humans and AI work together, with human approval, multilingual explanation, and measurable impact evidence.': '人間とAIが一緒に働くコミュニティのための、Gemini支援ガバナンスです。人間の承認、多言語説明、測定できるインパクト証拠を扱います。',
         'Pre-XPRIZE prototype': 'XPRIZE提出前のプロトタイプ',
         'Gemini live proof attached': 'Gemini実行証拠あり',
+        'Builder workflow evidence attached': '作り手ワークフロー証拠あり',
+        'Gemini proof and first-party builder workflow evidence are attached. External pilot evidence is intentionally zero until a real operator enters before/after numbers. Real impact, revenue, and final XPRIZE readiness are not claimed yet.': 'Gemini証拠と、作り手自身のワークフロー証拠は添付済みです。外部パイロット証拠は、実オペレーターが前後比較の数字を入力するまで意図的にゼロのままです。実インパクト、売上、XPRIZE最終準備完了はまだ主張しません。',
         'Gemini proof is attached. Pilot evidence is intentionally zero until a real operator enters before/after numbers. Real impact, revenue, and final XPRIZE readiness are not claimed yet.': 'Gemini証拠は添付済みです。実オペレーターが前後比較の数字を入力するまで、パイロット証拠は意図的にゼロのままです。実インパクト、売上、XPRIZE最終準備完了はまだ主張しません。',
         '· awaiting first real operator': '・実オペレーター待ち',
         'target community types': '対象コミュニティ種別',
         'human approval gates': '人間承認ゲート',
         'supported explanation languages': '対応説明言語',
         'Gemini proof attached': 'Gemini証拠あり',
+        'builder workflow case': '作り手ワークフロー事例',
         'pilot evidence items': 'パイロット証拠',
         'judge hook': '審査員向けの刺しどころ',
         'One-Sentence Pitch': '一言でいうと',
@@ -624,11 +684,24 @@
         'Start with the policy, multilingual explanation, and pilot measurement promise.': 'ポリシー、多言語説明、パイロット測定という約束から見ます。',
         '2. Check the proof state': '2. 証拠の状態を見る',
         'Look at the Gemini proof, Field Reality Check, and evidence ladder before judging impact.': 'インパクトを判断する前に、Gemini証拠、現場チェック、証拠段階を見ます。',
+        '3. Open workflow evidence mode': '3. 作り手ワークフロー証拠を見る',
+        "See how the builder's own human-led AI agent workflow becomes first-party evidence without becoming an external pilot claim.": '人間主導のAIエージェント共同作業が、外部パイロットとは別の第一者証拠になる流れを見ます。',
+        '4. Respect the gate': '4. 関門を守る',
         '3. Respect the gate': '3. 関門を守る',
         'Real impact stays unclaimed until a real operator enters before/after pilot evidence.': '実運用者が前後比較の証拠を入れるまで、実インパクトは主張しません。',
         'Honest current state': '正直な現在地',
         'Gemini proof is attached. Real pilot evidence is the next gate.': 'Gemini証拠はあります。次の関門は実パイロット証拠です。',
         'This prototype already shows the workflow, the human approval model, and one sanitized Gemini proof. It deliberately keeps pilot impact at zero until a real operator enters before/after evidence.': 'このプロトタイプは、ワークフロー、人間承認モデル、公開用に整えたGemini証拠を示します。実オペレーターが前後比較の証拠を入れるまで、パイロット効果は意図的にゼロのままです。',
+        'This prototype already shows the workflow, the human approval model, one sanitized Gemini proof, and one first-party human-led AI agent workflow case. It deliberately keeps external pilot impact at zero until a real operator enters before/after evidence.': 'このプロトタイプは、ワークフロー、人間承認モデル、公開用に整えたGemini証拠、人間主導のAIエージェント作業による第一者ワークフロー証拠ケースを示します。外部パイロット効果は、実オペレーターが前後比較の証拠を入れるまで意図的にゼロのままです。',
+        'Builder workflow evidence': '作り手ワークフロー証拠',
+        'Built from the same human-AI workflow it is meant to govern.': 'このツールが整えるべき人間AI共同作業から、そのまま生まれたツールです。',
+        'The human project lead and AI agents used this pattern while preparing the hackathon batch: The human project lead set direction and approvals; AI agents implemented, verified, pushed, and recorded; claim boundaries kept public proof honest.': '人間のプロジェクト責任者とAIエージェントは、ハッカソン作品群の準備でこの型を実際に使いました。人間のプロジェクト責任者が方向性と承認を持ち、AIが実装、検証、push、記録を進め、主張の境界が公開証拠を正直に保ちました。',
+        'Human role:': '人間の役割:',
+        'AI role:': 'AIの役割:',
+        'Evidence role:': '証拠の役割:',
+        'The human project lead owns direction, login, final approval, and public judgment.': '人間のプロジェクト責任者が方向性、ログイン、最終承認、公開判断を持ちます。',
+        'Agents draft, implement, test, deploy, verify, and update records.': 'エージェントが下書き、実装、テスト、デプロイ、検証、記録更新を行います。',
+        'Git commits, public URLs, README proof, and current-truth records become the handoff packet.': 'Git commit、公開URL、README証拠、current truth記録が引き継ぎパケットになります。',
         'Impact Intake': 'インパクト入力',
         'Community or team': 'コミュニティまたはチーム',
         'Impact problem': '解決したい問題',
@@ -647,6 +720,16 @@
         'Gemini Workbench': 'Gemini作業台',
         'Field Reality Check': '現場リアリティチェック',
         'Impact Evidence Ledger': 'インパクト証拠台帳',
+        'Builder Workflow Evidence Mode': '作り手ワークフロー証拠モード',
+        "Use this mode when the operator is the builder's own human-led AI agent workflow. It records what humans owned, what AI agents did, where approval stopped the workflow, and which public artifacts prove the work happened.": '運用者が、作り手自身の人間主導AIエージェント運用である時に使うモードです。人間が何を持ち、AIが何を行い、どこで承認が止め、どの公開成果物が作業の証拠になるかを記録します。',
+        'Workflow case': 'ワークフロー事例',
+        'Human owner role': '人間が持った役割',
+        'AI worker role': 'AIが担った役割',
+        'Human approval moments': '人間承認の場面',
+        'Public proof created': '作成された公開証拠',
+        'Workflow improvement': '改善されたこと',
+        'Workflow evidence boundary': 'ワークフロー証拠の境界',
+        'Builder workflow is useful evidence, but it stays separate from external pilot evidence. The public claim must say first-party workflow evidence, not formal validation.': '作り手ワークフロー証拠は有用な証拠ですが、外部パイロット証拠とは分けます。公開主張は、正式検証ではなく第一者ワークフロー証拠と表現します。',
         'Pilot Validation Kit': 'パイロット検証キット',
         'Pilot Trial Workspace': 'パイロット試行ワークスペース',
         'Pilot Outreach Kit': 'パイロット依頼キット',
@@ -657,6 +740,7 @@
         'Collect next:': '次に集めるもの:',
         'Do not claim yet:': 'まだ主張しないこと:',
         'policy drafting, Field Reality Check, multilingual explanation target, and claim boundary.': 'ポリシー下書き、現場リアリティチェック、多言語説明の対象、主張の境界。',
+        'policy drafting, Field Reality Check, multilingual explanation target, human-led AI agent workflow, and claim boundary.': 'ポリシー下書き、現場リアリティチェック、多言語説明の対象、人間主導のAIエージェント作業、主張の境界。',
         'baseline minutes, trial minutes, decisions reviewed, accepted edits, languages used, and approved quote.': '導入前分数、試行分数、レビュー判断数、承認された修正、使用言語、承認済み引用。',
         'broad adoption, measured impact, revenue, or final XPRIZE readiness.': '広い採用、測定済みインパクト、売上、XPRIZE最終準備完了。',
         'The public demo does not include secrets. One sanitized live Gemini proof file is attached; final XPRIZE readiness still requires real impact evidence.': '公開デモに秘密情報は含めていません。公開用に整えたGemini実行証拠ファイルを1件添付済みです。XPRIZE最終準備完了には、まだ実インパクト証拠が必要です。',
@@ -670,7 +754,7 @@
         'Estimated time saved = max(0, baseline minutes - trial minutes) x reviewed decisions. This is only evidence after a real operator enters real numbers.': '推定節約時間 = max(0, 導入前分数 - 試行分数) x レビュー済み判断数。実オペレーターが実数を入力した後だけ証拠になります。',
         'Use this to recruit the first real operator without inventing impact evidence.': 'インパクト証拠を作り話にせず、最初の実オペレーターを募集するために使います。',
         'XPRIZE needs more than a useful prototype. The engine tracks the proof needed for a real AI-operated service.': 'XPRIZEには便利なプロトタイプ以上が必要です。このエンジンは、実際のAI運用サービスに必要な証拠を追跡します。',
-        'This public MVP claims one live Gemini proof file and one informal early-feedback signal. Field Reality Check is assistant judgment only; it does not prove real users, measured impact, revenue, or XPRIZE submission readiness.': 'この公開MVPが主張するのは、Gemini実行証拠ファイル1件と、非公式な初期フィードバックシグナル1件です。現場リアリティチェックはアシスタント判断にすぎず、実ユーザー、測定済みインパクト、売上、XPRIZE提出準備完了を証明するものではありません。',
+        'This public MVP claims one live Gemini proof file, one first-party human-led AI agent workflow case, and one informal early-feedback signal. Field Reality Check is assistant judgment only; it does not prove external users, measured impact, revenue, or XPRIZE submission readiness.': 'この公開MVPが主張するのは、Gemini実行証拠ファイル1件、人間主導のAIエージェント作業による第一者ワークフロー証拠ケース1件、非公式な初期フィードバックシグナル1件です。現場リアリティチェックはアシスタント判断にすぎず、外部ユーザー、測定済みインパクト、売上、XPRIZE提出準備完了を証明するものではありません。',
         'Community or team': 'コミュニティまたはチーム',
         'Impact problem': '解決したい問題',
         'Governance stance': 'ガバナンス方針',
@@ -694,6 +778,13 @@
         'No private user data. Note what was accepted, edited, or rejected.': '非公開ユーザーデータは入れません。承認、修正、却下された内容だけを書きます。',
         'Example: English, Japanese': '例: 英語、日本語',
         'Use only if the operator agrees to a public quote.': '運用者が公開引用に同意した場合だけ使います。',
+        'Human-Led AI Agent Hackathon Submission Workflow': '人間主導のAIエージェント・ハッカソン提出ワークフロー',
+        'The human project lead set product direction, handled account confirmation, approved final boundaries, and judged whether the work was ready.': '人間のプロジェクト責任者がプロダクトの方向性、アカウント確認、最終境界の承認、完成判断を持ちました。',
+        'AI agents implemented UI polish, ran verifiers, pushed Git commits, checked public URLs, and updated current-truth records.': 'AIエージェントがUI磨き、検証、Git commitのpush、公開URL確認、current truth記録更新を行いました。',
+        'Login, reCAPTCHA, account switching, final submit decisions, and claim-boundary approval stayed human-controlled.': 'ログイン、reCAPTCHA、アカウント切替、最終提出判断、主張境界の承認は人間が管理しました。',
+        'Five public apps were polished, pushed, verified, and recorded; portfolio Vercel and GitHub Pages surfaces returned HTTP 200.': '5つの公開アプリを磨き、pushし、検証し、記録しました。ポートフォリオのVercelとGitHub PagesはHTTP 200を返しました。',
+        'The workflow became clearer: status labels, Japanese-first explanations, public proof checks, voice-assisted human stops, and durable records reduced handoff confusion.': '状態ラベル、日本語ファースト説明、公開証拠チェック、音声による人間停止点、残る記録によって、引き継ぎの混乱が減りました。',
+        "This is first-party builder workflow evidence. It proves the workflow fits this AI organization workflow, but it is not an external pilot, broad adoption, revenue, or measured social impact.": 'これは作り手自身の第一者ワークフロー証拠です。このAI組織に合うことは示しますが、外部パイロット、広い採用、売上、測定済み社会インパクトではありません。',
         'AI-friendly with disclosure': 'AI利用歓迎・開示あり',
         'Balanced human-reviewed governance': 'バランス型・人間レビューあり',
         'Strict disclosure and review': '厳格な開示とレビュー',
@@ -741,6 +832,7 @@
         'No XPRIZE claim until Gemini proof and user evidence exist.': 'Gemini証拠とユーザー証拠が揃うまで、XPRIZE向けの強い主張はしません。',
         '1. Prototype proof': '1. プロトタイプ証拠',
         '2. Field signal': '2. 現場シグナル',
+        '2b. Builder workflow': '2b. 作り手ワークフロー証拠',
         '3. Pilot evidence': '3. パイロット証拠',
         '4. Impact case': '4. インパクト事例',
         'attached': '添付済み',
@@ -749,6 +841,7 @@
         'blocked until measured': '測定までブロック',
         'Public UI, screenshot, demo video, verifiers, and one sanitized Vertex AI Gemini proof are attached.': '公開UI、スクリーンショット、デモ動画、検証スクリプト、公開用に整えたVertex AI Gemini証拠を添付済みです。',
         'One informal reaction was positive, but the details stayed private and are not counted as measured validation.': '非公式な反応は前向きでしたが、詳細は非公開で、測定済み検証とは数えません。',
+        'human project lead and AI agents used the same human-AI workflow to polish, verify, push, deploy, and record the public hackathon batch.': '人間のプロジェクト責任者とAIエージェントは同じ人間AI共同作業で、公開ハッカソン作品群の磨き込み、検証、push、デプロイ、記録を行いました。',
         'A real operator must enter baseline time, trial time, reviewed decisions, policy outcome, languages used, and any approved quote.': '実オペレーターが、基準時間、試行時間、レビュー判断数、ポリシー結果、使用言語、承認済み引用を入力する必要があります。',
         'Broad impact, revenue, and final XPRIZE readiness stay blocked until repeatable proof exists.': '再現できる証拠が出るまで、広いインパクト、売上、XPRIZE最終準備完了は主張しません。',
         'Service offer': '提供サービス',
@@ -776,6 +869,7 @@
         'Collect only non-private counts, accepted edits, time saved, and a short operator quote after the trial.': '試行後は、非公開情報を含まない件数、承認された修正、節約時間、短い運用者コメントだけを集めます。',
         'Gemini API live proof': 'Gemini API実行証拠',
         'Human approval model': '人間承認モデル',
+        'Builder workflow evidence': '作り手ワークフロー証拠',
         'Multilingual support': '多言語対応',
         'Field reality check': '現場リアリティチェック',
         'Impact measurement': 'インパクト測定',
@@ -786,6 +880,7 @@
         'media/gemini-live-policy-draft.json proves one live Vertex AI Gemini policy-draft call.': 'media/gemini-live-policy-draft.json が、Vertex AI Geminiによるポリシー下書き実行を1回証明します。',
         'Attach media/gemini-live-policy-draft.json after a real call.': '実行後に media/gemini-live-policy-draft.json を添付します。',
         'Four approval gates are visible in the operating loop.': '運用ループ内に4つの承認ゲートが見えます。',
+        'First-party builder workflow evidence is attached without converting it into an external pilot claim.': '作り手自身のワークフロー証拠を添付していますが、外部パイロット主張には変換しません。',
         'Needs real records for time saved, disputes avoided, and decisions reviewed.': '節約時間、回避できた争い、レビュー済み判断には実記録が必要です。',
         'Needs at least one real community or organization trial.': '少なくとも1つの実コミュニティまたは組織での試行が必要です。',
         'Needs a credible usage or revenue path before XPRIZE final submission.': 'XPRIZE最終提出前に、信頼できる利用または売上ルートが必要です。',
@@ -801,6 +896,15 @@
         'review': 'レビュー',
         'assist': '支援',
         'Operator': '運用者',
+        'Case': '事例',
+        'Human owner': '人間の責任者',
+        'AI workers': 'AI作業者',
+        'Approval stops': '承認停止点',
+        'Public proof': '公開証拠',
+        'Improvement': '改善点',
+        'Boundary': '境界',
+        'first-party evidence': '第一者証拠',
+        'first-party workflow evidence attached': '第一者ワークフロー証拠あり',
         'Reviewed decisions': 'レビュー済み判断',
         'Estimated time saved': '推定節約時間',
         'Policy outcome': 'ポリシー結果',
@@ -853,19 +957,33 @@
       en: {
         community: 'volunteer moderators running a multilingual AI-aware community',
         problem: 'AI-assisted posts are useful, but moderators need transparent rules, disclosure norms, review checklists, and explanations that humans can approve.',
-        fieldNote: 'A real person tried the prototype, kept the details private, and gave a positive but non-specific reaction. The only safe measurement description is standard/default.'
+        fieldNote: 'A real person tried the prototype, kept the details private, and gave a positive but non-specific reaction. The only safe measurement description is standard/default.',
+        workflowCase: 'Human-Led AI Agent Hackathon Submission Workflow',
+        humanOwner: 'The human project lead set product direction, handled account confirmation, approved final boundaries, and judged whether the work was ready.',
+        aiWorkers: 'AI agents implemented UI polish, ran verifiers, pushed Git commits, checked public URLs, and updated current-truth records.',
+        approvalMoments: 'Login, reCAPTCHA, account switching, final submit decisions, and claim-boundary approval stayed human-controlled.',
+        publicProof: 'Five public apps were polished, pushed, verified, and recorded; portfolio Vercel and GitHub Pages surfaces returned HTTP 200.',
+        workflowImprovement: 'The workflow became clearer: status labels, Japanese-first explanations, public proof checks, voice-assisted human stops, and durable records reduced handoff confusion.',
+        builderWorkflowBoundary: "This is first-party builder workflow evidence. It proves the workflow fits this AI organization workflow, but it is not an external pilot, broad adoption, revenue, or measured social impact."
       },
       ja: {
         community: '多言語でAI利用を扱うコミュニティを運営するボランティアモデレーター',
         problem: 'AI支援投稿は役に立ちますが、モデレーターには透明なルール、開示の考え方、レビューチェックリスト、人間が承認できる説明文が必要です。',
-        fieldNote: '実際の人がプロトタイプを試し、詳細は非公開のまま、前向きだが具体性のない反応をくれました。安全に言える測定説明は標準/デフォルトのみです。'
+        fieldNote: '実際の人がプロトタイプを試し、詳細は非公開のまま、前向きだが具体性のない反応をくれました。安全に言える測定説明は標準/デフォルトのみです。',
+        workflowCase: '人間主導のAIエージェント・ハッカソン提出ワークフロー',
+        humanOwner: '人間のプロジェクト責任者がプロダクトの方向性、アカウント確認、最終境界の承認、完成判断を持ちました。',
+        aiWorkers: 'AIエージェントがUI磨き、検証、Git commitのpush、公開URL確認、current truth記録更新を行いました。',
+        approvalMoments: 'ログイン、reCAPTCHA、アカウント切替、最終提出判断、主張境界の承認は人間が管理しました。',
+        publicProof: '5つの公開アプリを磨き、pushし、検証し、記録しました。ポートフォリオのVercelとGitHub PagesはHTTP 200を返しました。',
+        workflowImprovement: '状態ラベル、日本語ファースト説明、公開証拠チェック、音声による人間停止点、残る記録によって、引き継ぎの混乱が減りました。',
+        builderWorkflowBoundary: 'これは作り手自身の第一者ワークフロー証拠です。このAI組織に合うことは示しますが、外部パイロット、広い採用、売上、測定済み社会インパクトではありません。'
       }
     };
 
     function syncSampleInputs(lang) {
       const next = sampleInputs[lang];
       const other = sampleInputs[lang === 'ja' ? 'en' : 'ja'];
-      for (const id of ['community', 'problem', 'fieldNote']) {
+      for (const id of ['community', 'problem', 'fieldNote', 'workflowCase', 'humanOwner', 'aiWorkers', 'approvalMoments', 'publicProof', 'workflowImprovement', 'builderWorkflowBoundary']) {
         if ($(id).value === other[id] || $(id).value === next[id]) $(id).value = next[id];
       }
       if (lang === 'ja' && $('language').value === 'English') $('language').value = 'Japanese';
@@ -896,6 +1014,7 @@
     const readiness = [
       { name: '1. Prototype proof', status: 'attached', note: 'Public UI, screenshot, demo video, verifiers, and one sanitized Vertex AI Gemini proof are attached.' },
       { name: '2. Field signal', status: 'early signal', note: 'One informal reaction was positive, but the details stayed private and are not counted as measured validation.' },
+      { name: '2b. Builder workflow', status: 'first-party evidence', note: 'human project lead and AI agents used the same human-AI workflow to polish, verify, push, deploy, and record the public hackathon batch.' },
       { name: '3. Pilot evidence', status: 'next gate', note: 'A real operator must enter baseline time, trial time, reviewed decisions, policy outcome, languages used, and any approved quote.' },
       { name: '4. Impact case', status: 'blocked until measured', note: 'Broad impact, revenue, and final XPRIZE readiness stay blocked until repeatable proof exists.' }
     ];
@@ -973,6 +1092,31 @@
       };
     }
 
+    function buildBuilderWorkflowEvidence() {
+      const workflowCase = normalizedEvidence($('workflowCase').value) || 'Human-Led AI Agent Hackathon Submission Workflow';
+      const humanOwner = normalizedEvidence($('humanOwner').value);
+      const aiWorkers = normalizedEvidence($('aiWorkers').value);
+      const approvalMoments = normalizedEvidence($('approvalMoments').value);
+      const publicProof = normalizedEvidence($('publicProof').value);
+      const workflowImprovement = normalizedEvidence($('workflowImprovement').value);
+      const boundary = normalizedEvidence($('builderWorkflowBoundary').value);
+      const evidenceItems = [workflowCase, humanOwner, aiWorkers, approvalMoments, publicProof, workflowImprovement, boundary].filter(Boolean).length;
+
+      return {
+        workflow_case: workflowCase,
+        human_owner_role: humanOwner || (currentLang === 'ja' ? '未入力' : 'pending'),
+        ai_worker_role: aiWorkers || (currentLang === 'ja' ? '未入力' : 'pending'),
+        human_approval_moments: approvalMoments || (currentLang === 'ja' ? '未入力' : 'pending'),
+        public_proof_created: publicProof || (currentLang === 'ja' ? '未入力' : 'pending'),
+        workflow_improvement: workflowImprovement || (currentLang === 'ja' ? '未入力' : 'pending'),
+        claim_boundary: boundary || (currentLang === 'ja'
+          ? 'これは第一者ワークフロー証拠であり、外部パイロットや測定済み社会インパクトではありません。'
+          : 'This is first-party workflow evidence, not an external pilot or measured social impact.'),
+        evidence_items_captured: evidenceItems,
+        status: evidenceItems >= 5 ? 'first-party workflow evidence attached' : 'pending'
+      };
+    }
+
     function buildPrompt(packet) {
       if (currentLang === 'ja') {
         return `あなたは、人間のコミュニティ運用者を助けるGeminiです。${tr(packet.language)}で短く実用的なガバナンス文を下書きしてください。
@@ -982,6 +1126,9 @@
 方針: ${tr(packet.stance)}
 現場ロール: ${tr(packet.field_reality_check.role)}
 現場メモ: ${packet.field_reality_check.input}
+作り手ワークフロー証拠ケース: ${packet.builder_workflow_evidence.workflow_case}
+人間の役割: ${packet.builder_workflow_evidence.human_owner_role}
+AIの役割: ${packet.builder_workflow_evidence.ai_worker_role}
 
 返すもの:
 1. AI参加ポリシー
@@ -990,6 +1137,7 @@
 4. ユーザー向け説明文
 5. 人間承認が必要だという警告
 6. 現場リアリティチェック: 現場ロールになりきって、使える証拠、止めるべき主張、次に測ることを分ける
+7. 作り手ワークフロー証拠を、外部パイロットと混ぜずに説明する文
 
 AI作者検出を主張しないでください。最終的な処分判断をしないでください。`;
       }
@@ -1000,6 +1148,9 @@ Problem: ${packet.problem}
 Stance: ${packet.stance}
 Field role: ${packet.field_reality_check.role}
 Field note: ${packet.field_reality_check.input}
+Builder workflow case: ${packet.builder_workflow_evidence.workflow_case}
+Human role: ${packet.builder_workflow_evidence.human_owner_role}
+AI role: ${packet.builder_workflow_evidence.ai_worker_role}
 
 Return:
 1. AI participation policy
@@ -1008,6 +1159,7 @@ Return:
 4. user-facing explanation
 5. one human approval warning
 6. field reality check: act as the field role and separate usable evidence, blocked claims, and the next thing to measure
+7. a short explanation of first-party builder workflow evidence without mixing it with an external pilot claim
 
 Do not claim to detect AI authorship. Do not make final enforcement decisions.`;
     }
@@ -1144,9 +1296,11 @@ Rules:
       const model = $('model').value.trim() || 'gemini-2.5-flash';
       const trialEvidence = buildTrialEvidence();
       const fieldRealityCheck = buildFieldRealityCheck();
+      const builderWorkflowEvidence = buildBuilderWorkflowEvidence();
       const evidence = [
         { name: 'Gemini API live proof', status: committedGeminiProof ? 'attached' : 'blocked', note: committedGeminiProof ? 'media/gemini-live-policy-draft.json proves one live Vertex AI Gemini policy-draft call.' : 'Attach media/gemini-live-policy-draft.json after a real call.' },
         { name: 'Human approval model', status: 'attached', note: 'Four approval gates are visible in the operating loop.' },
+        { name: 'Builder workflow evidence', status: builderWorkflowEvidence.status, note: 'First-party builder workflow evidence is attached without converting it into an external pilot claim.' },
         { name: 'Multilingual support', status: 'prototype', note: currentLang === 'ja' ? `${tr(language)}の説明対象がプロンプトに含まれています。` : `${language} explanation target is included in the prompt.` },
         { name: 'Field reality check', status: 'prototype', note: `${fieldRealityCheck.evidence_level}: ${fieldRealityCheck.safe_claim}` },
         { name: 'Impact measurement', status: trialEvidence.status.includes('entered') ? 'trial entered' : 'pending', note: trialEvidence.status.includes('entered') ? (currentLang === 'ja' ? `推定 ${trialEvidence.estimated_minutes_saved} 分を節約。算出式は出力に含めています。` : `${trialEvidence.estimated_minutes_saved} estimated minutes saved; formula is included in the export.`) : 'Needs real records for time saved, disputes avoided, and decisions reviewed.' },
@@ -1167,6 +1321,7 @@ Rules:
         evidence_readiness_ladder: readiness,
         pilot_validation_kit: pilot,
         pilot_trial_workspace: trialEvidence,
+        builder_workflow_evidence: builderWorkflowEvidence,
         pilot_outreach_kit: outreach,
         business_path: business,
         evidence_ledger: evidence,
@@ -1174,8 +1329,8 @@ Rules:
         field_reality_prompt: null,
         next_live_proof_step: 'Run one real Gemini generateContent call, sanitize the response metadata, and attach media/gemini-live-policy-draft.json.',
         claim_boundary: currentLang === 'ja'
-          ? 'Geminiによるポリシー下書き実行証拠1件と、非公式な初期フィードバックシグナル1件を添付しています。現場リアリティチェックはアシスタント判断にすぎません。実ユーザー、売上、インパクト指標、XPRIZE最終提出準備完了はまだ主張しません。'
-          : 'One live Gemini policy-draft call and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. Real users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.'
+          ? 'Geminiによるポリシー下書き実行証拠1件、人間のプロジェクト責任者とAI組織による第一者ワークフロー証拠ケース1件、非公式な初期フィードバックシグナル1件を添付しています。現場リアリティチェックはアシスタント判断にすぎません。外部ユーザー、売上、インパクト指標、XPRIZE最終提出準備完了はまだ主張しません。'
+          : 'One live Gemini policy-draft call, one first-party human-led AI agent workflow case, and one informal early-feedback signal are attached. Field Reality Check is assistant judgment only. External users, revenue, impact metrics, and final XPRIZE submission readiness are not claimed yet.'
       };
       packet.gemini_prompt = buildPrompt(packet);
       packet.field_reality_prompt = buildFieldPrompt(packet);
@@ -1199,6 +1354,22 @@ Rules:
         </div>
       `).join('');
       $('evidenceGrid').innerHTML = evidence.map((item) => `
+        <div class="card">
+          <b>${tr(item.name)}</b>
+          <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
+          <p>${tr(item.note)}</p>
+        </div>
+      `).join('');
+      const workflowCards = [
+        { name: 'Case', status: builderWorkflowEvidence.status, note: builderWorkflowEvidence.workflow_case },
+        { name: 'Human owner', status: 'approval gate', note: builderWorkflowEvidence.human_owner_role },
+        { name: 'AI workers', status: 'assist', note: builderWorkflowEvidence.ai_worker_role },
+        { name: 'Approval stops', status: 'guarded', note: builderWorkflowEvidence.human_approval_moments },
+        { name: 'Public proof', status: 'attached', note: builderWorkflowEvidence.public_proof_created },
+        { name: 'Improvement', status: 'first-party evidence', note: builderWorkflowEvidence.workflow_improvement },
+        { name: 'Boundary', status: 'blocked', note: builderWorkflowEvidence.claim_boundary }
+      ];
+      $('builderWorkflowGrid').innerHTML = workflowCards.map((item) => `
         <div class="card">
           <b>${tr(item.name)}</b>
           <span class="badge ${statusClass(item.status)}">${tr(item.status)}</span>
@@ -1266,6 +1437,7 @@ Rules:
       $('fieldOutput').textContent = JSON.stringify(deepLocalize(packet.field_reality_check), null, 2);
       $('packetOutput').textContent = JSON.stringify(deepLocalize(packet), null, 2);
       $('geminiProof').textContent = committedGeminiProof ? '1' : '0';
+      $('builderWorkflowProof').textContent = builderWorkflowEvidence.status.includes('attached') ? '1' : '0';
       $('pilotProof').textContent = String(trialEvidence.evidence_items_captured);
       applyLanguage(currentLang);
     }

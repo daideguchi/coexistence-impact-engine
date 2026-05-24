@@ -26,7 +26,7 @@ make_text_slide() {
     -fill "#e3f4f1" -font "$FONT" -pointsize 34 -annotate +86+216 "$subtitle" \
     -fill "#ffffff" -stroke "#d7e2df" -strokewidth 3 -draw "roundrectangle 120,420 1800,760 24,24" \
     -stroke none -fill "#18232c" -font "$FONT" -pointsize 42 -annotate +170+526 "$footer" \
-    -fill "#5d6e7b" -font "$FONT" -pointsize 28 -annotate +170+650 "A public impact prototype with explicit Gemini, user, and business proof boundaries." \
+    -fill "#5d6e7b" -font "$FONT" -pointsize 28 -annotate +170+650 "A public impact prototype with explicit Gemini, workflow evidence, user, and business proof boundaries." \
     "$out"
 }
 
@@ -59,15 +59,17 @@ The middle-school clear story explains who it helps, what hurts, and how the pro
 
 The operating loop keeps the boundary clean. Gemini drafts policy and multilingual explanations. Humans approve enforcement, public claims, and final decisions.
 
+The product now includes Builder Workflow Evidence Mode. That matters because the build itself was a real human and AI workflow: The human project lead set direction and approvals, while AI agents implemented, verified, pushed, deployed, and recorded the work.
+
 The Gemini workbench can run a browser-local BYOK call, and the public repo now includes one sanitized Vertex AI Gemini proof file. It does not contain secrets.
 
 The Field Reality Check is where AI is allowed to judge from the operator's seat. It separates a vague reaction from usable evidence, blocked claims, and the next thing to measure.
 
-The evidence ledger and business path show what is real, what is pending, and what must be proven before XPRIZE submission: user evidence, impact metrics, and business evidence.
+The evidence ledger and business path show what is real, what is first-party workflow evidence, what is pending, and what must be proven before XPRIZE submission: external user evidence, impact metrics, and business evidence.
 
 The new pilot trial workspace captures baseline minutes, trial minutes, reviewed decisions, policy outcomes, languages used, and an optional approved quote. Its time-saved formula stays at zero until a real operator enters real evidence.
 
-This is not a final XPRIZE submission yet. It is an honest public foundation for turning AI coexistence into a measurable impact product.
+This is not a final XPRIZE submission yet. It is an honest public foundation for turning the way humans and AI actually work together into a measurable impact product.
 TEXT
 
 "$EDGE_TTS_PYTHON" -m edge_tts \
@@ -101,40 +103,47 @@ make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
   "$TMP_DIR/slide-3.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
+  "Builder Workflow Evidence" \
+  "The human project lead set direction and approvals. AI agents implemented, verified, pushed, and recorded." \
+  "4 / 8  First-party workflow evidence" \
+  "$TMP_DIR/slide-4.png"
+
+make_screenshot_slide "$ROOT/media/coexistence-impact-engine-pages-full.png" \
   "Gemini Workbench" \
   "A sanitized Vertex AI Gemini proof file is attached without committing secrets." \
-  "4 / 7  Live Gemini proof, bounded claim" \
-  "$TMP_DIR/slide-4.png"
+  "5 / 8  Live Gemini proof, bounded claim" \
+  "$TMP_DIR/slide-5.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-full.png" \
   "Field Reality Check" \
   "AI reasons from the operator's seat: signal, blocked claim, and next measurement." \
-  "5 / 7  Situational judgment, not final validation" \
-  "$TMP_DIR/slide-5.png"
+  "6 / 8  Situational judgment, not final validation" \
+  "$TMP_DIR/slide-6.png"
 
 make_screenshot_slide "$ROOT/media/coexistence-impact-engine-full.png" \
   "Pilot Trial Workspace" \
   "Capture baseline time, reviewed decisions, policy outcome, languages, and an approved quote." \
-  "6 / 7  Real impact capture" \
-  "$TMP_DIR/slide-6.png"
+  "7 / 8  External impact capture" \
+  "$TMP_DIR/slide-7.png"
 
 make_text_slide \
   "Honest Submission Boundary" \
-  "Gemini proof is attached. Final XPRIZE readiness is not claimed." \
-  "Next: one real operator trial, impact metrics, and business evidence." \
-  "$TMP_DIR/slide-7.png"
+  "Gemini and first-party workflow proof are attached. Final XPRIZE readiness is not claimed." \
+  "Next: one external operator trial, impact metrics, and business evidence." \
+  "$TMP_DIR/slide-8.png"
 
 ffmpeg -y \
-  -loop 1 -t 13 -i "$TMP_DIR/slide-0.png" \
-  -loop 1 -t 13 -i "$TMP_DIR/slide-1.png" \
-  -loop 1 -t 13 -i "$TMP_DIR/slide-2.png" \
-  -loop 1 -t 13 -i "$TMP_DIR/slide-3.png" \
-  -loop 1 -t 13 -i "$TMP_DIR/slide-4.png" \
-  -loop 1 -t 13 -i "$TMP_DIR/slide-5.png" \
-  -loop 1 -t 13 -i "$TMP_DIR/slide-6.png" \
-  -loop 1 -t 13 -i "$TMP_DIR/slide-7.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-0.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-1.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-2.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-3.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-4.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-5.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-6.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-7.png" \
+  -loop 1 -t 12 -i "$TMP_DIR/slide-8.png" \
   -i "$TMP_DIR/narration.mp3" \
-  -filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v][6:v][7:v]concat=n=8:v=1:a=0,format=yuv420p[v];[8:a]loudnorm=I=-16:TP=-1.5:LRA=11,volume=0.92[a]" \
+  -filter_complex "[0:v][1:v][2:v][3:v][4:v][5:v][6:v][7:v][8:v]concat=n=9:v=1:a=0,format=yuv420p[v];[9:a]loudnorm=I=-16:TP=-1.5:LRA=11,volume=0.92[a]" \
   -map "[v]" -map "[a]" -r 30 -c:v libx264 -preset veryfast -crf 23 -c:a aac -b:a 192k -shortest -movflags +faststart "$OUT"
 
 cp "$OUT" "$DRAFT_OUT"

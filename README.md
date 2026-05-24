@@ -20,9 +20,9 @@ Who it helps: communities, moderators, and small organizations where humans and 
 
 The problem: the hard question is not only whether AI was involved. The hard question is how people set rules, explain decisions, approve risky steps, support multiple languages, and measure whether the workflow helped.
 
-How Coexistence Impact Engine solves it: the app creates a human/AI operating loop, Gemini policy-draft prompt, multilingual explanation path, Field Reality Check, human approval gates, pilot trial workspace, evidence ledger, and exportable impact packet.
+How Coexistence Impact Engine solves it: the app creates a human/AI operating loop, Gemini policy-draft prompt, multilingual explanation path, Field Reality Check, human approval gates, Builder Workflow Evidence Mode, pilot trial workspace, evidence ledger, and exportable impact packet.
 
-What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, pilot evidence calculator, and one sanitized live Vertex AI Gemini proof file for policy drafting and Field Reality Check are live. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
+What is proven now: the public app, screenshots, demo video draft, no-secret verifier, Gemini boundary verifier, pilot evidence calculator, Builder Workflow Evidence Mode, and one sanitized live Vertex AI Gemini proof file for policy drafting and Field Reality Check are live. The builder's own human-led AI agent workflow is recorded as first-party workflow evidence. External users, measured impact, revenue, and final XPRIZE readiness are not claimed yet. It does not claim real users outside the builder workflow.
 
 Early feedback: one informal reviewer understood the value quickly and responded positively, while keeping the details private. This is treated as a privacy-respecting positive signal only, not formal validation. Standard/default values are not counted as measured impact. The next milestone is to turn that "this feels useful" reaction into aggregate evidence the operator is comfortable sharing.
 
@@ -30,8 +30,8 @@ Early feedback: one informal reviewer understood the value quickly and responded
 
 1. Read the one-sentence pitch to understand the governance and impact loop.
 2. Open the live app and build an impact packet.
-3. Check the Gemini proof, Field Reality Check, evidence ladder, and pilot workspace.
-4. Confirm the boundary: real impact remains unclaimed until a real operator enters before/after pilot evidence.
+3. Check the Gemini proof, Field Reality Check, Builder Workflow Evidence Mode, evidence ladder, and pilot workspace.
+4. Confirm the boundary: first-party workflow evidence is attached, but real external impact remains unclaimed until a real operator enters before/after pilot evidence.
 
 ## Live Demo
 
@@ -61,6 +61,7 @@ The first screen is intentionally honest: Gemini proof is attached, but pilot ev
 - builds a human/AI operating loop
 - drafts a Gemini prompt for policy, disclosure, review checklist, and user explanation
 - adds a Field Reality Check so AI can reason from the operator's seat, respect withheld details, and avoid turning standard/default values into impact claims
+- adds Builder Workflow Evidence Mode so the builder's own human-led AI agent workflow can be captured as first-party evidence without pretending it is an external pilot
 - supports browser-local Gemini BYOK testing without saving secrets
 - creates a pilot validation kit for the first real community trial
 - creates a pilot outreach kit for recruiting one real operator without private data
@@ -75,6 +76,7 @@ Current proof:
 - public app and screenshot
 - deterministic impact packet builder
 - one sanitized Vertex AI Gemini proof file
+- one first-party human-led AI agent workflow case
 - Field Reality Check for separating signal from proof
 - no-secret and claim-boundary verification
 - one privacy-respecting positive early-feedback signal
@@ -82,7 +84,7 @@ Current proof:
 Not claimed yet:
 
 - formal pilot
-- real users or adoption
+- external users or adoption
 - measured impact
 - revenue
 - final XPRIZE readiness
@@ -138,6 +140,19 @@ media/gemini-live-policy-draft.json
 
 The proof shows Vertex AI Gemini calls for policy drafting and Field Reality Check. Real users, impact metrics, revenue, and final XPRIZE readiness are not claimed yet.
 
+## Builder Workflow Evidence Mode
+
+This product now includes the workflow that created it.
+
+The human project lead and AI agents used the same human-AI operating loop while preparing the public hackathon batch:
+
+- The human project lead owned direction, account confirmation, final approval, and public judgment.
+- AI agents implemented UI polish, ran verifiers, pushed Git commits, checked public URLs, and updated current-truth records.
+- Human-only stop points stayed human-controlled: login, reCAPTCHA, account switching, final submit decisions, and claim-boundary approval.
+- Public proof came from Git commits, live URLs, README proof, Vercel/GitHub Pages checks, and durable current-truth records.
+
+This is useful first-party builder workflow evidence. It proves the workflow fits the builder's own AI organization. It does not prove an external pilot, broad adoption, revenue, measured social impact, or final XPRIZE readiness.
+
 ## Verify
 
 ```bash
@@ -162,9 +177,10 @@ Expected current state:
 
 ```text
 impact_verify_ok
-cards=51
+cards=61
 pilot_trial_workspace_ok
 field_reality_check_ok
+builder_workflow_evidence_ok
 coexistence_impact_no_secrets_ok
 coexistence_impact_readme_review_hub_ok
 coexistence_impact_gemini_boundary_ok
@@ -175,7 +191,7 @@ impact_demo_video_ok
 
 ## Claim Boundary
 
-This is a public impact prototype, not a final XPRIZE submission. It claims one live Gemini proof file for policy drafting and Field Reality Check, plus one informal early-feedback signal only. It does not claim real users, a formal pilot, broad user validation, revenue, impact metrics, or final submission readiness yet.
+This is a public impact prototype, not a final XPRIZE submission. It claims one live Gemini proof file for policy drafting and Field Reality Check, one first-party human-led AI agent workflow case, and one informal early-feedback signal only. It does not claim external users, a formal pilot, broad user validation, revenue, impact metrics, or final submission readiness yet.
 
 ## Submission Docs
 

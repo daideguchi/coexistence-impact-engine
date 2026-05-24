@@ -14,6 +14,8 @@ AI participation is becoming normal. The hard part is no longer simply asking wh
 
 I built this from a very personal place: I like open communities, and I believe humans and AI are going to share more of the same workspaces. That future will be useful, but it will also be messy. People will still need rules, context, explanation, and trust.
 
+The build process itself became part of the product. The human project lead and AI agents prepared the hackathon batch together: The human project lead set direction, handled account confirmation, approved final boundaries, and made public judgment calls. AI agents implemented UI polish, ran verification, pushed commits, checked live URLs, and updated durable records. That is exactly the kind of human-AI operating loop this product is designed to govern.
+
 Early feedback was simple, but important. When I showed the prototype to someone outside the build process, the reaction was not a dramatic pitch-deck moment. It was closer to: "Yeah, this is good." That mattered to me. Coexistence Impact Engine is not trying to impress people with another AI demo. It is trying to make a difficult future feel manageable.
 
 The first signal was that the core idea made sense without a long explanation. The details stayed private, so I treat the reaction as privacy-respecting and positive, but not measured validation. The next step is to convert that first "this feels useful" reaction into aggregate evidence the operator is comfortable sharing: time saved, decisions reviewed, explanations accepted or edited, and multilingual workflows completed.
@@ -24,6 +26,7 @@ The first signal was that the core idea made sense without a long explanation. T
 - builds a human/AI operating loop
 - drafts a Gemini prompt for policy and multilingual explanation
 - adds a Field Reality Check where AI role-plays the operator and separates usable evidence from overclaims
+- adds Builder Workflow Evidence Mode to capture the builder's own human-led AI agent workflow as first-party evidence without calling it an external pilot
 - keeps risky actions behind human approval gates
 - creates a pilot validation kit for real-world impact testing
 - creates a pilot outreach kit for recruiting the first real operator
@@ -38,6 +41,7 @@ The app does not hide its maturity level. The first screen says Gemini proof is 
 
 - Prototype proof: public app, screenshot, demo video draft, verifiers, and one sanitized Gemini proof file are attached.
 - Field signal: one outside reaction was positive, but private and not counted as measured validation.
+- Builder workflow: human project lead and AI agents used the same workflow to polish, verify, push, deploy, and record public hackathon products.
 - Pilot evidence: next gate. Collect baseline time, trial time, reviewed decisions, policy outcome, languages used, and approved quote.
 - Impact case: blocked until measured. No broad impact, revenue, or final XPRIZE readiness claim yet.
 
@@ -59,8 +63,8 @@ HTML, CSS, JavaScript, Gemini API BYOK call path, Vertex AI `generateContent` sm
 - Validate with at least one real community or organization.
 - Add measurable impact evidence using the Pilot Trial Workspace and `docs/PILOT_EVIDENCE_TEMPLATE.md`.
 - Add business evidence or credible usage path.
-- DD must approve legal terms and final submission.
+- The human project lead must approve legal terms and final submission.
 
 ## Claim Boundary
 
-This is a public impact prototype. It claims one live Gemini proof file for policy drafting and Field Reality Check, plus one privacy-respecting positive early-feedback signal only. The Field Reality Check can classify evidence quality, privacy limits, and overclaim risks, but it does not create formal validation. The project does not claim a formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.
+This is a public impact prototype. It claims one live Gemini proof file for policy drafting and Field Reality Check, one first-party human-led AI agent workflow case, plus one privacy-respecting positive early-feedback signal only. The Field Reality Check can classify evidence quality, privacy limits, and overclaim risks, but it does not create formal validation. The project does not claim an external formal pilot, broad user validation, revenue, impact metrics, or final XPRIZE submission readiness yet.

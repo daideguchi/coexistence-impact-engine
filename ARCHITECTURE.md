@@ -11,6 +11,7 @@ index.html
   human/AI operating loop
   evidence readiness ladder
   evidence ledger
+  Builder Workflow Evidence Mode
   pilot trial workspace
   time-saved calculator
   JSON packet export
@@ -56,6 +57,24 @@ The next real step is:
 
 ## Pilot Evidence Capture
 
+## Builder Workflow Evidence Capture
+
+The app now includes a first-party workflow evidence lane for the builder's own human project lead and AI agents.
+
+It captures:
+
+- workflow case
+- human owner role
+- AI worker role
+- human approval moments
+- public proof created
+- workflow improvement
+- builder workflow claim boundary
+
+This lane is deliberately separate from external pilot evidence. It can prove that the workflow fits the builder's real human-AI operating model, but it must not be upgraded into broad adoption, external user validation, revenue, or measured social impact.
+
+## Pilot Evidence Capture
+
 The app includes a Pilot Trial Workspace for the first real operator trial:
 
 - operator role
@@ -81,7 +100,8 @@ The app separates maturity into four visible states:
 
 1. Prototype proof is attached.
 2. Informal field signal is recorded without upgrading it into validation.
-3. Pilot evidence is the next gate.
+2b. Builder workflow is recorded as first-party workflow evidence.
+3. External pilot evidence is the next gate.
 4. Broad impact and business claims are blocked until measured.
 
 This is intentional. It keeps the public story useful for judges while preventing the prototype from pretending it has already completed real-world validation.

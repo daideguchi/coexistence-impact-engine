@@ -18,6 +18,8 @@ REQUIRED_MARKERS = [
     "Demo Media",
     "Gemini Boundary",
     "Field Reality Check",
+    "Builder Workflow Evidence Mode",
+    "first-party human-led AI agent workflow case",
     "Verify",
     "Claim Boundary",
     "Submission Docs",
